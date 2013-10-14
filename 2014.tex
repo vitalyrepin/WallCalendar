@@ -2,7 +2,9 @@
 \usepackage[english,russian]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T2A]{fontenc}
-\usepackage{forloop}
+\usepackage{cmap}
+\usepackage{hyperxmp}
+\usepackage{hyperref}
 \usepackage{lmodern}
 \usepackage{ifthen}
 \usepackage[landscape,left=0.1cm, right=.1cm, top=0.1cm, bottom=.1cm,paperwidth=8.5in,paperheight=8.5in]{geometry}
@@ -12,20 +14,22 @@
 \usetikzlibrary{calendar,fit}
 \usepackage{expl3,xparse}
 
+\hypersetup{%
+pdftitle={%
+Wall calendar 2014},
+pdfauthor={Vitaly Repin},
+pdfcopyright={This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License},
+pdfsubject={Calendar},
+pdfkeywords={calendar,2014,photos},
+pdflicenseurl={http://creativecommons.org/licenses/by-sa/3.0/},
+pdfcaptionwriter={Vitaly Repin},
+pdfcontactcity={Espoo},
+pdfcontactcountry={Finland},
+pdfcontactemail={vitaly.repin@gmail.com},
+pdflang={en}
+}
 
-%% Generates small calendar
-%% Argument 1: Month
-%% Argument 2: Year
-%% Argument 3: Month name in russian
-\newcommand{\genSmallCal}[3]{
-\begin{tabular}{c}
-\small #3 #2\\
-\begin{tikzpicture}[every day/.style={font=\small\selectfont}]]
-  \calendar[dates=#2-#1-01 to #2-#1-last,
-            week list,
-	    day xshift=1cm,
-	    day yshift=.65cm]
-  if (Sunday,
+\newcommand{\markRed}{if (Sunday,
       Saturday,
       equals=01-01,
       equals=01-02,
@@ -43,7 +47,74 @@
       equals=11-03,
       equals=11-04,
       equals=02-23) [red]
-;
+}
+
+%% Adapted from pgf source
+\def\pgfcalendarmonthname#1{%
+  \translate{\ifcase#1\or Январь\or Февраль\or Март\or Апрель\or
+    Май\or Июнь\or Июль\or Август\or Сентябрь\or Октябрь\or
+    Ноябрь\or Декабрь\fi}%
+}
+
+
+%%Generates Year calendar. Sources are adapted from pgfmanual (Calendar section)
+\newsavebox{\yearCal}
+\savebox{\yearCal}{
+\sffamily
+\colorlet{winter}{blue}
+\colorlet{spring}{green!60!black}
+\colorlet{summer}{orange}
+\colorlet{fall}{red}
+% A counter, since TikZ is not clever enough (yet) to handle
+% arbitrary angle systems.
+\newcount\mycount
+\begin{tikzpicture}
+[transform shape,
+every day/.style={anchor=mid,font=\fontsize{6}{6}\selectfont}]
+\node{\Huge\bfseries 2014};
+\foreach \month/\monthcolor in
+{1/winter,2/winter,3/spring,4/spring,5/spring,6/summer,
+7/summer,8/summer,9/fall,10/fall,11/fall,12/winter}
+{
+% Computer angle:
+\mycount=\month
+\advance\mycount by -1
+\multiply\mycount by 30
+\advance\mycount by -90
+% The actual calendar
+\calendar at (\the\mycount:7.5cm)
+[
+dates=2014-\month-01 to 2014-\month-last,
+]
+if (day of month=1) {\color{\monthcolor}\tikzmonthcode}
+\markRed
+if (all)
+{
+% Again, compute angle
+\mycount=1
+\advance\mycount by -\pgfcalendarcurrentday
+\multiply\mycount by 11
+\advance\mycount by 90
+\pgftransformshift{\pgfpointpolar{\mycount}{1.7cm}}
+};
+}
+\end{tikzpicture}}
+
+
+%% Generates small calendar
+%% Argument 1: Month
+%% Argument 2: Year
+%% Argument 3: Month name in russian
+\newcommand{\genSmallCal}[3]{
+\begin{tabular}{c}
+\small #3 #2\\
+\begin{tikzpicture}[every day/.style={font=\small\selectfont}]]
+  \calendar[dates=#2-#1-01 to #2-#1-last,
+            week list,
+	    day xshift=1cm,
+	    day yshift=.65cm]
+  \markRed
+ ;
 \end{tikzpicture}
 \end{tabular}
 }
@@ -120,6 +191,7 @@
     МАЙ\or ИЮНЬ\or ИЮЛЬ\or АВГУСТ\or СЕНТЯБРЬ\or ОКТЯБРЬ\or
     НОЯБРЬ\or ДЕКАБРЬ\fi}%
 }
+
 
 \makeatletter
 \tikzstyle{month label above centered}=[%
@@ -390,24 +462,7 @@
       equals=10-01,
       equals=11-01,
       equals=12-01) [week number]
-  if (Sunday,
-      Saturday,
-      equals=01-01,
-      equals=01-02,
-      equals=01-03,
-      equals=01-04,
-      equals=01-06,
-      equals=01-07,
-      equals=01-08,
-      equals=03-10,
-      equals=05-01,
-      equals=05-02,
-      equals=05-09,
-      equals=06-12,
-      equals=06-13,
-      equals=11-03,
-      equals=11-04,
-      equals=02-23) [red]
+  \markRed
   if (equals=01-01,
       equals=01-07,
       equals=02-23,
@@ -433,6 +488,11 @@
 
 \newcommand{\pict}[1]{\newgeometry{left=0cm,bottom=0cm,top=0cm,right=0cm,margin=0cm}\noindent\includegraphics[width=\paperwidth,height=.999\paperheight]{#1}\restoregeometry}
 \newcommand{\smallmonths}[2]{\noindent\usebox{#1}\hfill\usebox{#2}\newpage}
+
+%% Yearly calendar - first page
+\vspace*{1cm}
+\centerline{\usebox{\yearCal}}
+\newpage
 
 %% January
 \pict{espoo}
