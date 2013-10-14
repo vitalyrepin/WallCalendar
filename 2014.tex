@@ -1,0 +1,503 @@
+\documentclass[fontsize=20pt]{scrartcl}
+\usepackage[english,russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage{forloop}
+\usepackage{lmodern}
+\usepackage{ifthen}
+\usepackage[landscape,left=0.1cm, right=.1cm, top=0.1cm, bottom=.1cm,paperwidth=8.5in,paperheight=8.5in]{geometry}
+\pagestyle{empty}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calendar,fit}
+\usepackage{expl3,xparse}
+
+
+%% Generates small calendar
+%% Argument 1: Month
+%% Argument 2: Year
+%% Argument 3: Month name in russian
+\newcommand{\genSmallCal}[3]{
+\begin{tabular}{c}
+\small #3 #2\\
+\begin{tikzpicture}[every day/.style={font=\small\selectfont}]]
+  \calendar[dates=#2-#1-01 to #2-#1-last,
+            week list,
+	    day xshift=1cm,
+	    day yshift=.65cm]
+  if (Sunday,
+      Saturday,
+      equals=01-01,
+      equals=01-02,
+      equals=01-03,
+      equals=01-04,
+      equals=01-06,
+      equals=01-07,
+      equals=01-08,
+      equals=03-10,
+      equals=05-01,
+      equals=05-02,
+      equals=05-09,
+      equals=06-12,
+      equals=06-13,
+      equals=11-03,
+      equals=11-04,
+      equals=02-23) [red]
+;
+\end{tikzpicture}
+\end{tabular}
+}
+
+\newsavebox{\smallCalDec}
+\newsavebox{\smallCalFeb}
+\newsavebox{\smallCalDecO}
+\newsavebox{\smallCalJan}
+\newsavebox{\smallCalMar}
+\newsavebox{\smallCalApr}
+\newsavebox{\smallCalMay}
+\newsavebox{\smallCalJun}
+\newsavebox{\smallCalJul}
+\newsavebox{\smallCalAug}
+\newsavebox{\smallCalSep}
+\newsavebox{\smallCalOct}
+\newsavebox{\smallCalNov}
+\newsavebox{\smallCalJanN}
+
+
+%% Small calendars for the months: Dec, 2013 - Jan 2015
+\savebox{\smallCalDecO}{\genSmallCal{12}{2013}{ДЕКАБРЬ}}
+\savebox{\smallCalFeb}{\genSmallCal{02}{2014}{ФЕВРАЛЬ}}
+\savebox{\smallCalJan}{\genSmallCal{01}{2014}{ЯНВАРЬ}}
+\savebox{\smallCalMar}{\genSmallCal{03}{2014}{МАРТ}}
+\savebox{\smallCalApr}{\genSmallCal{04}{2014}{АПРЕЛЬ}}
+\savebox{\smallCalMay}{\genSmallCal{05}{2014}{МАЙ}}
+\savebox{\smallCalJun}{\genSmallCal{06}{2014}{ИЮНЬ}}
+\savebox{\smallCalJul}{\genSmallCal{07}{2014}{ИЮЛЬ}}
+\savebox{\smallCalAug}{\genSmallCal{08}{2014}{АВГУСТ}}
+\savebox{\smallCalSep}{\genSmallCal{09}{2014}{СЕНТЯБРЬ}}
+\savebox{\smallCalOct}{\genSmallCal{10}{2014}{ОКТЯБРЬ}}
+\savebox{\smallCalNov}{\genSmallCal{11}{2014}{НОЯБРЬ}}
+\savebox{\smallCalDec}{\genSmallCal{12}{2014}{ДЕКАБРЬ}}
+\savebox{\smallCalJanN}{\genSmallCal{01}{2015}{ЯНВАРЬ}}
+
+
+\definecolor{cd81e05}{RGB}{216,30,5}
+\definecolor{c0051ba}{RGB}{0,81,186}
+\definecolor{cffffff}{RGB}{255,255,255}
+
+
+%% Adapted from http://tex.stackexchange.com/a/10199/4771
+\makeatletter%
+\tikzoption{day headings}{\tikzstyle{day heading}=[#1]}
+\tikzstyle{day heading}=[]
+\tikzstyle{day letter headings}=[
+    execute before day scope={ \ifdate{day of month=1}{%
+      \pgfmathsetlength{\pgf@ya}{\tikz@lib@cal@yshift}%
+      \pgfmathsetlength\pgf@xa{\tikz@lib@cal@xshift}%
+      \pgftransformyshift{-\pgf@ya}
+      \pgftransformyshift{-.45cm}
+      \foreach \d/\l in {0/ПОНЕДЕЛЬНИК MONDAY,1/ВТОРНИК TUESDAY,2/СРЕДА WEDNESDAY,3/ЧЕТВЕРГ THURSDAY,%
+                         4/ПЯТНИЦА FRIDAY,5/СУББОТА SATURDAY,6/ВОСКРЕСЕНЬЕ SUNDAY} {
+        \pgf@xa=\d\pgf@xa%
+        \pgftransformxshift{\pgf@xa-\cellwidth/2}%
+        \pgftransformyshift{\pgf@ya}%
+	\ifnum\ifnum\d=5 1\else\ifnum\d=6 1\else0\fi\fi
+   	=1 %
+	\node[above=-0.5ex,day heading,align=center,text width=3cm,color=red,font=\tiny]{\l};
+	\else
+	\node[above=-0.5ex,day heading,align=center,text width=3cm,font=\tiny]{\l};
+ 	\fi
+      }
+    }{}%
+  }%
+]
+\makeatother%
+%% End
+
+%% Adapted from pgf source
+\def\pgfcalendarmonthname#1{%
+  \translate{\ifcase#1\or ЯНВАРЬ\or ФЕВРАЛЬ\or МАРТ\or АПРЕЛЬ\or
+    МАЙ\or ИЮНЬ\or ИЮЛЬ\or АВГУСТ\or СЕНТЯБРЬ\or ОКТЯБРЬ\or
+    НОЯБРЬ\or ДЕКАБРЬ\fi}%
+}
+
+\makeatletter
+\tikzstyle{month label above centered}=[%
+  execute before day scope={%
+    \ifdate{day of month=1}{%
+      {
+        \pgfmathsetlength{\pgf@xa}{\tikz@lib@cal@xshift}%
+        \pgf@xb=\tikz@lib@cal@width\pgf@xa%
+        \advance\pgf@xb by-\pgf@xa%
+        \pgf@xb=.5\pgf@xb%
+        \pgftransformxshift{\pgf@xb}%
+        \pgftransformxshift{-\cellwidth/2}%
+        \pgfmathsetlength{\pgf@y}{\tikz@lib@cal@yshift}%
+        \pgftransformyshift{0.333\pgf@y}
+        \tikzmonthcode%
+      }
+    }{}},
+  every month/.append style={anchor=base}
+]
+\makeatother
+%% End
+
+\ExplSyntaxOn
+
+%% Adapted from http://tex.stackexchange.com/a/56214/4771
+%%
+% first of all we define the user level commands
+\NewDocumentCommand{\addtext}{ m }{ \bdaycal_input_add:n { #1 } }
+\NewDocumentCommand{\addtextyear}{ mm }{ \bdaycal_input_add_y:nn { #1 } { #2 } }
+\NewDocumentCommand{\showtext}{ }{ \bdaycal_output_direct: }
+
+% allocate variable:
+% a sequence for global storage of the inputs;
+\seq_new:N \g_bdaycal_input_seq
+
+% store globally an input in the sequence
+\cs_new:Npn \bdaycal_input_add:n #1
+ {
+  \seq_gput_right:Nn \g_bdaycal_input_seq { #1 }
+ }
+
+\cs_new:Npn \bdaycal_input_add_y:nn #1 #2
+ {
+  \seq_gput_right:Nn \g_bdaycal_input_seq { #1 ~ ( \int_to_arabic:n
+    { \pgfcalendarifdateyear - #2 } ) }
+ }
+
+% how to output in direct order; we simply do a mapping function calling
+% \bdaycal_print:n after incrementing the counter
+\cs_new_protected:Npn \bdaycal_output_direct:
+ {
+  \seq_map_inline:Nn \g_bdaycal_input_seq
+   {
+    \bdaycal_print:n { ##1 }
+   }
+  \seq_gclear:N \g_bdaycal_input_seq
+ }
+
+% the printing macro; change here for adapting to your wishes
+\cs_new:Npn \bdaycal_print:n #1
+ {
+  #1 \par
+ }
+%% End
+
+%% http://www.tondering.dk/claus/cal/week.php#calcweekno
+\int_new:N \l_week_number_year_int
+\int_new:N \l_week_number_month_int
+\int_new:N \l_week_number_day_int
+\int_new:N \l_week_number_a_int
+\int_new:N \l_week_number_b_int
+\int_new:N \l_week_number_c_int
+\int_new:N \l_week_number_s_int
+\int_new:N \l_week_number_e_int
+\int_new:N \l_week_number_f_int
+\int_new:N \l_week_number_g_int
+\int_new:N \l_week_number_d_int
+\int_new:N \l_week_number_n_int
+\int_new:N \l_week_number_W_int
+
+\cs_new:Nn \week_number:nnn {
+
+  \int_set:Nn \l_week_number_year_int { #1 }
+  \int_set:Nn \l_week_number_month_int { #2 }
+  \int_set:Nn \l_week_number_day_int { #3 }
+
+  \int_compare:nNnTF { \l_week_number_month_int } < { 3 } % jan or feb
+  { % true
+
+    \int_set:Nn \l_week_number_a_int { \l_week_number_year_int - 1 }
+
+    \int_set:Nn \l_week_number_b_int {
+      \int_div_truncate:nn { \l_week_number_a_int } { 4 }
+      - \int_div_truncate:nn { \l_week_number_a_int } { 100 }
+      + \int_div_truncate:nn { \l_week_number_a_int } { 400 }
+    }
+
+    \int_set:Nn \l_week_number_c_int {
+      \int_div_truncate:nn { \l_week_number_a_int - 1 } { 4 }
+      - \int_div_truncate:nn { \l_week_number_a_int - 1 } { 100 }
+      + \int_div_truncate:nn { \l_week_number_a_int - 1 } { 400 }
+    }
+
+    \int_set:Nn \l_week_number_s_int {
+      \l_week_number_b_int - \l_week_number_c_int }
+
+    \int_zero:N \l_week_number_e_int
+
+    \int_set:Nn \l_week_number_f_int { \l_week_number_day_int - 1
+      + 31 * ( \l_week_number_month_int - 1 ) }
+
+  } % end true
+  { % false
+
+    \int_set_eq:NN \l_week_number_a_int \l_week_number_year_int
+
+    \int_set:Nn \l_week_number_b_int {
+      \int_div_truncate:nn { \l_week_number_a_int } { 4 }
+      - \int_div_truncate:nn { \l_week_number_a_int } { 100 }
+      + \int_div_truncate:nn { \l_week_number_a_int } { 400 }
+    }
+
+    \int_set:Nn \l_week_number_c_int {
+      \int_div_truncate:nn { \l_week_number_a_int - 1 } { 4 }
+      - \int_div_truncate:nn { \l_week_number_a_int - 1 } { 100 }
+      + \int_div_truncate:nn { \l_week_number_a_int - 1 } { 400 }
+    }
+
+    \int_set:Nn \l_week_number_s_int {
+      \l_week_number_b_int - \l_week_number_c_int }
+
+    \int_set:Nn \l_week_number_e_int { \l_week_number_s_int + 1 }
+
+    \int_set:Nn \l_week_number_f_int { \l_week_number_day_int
+      + \int_div_truncate:nn {
+        153 * ( \l_week_number_month_int - 3 ) + 2 } { 5 }
+      + 58 + \l_week_number_s_int }
+
+  } % end false
+
+  \int_set:Nn \l_week_number_g_int {
+    \int_mod:nn { \l_week_number_a_int + \l_week_number_b_int } { 7 }  }
+
+  \int_set:Nn \l_week_number_d_int {
+    \int_mod:nn { \l_week_number_f_int + \l_week_number_g_int
+      - \l_week_number_e_int } { 7 }  }
+
+  \int_set:Nn \l_week_number_n_int {
+    \l_week_number_f_int + 3 - \l_week_number_d_int }
+
+  \int_compare:nNnTF { \l_week_number_n_int } < { 0 }
+  { %true
+
+    \int_set:Nn \l_week_number_W_int { 53
+      - \int_div_truncate:nn { \l_week_number_g_int
+        - \l_week_number_s_int } { 5 } }
+
+  } % end true
+  { % false
+
+    \int_compare:nNnTF { \l_week_number_n_int } > { 364
+      + \l_week_number_s_int }
+    { % true
+
+      \int_set:Nn \l_week_number_W_int { 1 }
+
+    } % end true
+    { % false
+
+      \int_set:Nn \l_week_number_W_int { \int_div_truncate:nn {
+          \l_week_number_n_int } { 7 } + 1 }
+
+    } % end false
+
+  } % end false
+
+}
+
+\definecolor{myred}{RGB}{216,30,5}
+\definecolor{myblue}{RGB}{0,81,186}
+
+\newsavebox{\flagRU}
+\savebox{\flagRU}{
+\begin{tikzpicture}
+\fill[myred] rectangle (18pt,5pt);
+\fill[myblue,yshift=5pt] rectangle (18pt,5pt);
+\draw rectangle (18pt,15pt);
+\end{tikzpicture}
+}
+
+\pgfkeys{/tikz/week~number/.code =
+  {
+    \week_number:nnn { 
+      \pgfcalendarifdateyear } { 
+      \pgfcalendarifdatemonth } { 
+      \pgfcalendarifdateday }
+    \addtext{ Неделя ~ \int_to_arabic:n { \l_week_number_W_int } \\ Week ~ \int_to_arabic:n { \l_week_number_W_int } }
+  }
+}
+
+\ExplSyntaxOff
+
+\pgfkeys{/tikz/flag-flying day/.code =
+  {
+    \draw (-\cellwidth,0) node [above right,font=\Huge]
+    {\resizebox{!}{0.8ex}{\usebox{\flagRU}}};
+  }
+}
+
+\pgfkeys{/tikz/observance/.code =
+  {
+    \addtext{#1}
+  }
+}
+
+\newcommand{\TikzDayCode}{}
+\newcommand{\restoreTikzDayCode}{\renewcommand{\TikzDayCode}{\node (lower right) at (0,0) [above left,font=\Huge] {\tikzdaytext};}}
+\restoreTikzDayCode
+
+\pgfkeys{/tikz/day code =
+  {
+    \TikzDayCode
+    \node (upper left) at (-\cellwidth,\cellheight)
+    [below right,align=left,text width=\cellwidth-\pgflinewidth,
+    font=\tiny,black] {\showtext};
+    \node (lower left) at (-\cellwidth,0) {};
+    \node[rounded corners, draw,
+          fit=(lower right) (upper left) (lower left),
+          inner sep=1mm] {};
+  }
+}
+
+\pgfkeys{/tikz/inner sep = 0pt}
+
+\pgfkeys{/tikz/day xshift=\cellwidth+3.5mm}
+
+\pgfkeys{/tikz/day yshift=\cellheight+2mm+2mm}
+
+\newlength{\cellheight}
+\setlength{\cellheight}{20mm}
+\newlength{\cellwidth}
+\setlength{\cellwidth}{26.85mm}
+
+\begin{document}
+
+%% Argument 1: Start date
+%% Argument 2: End data
+\newcommand{\calmonthRaw}[2]{%
+\vspace*{1cm}%
+\centerline{%
+\begin{tikzpicture}[thick]
+  \calendar[dates=#1 to #2,
+            week list,
+            month label above centered,
+            month text={\%mt \%y0},
+            day headings={font=\footnotesize\scshape},
+            day letter headings]
+  if (Monday,
+      equals=01-01,
+      equals=02-01,
+      equals=03-01,
+      equals=04-01,
+      equals=05-01,
+      equals=06-01,
+      equals=07-01,
+      equals=08-01,
+      equals=09-01,
+      equals=10-01,
+      equals=11-01,
+      equals=12-01) [week number]
+  if (Sunday,
+      Saturday,
+      equals=01-01,
+      equals=01-02,
+      equals=01-03,
+      equals=01-04,
+      equals=01-06,
+      equals=01-07,
+      equals=01-08,
+      equals=03-10,
+      equals=05-01,
+      equals=05-02,
+      equals=05-09,
+      equals=06-12,
+      equals=06-13,
+      equals=11-03,
+      equals=11-04,
+      equals=02-23) [red]
+  if (equals=01-01,
+      equals=01-07,
+      equals=02-23,
+      equals=03-08,
+      equals=05-01,
+      equals=05-09,
+      equals=06-12,
+      equals=11-04
+      ) [flag-flying day]
+  if (equals=01-01) [observance=Новый год]
+  if (equals=01-07) [observance=Рождество\\ Христово]
+  if (equals=02-23) [observance=День защитника Отечества]
+  if (equals=03-08) [observance=Международный женский день]
+  if (equals=05-01) [observance=Праздник Весны и Труда]
+  if (equals=05-09) [observance=День Победы]
+  if (equals=11-04) [observance=День народного единства]
+  if (equals=06-12) [observance=День России]
+;
+\end{tikzpicture}}\bigskip}
+
+%% Argument: month
+\newcommand{\calmonth}[1]{\calmonthRaw{2014-#1-01}{2014-#1-last}}
+
+\newcommand{\pict}[1]{\newgeometry{left=0cm,bottom=0cm,top=0cm,right=0cm,margin=0cm}\noindent\includegraphics[width=\paperwidth,height=.999\paperheight]{#1}\restoregeometry}
+\newcommand{\smallmonths}[2]{\noindent\usebox{#1}\hfill\usebox{#2}\newpage}
+
+%% January
+\pict{espoo}
+\calmonth{1}
+\smallmonths{\smallCalDecO}{\smallCalFeb}
+
+%% February
+\pict{kuopio}
+\calmonth{2}
+\smallmonths{\smallCalJan}{\smallCalMar}
+
+%% March
+\pict{savonlinna}
+\renewcommand{\TikzDayCode}{\node (lower right) at (0,0) [above left,font=\Huge] {\ifthenelse{\equal{\pgfcalendarcurrentday}{24}}{\small 24 (31)}{\tikzdaytext}};}
+\calmonthRaw{2014-03-01}{2014-03-30}
+\restoreTikzDayCode
+\smallmonths{\smallCalFeb}{\smallCalApr}
+
+%% April
+\pict{ruskeala}
+\calmonth{4}
+\smallmonths{\smallCalMar}{\smallCalMay}
+
+
+%%May
+\pict{baikal}
+\calmonth{5}
+\smallmonths{\smallCalApr}{\smallCalJun}
+
+
+%% June
+\pict{kapchuk}
+\renewcommand{\TikzDayCode}{\node (lower right) at (0,0) [above left,font=\Huge] {\ifthenelse{\equal{\pgfcalendarcurrentday}{23}}{\small 23 (30)}{\tikzdaytext}};}
+\calmonthRaw{2014-06-01}{2014-06-29}
+\smallmonths{\smallCalMay}{\smallCalJul}
+
+%% July
+\pict{peterhof}
+\calmonth{7}
+\smallmonths{\smallCalJun}{\smallCalAug}
+
+%% August
+\pict{piter}
+\calmonth{8}
+\smallmonths{\smallCalJul}{\smallCalSep}
+
+%% September
+\pict{irkutsk}
+\calmonth{9}
+\smallmonths{\smallCalAug}{\smallCalOct}
+
+
+%% October
+\pict{porkkala}
+\calmonth{10}
+\smallmonths{\smallCalSep}{\smallCalNov}
+
+%% December
+\pict{nuuksio}
+\calmonth{12}
+\smallmonths{\smallCalNov}{\smallCalJanN}
+
+
+
+%\newcounter{m}
+%\forloop{m}{1}{\value{m} < 2}{\calmonth{\arabic{m}}\newpage}
+
+\end{document}
