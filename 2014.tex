@@ -29,7 +29,9 @@ pdfcontactemail={vitaly.repin@gmail.com},
 pdflang={en}
 }
 
-\newcommand{\markRed}{if (Sunday,
+\newcommand{\markRed}{}
+\newcommand{\restoreMarkRed}{%
+\renewcommand{\markRed}{if (Sunday,
       Saturday,
       equals=01-01,
       equals=01-02,
@@ -47,7 +49,8 @@ pdflang={en}
       equals=11-03,
       equals=11-04,
       equals=02-23) [red]
-}
+}}
+\restoreMarkRed
 
 %% Adapted from pgf source
 \def\pgfcalendarmonthname#1{%
@@ -149,13 +152,10 @@ if (all)
 \savebox{\smallCalOct}{\genSmallCal{10}{2014}{ОКТЯБРЬ}}
 \savebox{\smallCalNov}{\genSmallCal{11}{2014}{НОЯБРЬ}}
 \savebox{\smallCalDec}{\genSmallCal{12}{2014}{ДЕКАБРЬ}}
+%% 2015: We don't know the holidays yet. Marking only weekends with red
+\renewcommand{\markRed}{if (weekend) [red]}
 \savebox{\smallCalJanN}{\genSmallCal{01}{2015}{ЯНВАРЬ}}
-
-
-\definecolor{cd81e05}{RGB}{216,30,5}
-\definecolor{c0051ba}{RGB}{0,81,186}
-\definecolor{cffffff}{RGB}{255,255,255}
-
+\restoreMarkRed
 
 %% Adapted from http://tex.stackexchange.com/a/10199/4771
 \makeatletter%
@@ -187,9 +187,9 @@ if (all)
 
 %% Adapted from pgf source
 \def\pgfcalendarmonthname#1{%
-  \translate{\ifcase#1\or ЯНВАРЬ\or ФЕВРАЛЬ\or МАРТ\or АПРЕЛЬ\or
-    МАЙ\or ИЮНЬ\or ИЮЛЬ\or АВГУСТ\or СЕНТЯБРЬ\or ОКТЯБРЬ\or
-    НОЯБРЬ\or ДЕКАБРЬ\fi}%
+  \translate{\ifcase#1\or ЯНВАРЬ JANUARY\or ФЕВРАЛЬ FEBRUARY\or МАРТ MARCH\or АПРЕЛЬ APRIL\or
+    МАЙ MAY\or ИЮНЬ JUNE\or ИЮЛЬ JULY\or АВГУСТ AUGUST\or СЕНТЯБРЬ SEPTEMBER\or ОКТЯБРЬ OCTOBER\or
+    НОЯБРЬ NOVEMBER\or ДЕКАБРЬ DECEMBER\fi}%
 }
 
 
@@ -370,18 +370,6 @@ if (all)
 
 }
 
-\definecolor{myred}{RGB}{216,30,5}
-\definecolor{myblue}{RGB}{0,81,186}
-
-\newsavebox{\flagRU}
-\savebox{\flagRU}{
-\begin{tikzpicture}
-\fill[myred] rectangle (18pt,5pt);
-\fill[myblue,yshift=5pt] rectangle (18pt,5pt);
-\draw rectangle (18pt,15pt);
-\end{tikzpicture}
-}
-
 \pgfkeys{/tikz/week~number/.code =
   {
     \week_number:nnn { 
@@ -394,12 +382,6 @@ if (all)
 
 \ExplSyntaxOff
 
-\pgfkeys{/tikz/flag-flying day/.code =
-  {
-    \draw (-\cellwidth,0) node [above right,font=\Huge]
-    {\resizebox{!}{0.8ex}{\usebox{\flagRU}}};
-  }
-}
 
 \pgfkeys{/tikz/observance/.code =
   {
@@ -437,6 +419,8 @@ if (all)
 
 \begin{document}
 
+\input{flags}
+
 %% Argument 1: Start date
 %% Argument 2: End data
 \newcommand{\calmonthRaw}[2]{%
@@ -468,18 +452,88 @@ if (all)
       equals=02-23,
       equals=03-08,
       equals=05-01,
-      equals=05-09,
       equals=06-12,
-      equals=11-04
+      equals=11-04,
+      equals=04-06,
+      equals=04-12,
+      equals=06-22,
+      equals=07-13,
+      equals=07-20,
+      equals=08-17,
+      equals=10-05,
+      equals=09-01,
+      equals=09-28,
+      equals=10-26
       ) [flag-flying day]
+  if (equals=07-27) [flag-navy day]
+  if (equals=08-02) [flag-airborne day]
+  if (equals=09-14) [flag-military day]
+  if (equals=05-09) [flag-victory day]
+  if (equals=04-20,
+      equals=01-14,
+      equals=01-19,
+      equals=03-02,
+      equals=02-15,
+      equals=02-22,
+      equals=03-15,
+      equals=03-22,
+      equals=03-29,
+      equals=04-13,
+      equals=04-17,
+      equals=04-18,
+      equals=09-03,
+      equals=05-29,
+      equals=06-07,
+      equals=06-08,
+      equals=07-07,
+      equals=08-19,
+      equals=08-28,
+      equals=10-14,
+      equals=11-01,
+      equals=12-12
+  ) [flag-orthodox day]
   if (equals=01-01) [observance=Новый год]
   if (equals=01-07) [observance=Рождество\\ Христово]
   if (equals=02-23) [observance=День защитника Отечества]
   if (equals=03-08) [observance=Международный женский день]
+  if (equals=04-06) [observance=День геолога]
   if (equals=05-01) [observance=Праздник Весны и Труда]
   if (equals=05-09) [observance=День Победы]
   if (equals=11-04) [observance=День народного единства]
   if (equals=06-12) [observance=День России]
+  if (equals=04-12) [observance=День\\ космонавтики]
+  if (equals=06-22) [observance=День памяти и скорби]
+  if (equals=07-20) [observance=День\\ металлурга]
+  if (equals=08-02) [observance=День ВДВ]
+  if (equals=08-17) [observance=День\\ Воздушного\\ Флота России]
+  if (equals=07-13) [observance=День рыбака]
+  if (equals=07-27) [observance=День ВМФ]
+  if (equals=09-01) [observance=День знаний]
+  if (equals=09-14) [observance=День танкиста]
+  if (equals=09-28) [observance=День машино\-строителя]
+  if (equals=10-05) [observance=День учителя]
+  if (equals=10-26) [observance=День\\ автомобилиста]
+  %% Orthodoxy dates
+  if (equals=01-14) [observance=Обрезание\\ Господне]
+  if (equals=02-22, 
+  	equals=03-15,
+	equals=03-22,
+	equals=03-29) [observance=Вселенская\\ родительская суббота]
+  if (equals=01-19) [observance=Крещение\\ Господне]
+  if (equals=03-02) [observance=Прощеное\\ воскресенье]
+  if (equals=02-15) [observance=Сретение\\ Господне]
+  if (equals=04-13) [observance=Вход Господень в Иерусалим]
+  if (equals=04-17) [observance=Тайная Вечеря]
+  if (equals=04-18) [observance=Великий\\ Пяток]
+  if (equals=04-20) [observance=Пасха]
+  if (equals=09-03) [observance=Торжество\\ Православия]
+  if (equals=05-29) [observance=Вознесение\\ Господне]
+  if (equals=06-07) [observance=Троицкая\\ родительская суббота]
+  if (equals=06-08) [observance=Троица]
+  if (equals=08-19) [observance=Преображение\\ Господне]
+  if (equals=08-28) [observance=Успение\\ Пресвятой\\ Богородицы]
+  if (equals=10-14) [observance=Покров\\ Пресвятой\\ Богородицы]
+  if (equals=12-12) [observance=День Петра и Павла]
 ;
 \end{tikzpicture}}\bigskip}
 
@@ -527,6 +581,7 @@ if (all)
 \pict{kapchuk}
 \renewcommand{\TikzDayCode}{\node (lower right) at (0,0) [above left,font=\Huge] {\ifthenelse{\equal{\pgfcalendarcurrentday}{23}}{\small 23 (30)}{\tikzdaytext}};}
 \calmonthRaw{2014-06-01}{2014-06-29}
+\restoreTikzDayCode
 \smallmonths{\smallCalMay}{\smallCalJul}
 
 %% July
@@ -550,11 +605,14 @@ if (all)
 \calmonth{10}
 \smallmonths{\smallCalSep}{\smallCalNov}
 
+%% November
+\calmonth{11}
+\smallmonths{\smallCalOct}{\smallCalDec}
+
 %% December
 \pict{nuuksio}
 \calmonth{12}
 \smallmonths{\smallCalNov}{\smallCalJanN}
-
 
 
 %\newcounter{m}

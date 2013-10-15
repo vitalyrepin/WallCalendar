@@ -1,7 +1,7 @@
 # Main input (w/o extension)
 MAIN_FNAME=2014
 # Additional files the main input file depends on
-ADDDEPS=
+ADDDEPS=flags.tex
 
 IMAGES=
 
@@ -18,7 +18,6 @@ all:            $(GOALS)
 
 DEPS = 	$(MAIN_FNAME).tex $(ADDDEPS)
 
-$(MAIN_FNAME).dvi: $(DEPS) $(patsubst %.png,%.eps,$(IMAGES))
 $(MAIN_FNAME).pdf: $(DEPS) $(IMAGES)
 
 
