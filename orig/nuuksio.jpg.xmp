@@ -32,7 +32,7 @@
    </darktable:history_operation>
    <darktable:history_params>
     <rdf:Seq>
-     <rdf:li>0000000008832d3e3e8e0b3a85c66b3fffff7f3f0000000000000000cdcc4c3ecdcc4c3ecdcc4c3fcdcc4c3ecdcc4c3fcdcc4c3fcdcc4c3ecdcc4c3f000000000000000000000000010000000100000001000000</rdf:li>
+     <rdf:li>00000000f4eca33db7345b3d78974a3f0000803f0000000000000000cdcc4c3ecdcc4c3ecdcc4c3fcdcc4c3ecdcc4c3fcdcc4c3fcdcc4c3ecdcc4c3f000000000000000000000000010000000100000001000000</rdf:li>
     </rdf:Seq>
    </darktable:history_params>
    <darktable:blendop_params>
