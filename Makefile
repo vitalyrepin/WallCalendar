@@ -1,7 +1,7 @@
 # Main input (w/o extension)
 MAIN_FNAME=2014
 # Additional files the main input file depends on
-ADDDEPS=flags.tex
+ADDDEPS=flags.tex flags/fsb.tex flags/orthodox.tex
 
 IMAGES=
 
