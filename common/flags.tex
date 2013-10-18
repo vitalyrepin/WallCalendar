@@ -1,0 +1,73 @@
+%% Integration with calendaring
+
+%% Arguments: 
+%% 1st: Name of the key (without prefix and suffix
+%% 2nd: code to be executed
+\newcommand{\defineDayKey}[2]{
+\pgfkeys{/tikz/#1 day/.code =
+  {
+    \draw (-\cellwidth,0) node [above right,font=\Huge]
+    {#2};
+  }
+}
+}
+
+\defineDayKey{flag-flying}{\hspace*{-.2cm}\resizebox{!}{0.8ex}{\usebox{\flagRU}}}
+\defineDayKey{flag-victory}{\resizebox{!}{1.75ex}{\flagVictory}}
+\defineDayKey{flag-navy}{\resizebox{!}{0.8ex}{\flagRusNavy}}
+\defineDayKey{flag-airborne}{\resizebox{!}{0.8ex}{\flagRusAirborne} \resizebox{!}{0.8ex}{\usebox{\OrthodoxChrist}}}
+\defineDayKey{flag-space}{\resizebox{!}{0.8ex}{\flagRusSpace}}
+\defineDayKey{flag-kgb}{\resizebox{!}{0.8ex}{\flagKGB}}
+\defineDayKey{flag-spb}{\resizebox{!}{0.8ex}{\usebox{\flagSpb}}}
+\defineDayKey{flag-military}{\resizebox{!}{0.8ex}{\usebox{\flagRusDefence}}}
+\defineDayKey{flag-orthodox}{\resizebox{!}{0.8ex}{\usebox{\OrthodoxChrist}}}
+
+%% Flag of Russia
+\definecolor{myred}{RGB}{216,30,5}
+\definecolor{myblue}{RGB}{0,81,186}
+
+\newsavebox{\flagRU}
+\savebox{\flagRU}{
+\begin{tikzpicture}
+\fill[myred] rectangle (18pt,5pt);
+\fill[myblue,yshift=5pt] rectangle (18pt,5pt);
+\draw rectangle (18pt,15pt);
+\end{tikzpicture}
+}
+
+%% Flag of Russian Navy
+\definecolor{cfff}{RGB}{255,255,255}
+\definecolor{c0039a6}{RGB}{0,57,166}
+
+\newcommand{\flagRusNavy}{%
+\begin{tikzpicture}[y=0.80pt,x=0.80pt,yscale=-1, inner sep=0pt, outer sep=0pt]
+% rect3037
+\path[fill=cfff,rounded corners=0.0000cm] (0.0000,0.0000) rectangle
+  (30.0000,20.0000);
+% path3039
+\path[draw=c0039a6,line width=2.400pt] (0.0000,0.0000) --
+  (30.0000,20.0000)(0.0000,20.0000) -- (30.0000,0.0000);
+\end{tikzpicture}}
+
+%% Orthodoxy christ
+\input{common/flags/orthodox}
+
+%% Flag of the Russian Space Troops
+\newcommand{\flagRusSpace}{\includegraphics{common/flags/SpaceFlag.png}}
+
+%% Flag of the Russian Arborne Troops
+\newcommand{\flagRusAirborne}{\includegraphics{common/flags/RusAirborne.png}}
+
+%% St. Petersburg flag
+\newsavebox{\flagSpb}
+\savebox{\flagSpb}{\includegraphics{common/flags/SpbFlag.pdf}}
+
+%% Flag of the Russian Ministry of Defence
+\newsavebox{\flagRusDefence}
+\savebox{\flagRusDefence}{\includegraphics{common/flags/RusDefence.png}}
+
+%% Saint George ribbon - Vicory Day. 9, May.
+\newcommand{\flagVictory}{\rotatebox{90}{\includegraphics{common/flags/9May.png}}}
+
+%% FSB flag
+\input{common/flags/fsb}

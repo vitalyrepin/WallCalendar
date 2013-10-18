@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage[english,russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage{cmap}
+\usepackage{hyperxmp}
+\usepackage{hyperref}
+\usepackage[left=0cm, right=0cm, top=0cm, bottom=0cm,paperwidth=8.75in,paperheight=8.625in]{geometry}
+\pagestyle{empty}
+\usepackage{wallpaper}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{pst-barcode}
+\pdfminorversion=5
+\pdfobjcompresslevel=3
+\pdfcompresslevel=9
+\usepackage{auto-pst-pdf} 
+
+\hypersetup{%
+pdftitle={%
+Front cover for the Wall calendar 2014.},
+pdfauthor={Vitaly Repin},
+pdfcopyright={This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License},
+pdfsubject={Calendar},
+pdfkeywords={calendar,2014,photos},
+pdflicenseurl={http://creativecommons.org/licenses/by-sa/3.0/},
+pdfcaptionwriter={Vitaly Repin},
+pdfcontactcity={Espoo},
+pdfcontactcountry={Finland},
+pdfcontactemail={vitaly.repin@gmail.com},
+pdflang={en}
+}
+
+\pagestyle{empty}
+
+\begin{document}
+test
+
+\begin{pspicture}(1in,1in)
+   \psbarcode{test string}{}{qrcode}
+\end{pspicture}
+
+\end{document}

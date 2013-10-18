@@ -1,0 +1,551 @@
+%% Preamble. Used by clendar and by cover
+
+\newcommand{\markRed}{}
+\newcommand{\restoreMarkRed}{%
+\renewcommand{\markRed}{if (Sunday,
+      Saturday,
+      equals=01-01,
+      equals=01-02,
+      equals=01-03,
+      equals=01-04,
+      equals=01-06,
+      equals=01-07,
+      equals=01-08,
+      equals=03-10,
+      equals=05-01,
+      equals=05-02,
+      equals=05-09,
+      equals=06-12,
+      equals=06-13,
+      equals=11-03,
+      equals=11-04,
+      equals=02-23) [red]
+}}
+\restoreMarkRed
+
+%% Adapted from pgf source
+\def\pgfcalendarmonthname#1{%
+  \translate{\ifcase#1\or {Январь January}\or Февраль February\or Март March\or Апрель April\or
+    Май\or Июнь\or Июль\or Август\or Сентябрь\or Октябрь\or
+    Ноябрь\or Декабрь\fi}%
+}
+
+
+%% Generates Year calendar. Sources are adapted from pgfmanual (Calendar section)
+\colorlet{winter}{blue}
+\colorlet{spring}{green!60!black}
+\colorlet{summer}{orange}
+\colorlet{fall}{red}
+% Adapted from http://www.texample.net/tikz/examples/changing-the-default-calendar-layout/
+\newcommand{\genYearCal}[1]{
+\begin{tikzpicture}[every calendar/.style={
+            month label above centered,
+            month text={\textsc{\small\%mt}},
+            every day/.append style={font=\tiny\itshape},
+            if={(weekend) [red]},
+            week list,
+        }]
+	\matrix[column sep=1em, row sep=3em, ampersand replacement=\&] { #1 };
+\end{tikzpicture}}
+
+\newsavebox{\yearCalFirst}
+\savebox{\yearCalFirst}{\genYearCal{
+            \calendar[dates=2015-01-01 to 2015-01-last]; \&
+            \calendar[dates=2015-02-01 to 2015-02-last]; \\
+            \calendar[dates=2015-03-01 to 2015-03-last]; \&
+            \calendar[dates=2015-04-01 to 2015-04-last]; \\
+}}
+\newsavebox{\yearCalSecond}
+\savebox{\yearCalSecond}{\genYearCal{
+            \calendar[dates=2015-05-01 to 2015-05-last]; \&
+            \calendar[dates=2015-06-01 to 2015-06-last]; \\
+            \calendar[dates=2015-07-01 to 2015-07-last]; \&
+            \calendar[dates=2015-08-01 to 2015-08-last]; \\
+}}
+
+%% Generates small calendar
+%% Argument 1: Month
+%% Argument 2: Year
+%% Argument 3: Month name in russian
+\newcommand{\genSmallCal}[3]{
+\begin{tabular}{c}
+\small #3 #2\\
+\begin{tikzpicture}[every day/.style={font=\small\selectfont}]]
+  \calendar[dates=#2-#1-01 to #2-#1-last,
+            week list,
+	    day xshift=1cm,
+	    day yshift=.65cm]
+  \markRed
+ ;
+\end{tikzpicture}
+\end{tabular}
+}
+
+\newsavebox{\smallCalDec}
+\newsavebox{\smallCalFeb}
+\newsavebox{\smallCalDecO}
+\newsavebox{\smallCalJan}
+\newsavebox{\smallCalMar}
+\newsavebox{\smallCalApr}
+\newsavebox{\smallCalMay}
+\newsavebox{\smallCalJun}
+\newsavebox{\smallCalJul}
+\newsavebox{\smallCalAug}
+\newsavebox{\smallCalSep}
+\newsavebox{\smallCalOct}
+\newsavebox{\smallCalNov}
+\newsavebox{\smallCalJanN}
+
+
+%% Small calendars for the months: Dec, 2013 - Jan 2015
+\savebox{\smallCalDecO}{\genSmallCal{12}{2013}{ДЕКАБРЬ}}
+\savebox{\smallCalFeb}{\genSmallCal{02}{2014}{ФЕВРАЛЬ}}
+\savebox{\smallCalJan}{\genSmallCal{01}{2014}{ЯНВАРЬ}}
+\savebox{\smallCalMar}{\genSmallCal{03}{2014}{МАРТ}}
+\savebox{\smallCalApr}{\genSmallCal{04}{2014}{АПРЕЛЬ}}
+\savebox{\smallCalMay}{\genSmallCal{05}{2014}{МАЙ}}
+\savebox{\smallCalJun}{\genSmallCal{06}{2014}{ИЮНЬ}}
+\savebox{\smallCalJul}{\genSmallCal{07}{2014}{ИЮЛЬ}}
+\savebox{\smallCalAug}{\genSmallCal{08}{2014}{АВГУСТ}}
+\savebox{\smallCalSep}{\genSmallCal{09}{2014}{СЕНТЯБРЬ}}
+\savebox{\smallCalOct}{\genSmallCal{10}{2014}{ОКТЯБРЬ}}
+\savebox{\smallCalNov}{\genSmallCal{11}{2014}{НОЯБРЬ}}
+\savebox{\smallCalDec}{\genSmallCal{12}{2014}{ДЕКАБРЬ}}
+%% 2015: We don't know the holidays yet. Marking only weekends with red
+\renewcommand{\markRed}{if (weekend) [red]}
+\savebox{\smallCalJanN}{\genSmallCal{01}{2015}{ЯНВАРЬ}}
+\restoreMarkRed
+
+%% Adapted from http://tex.stackexchange.com/a/10199/4771
+\makeatletter%
+\tikzoption{day headings}{\tikzstyle{day heading}=[#1]}
+\tikzstyle{day heading}=[]
+\tikzstyle{day letter headings}=[
+    execute before day scope={ \ifdate{day of month=1}{%
+      \pgfmathsetlength{\pgf@ya}{\tikz@lib@cal@yshift}%
+      \pgfmathsetlength\pgf@xa{\tikz@lib@cal@xshift}%
+      \pgftransformyshift{-\pgf@ya}
+      \pgftransformyshift{-.45cm}
+      \foreach \d/\l in {0/ПОНЕДЕЛЬНИК MONDAY,1/ВТОРНИК TUESDAY,2/СРЕДА WEDNESDAY,3/ЧЕТВЕРГ THURSDAY,%
+                         4/ПЯТНИЦА FRIDAY,5/СУББОТА SATURDAY,6/ВОСКРЕСЕНЬЕ SUNDAY} {
+        \pgf@xa=\d\pgf@xa%
+        \pgftransformxshift{\pgf@xa-\cellwidth/2}%
+        \pgftransformyshift{\pgf@ya}%
+	\ifnum\ifnum\d=5 1\else\ifnum\d=6 1\else0\fi\fi
+   	=1 %
+	\node[above=-0.5ex,day heading,align=center,text width=3cm,color=red,font=\tiny]{\l};
+	\else
+	\node[above=-0.5ex,day heading,align=center,text width=3cm,font=\tiny]{\l};
+ 	\fi
+      }
+    }{}%
+  }%
+]
+\makeatother%
+%% End
+
+%% Adapted from pgf source
+\def\pgfcalendarmonthname#1{%
+  \translate{\ifcase#1\or ЯНВАРЬ JANUARY\or ФЕВРАЛЬ FEBRUARY\or МАРТ MARCH\or АПРЕЛЬ APRIL\or
+    МАЙ MAY\or ИЮНЬ JUNE\or ИЮЛЬ JULY\or АВГУСТ AUGUST\or СЕНТЯБРЬ SEPTEMBER\or ОКТЯБРЬ OCTOBER\or
+    НОЯБРЬ NOVEMBER\or ДЕКАБРЬ DECEMBER\fi}%
+}
+
+
+\makeatletter
+\tikzstyle{month label above centered}=[%
+  execute before day scope={%
+    \ifdate{day of month=1}{%
+      {
+        \pgfmathsetlength{\pgf@xa}{\tikz@lib@cal@xshift}%
+        \pgf@xb=\tikz@lib@cal@width\pgf@xa%
+        \advance\pgf@xb by-\pgf@xa%
+        \pgf@xb=.5\pgf@xb%
+        \pgftransformxshift{\pgf@xb}%
+        \pgftransformxshift{-\cellwidth/2}%
+        \pgfmathsetlength{\pgf@y}{\tikz@lib@cal@yshift}%
+        \pgftransformyshift{0.333\pgf@y}
+        \tikzmonthcode%
+      }
+    }{}},
+  every month/.append style={anchor=base}
+]
+\makeatother
+%% End
+
+\ExplSyntaxOn
+
+%% Adapted from http://tex.stackexchange.com/a/56214/4771
+%%
+% first of all we define the user level commands
+\NewDocumentCommand{\addtext}{ m }{ \bdaycal_input_add:n { #1 } }
+\NewDocumentCommand{\addtextyear}{ mm }{ \bdaycal_input_add_y:nn { #1 } { #2 } }
+\NewDocumentCommand{\showtext}{ }{ \bdaycal_output_direct: }
+
+% allocate variable:
+% a sequence for global storage of the inputs;
+\seq_new:N \g_bdaycal_input_seq
+
+% store globally an input in the sequence
+\cs_new:Npn \bdaycal_input_add:n #1
+ {
+  \seq_gput_right:Nn \g_bdaycal_input_seq { #1 }
+ }
+
+\cs_new:Npn \bdaycal_input_add_y:nn #1 #2
+ {
+  \seq_gput_right:Nn \g_bdaycal_input_seq { #1 ~ ( \int_to_arabic:n
+    { \pgfcalendarifdateyear - #2 } ) }
+ }
+
+% how to output in direct order; we simply do a mapping function calling
+% \bdaycal_print:n after incrementing the counter
+\cs_new_protected:Npn \bdaycal_output_direct:
+ {
+  \seq_map_inline:Nn \g_bdaycal_input_seq
+   {
+    \bdaycal_print:n { ##1 }
+   }
+  \seq_gclear:N \g_bdaycal_input_seq
+ }
+
+% the printing macro; change here for adapting to your wishes
+\cs_new:Npn \bdaycal_print:n #1
+ {
+  #1 \par
+ }
+%% End
+
+%% http://www.tondering.dk/claus/cal/week.php#calcweekno
+\int_new:N \l_week_number_year_int
+\int_new:N \l_week_number_month_int
+\int_new:N \l_week_number_day_int
+\int_new:N \l_week_number_a_int
+\int_new:N \l_week_number_b_int
+\int_new:N \l_week_number_c_int
+\int_new:N \l_week_number_s_int
+\int_new:N \l_week_number_e_int
+\int_new:N \l_week_number_f_int
+\int_new:N \l_week_number_g_int
+\int_new:N \l_week_number_d_int
+\int_new:N \l_week_number_n_int
+\int_new:N \l_week_number_W_int
+
+\cs_new:Nn \week_number:nnn {
+
+  \int_set:Nn \l_week_number_year_int { #1 }
+  \int_set:Nn \l_week_number_month_int { #2 }
+  \int_set:Nn \l_week_number_day_int { #3 }
+
+  \int_compare:nNnTF { \l_week_number_month_int } < { 3 } % jan or feb
+  { % true
+
+    \int_set:Nn \l_week_number_a_int { \l_week_number_year_int - 1 }
+
+    \int_set:Nn \l_week_number_b_int {
+      \int_div_truncate:nn { \l_week_number_a_int } { 4 }
+      - \int_div_truncate:nn { \l_week_number_a_int } { 100 }
+      + \int_div_truncate:nn { \l_week_number_a_int } { 400 }
+    }
+
+    \int_set:Nn \l_week_number_c_int {
+      \int_div_truncate:nn { \l_week_number_a_int - 1 } { 4 }
+      - \int_div_truncate:nn { \l_week_number_a_int - 1 } { 100 }
+      + \int_div_truncate:nn { \l_week_number_a_int - 1 } { 400 }
+    }
+
+    \int_set:Nn \l_week_number_s_int {
+      \l_week_number_b_int - \l_week_number_c_int }
+
+    \int_zero:N \l_week_number_e_int
+
+    \int_set:Nn \l_week_number_f_int { \l_week_number_day_int - 1
+      + 31 * ( \l_week_number_month_int - 1 ) }
+
+  } % end true
+  { % false
+
+    \int_set_eq:NN \l_week_number_a_int \l_week_number_year_int
+
+    \int_set:Nn \l_week_number_b_int {
+      \int_div_truncate:nn { \l_week_number_a_int } { 4 }
+      - \int_div_truncate:nn { \l_week_number_a_int } { 100 }
+      + \int_div_truncate:nn { \l_week_number_a_int } { 400 }
+    }
+
+    \int_set:Nn \l_week_number_c_int {
+      \int_div_truncate:nn { \l_week_number_a_int - 1 } { 4 }
+      - \int_div_truncate:nn { \l_week_number_a_int - 1 } { 100 }
+      + \int_div_truncate:nn { \l_week_number_a_int - 1 } { 400 }
+    }
+
+    \int_set:Nn \l_week_number_s_int {
+      \l_week_number_b_int - \l_week_number_c_int }
+
+    \int_set:Nn \l_week_number_e_int { \l_week_number_s_int + 1 }
+
+    \int_set:Nn \l_week_number_f_int { \l_week_number_day_int
+      + \int_div_truncate:nn {
+        153 * ( \l_week_number_month_int - 3 ) + 2 } { 5 }
+      + 58 + \l_week_number_s_int }
+
+  } % end false
+
+  \int_set:Nn \l_week_number_g_int {
+    \int_mod:nn { \l_week_number_a_int + \l_week_number_b_int } { 7 }  }
+
+  \int_set:Nn \l_week_number_d_int {
+    \int_mod:nn { \l_week_number_f_int + \l_week_number_g_int
+      - \l_week_number_e_int } { 7 }  }
+
+  \int_set:Nn \l_week_number_n_int {
+    \l_week_number_f_int + 3 - \l_week_number_d_int }
+
+  \int_compare:nNnTF { \l_week_number_n_int } < { 0 }
+  { %true
+
+    \int_set:Nn \l_week_number_W_int { 53
+      - \int_div_truncate:nn { \l_week_number_g_int
+        - \l_week_number_s_int } { 5 } }
+
+  } % end true
+  { % false
+
+    \int_compare:nNnTF { \l_week_number_n_int } > { 364
+      + \l_week_number_s_int }
+    { % true
+
+      \int_set:Nn \l_week_number_W_int { 1 }
+
+    } % end true
+    { % false
+
+      \int_set:Nn \l_week_number_W_int { \int_div_truncate:nn {
+          \l_week_number_n_int } { 7 } + 1 }
+
+    } % end false
+
+  } % end false
+
+}
+
+\pgfkeys{/tikz/week~number/.code =
+  {
+    \week_number:nnn { 
+      \pgfcalendarifdateyear } { 
+      \pgfcalendarifdatemonth } { 
+      \pgfcalendarifdateday }
+    \addtext{\textit{\int_to_arabic:n { \l_week_number_W_int }} }
+  }
+}
+
+\ExplSyntaxOff
+
+
+\pgfkeys{/tikz/observance/.code =
+  {
+    \addtext{#1}
+  }
+}
+
+\newcommand{\TikzDayCode}{}
+\newcommand{\restoreTikzDayCode}{\renewcommand{\TikzDayCode}{\node (lower right) at (0,0) [above left,font=\Huge] {\tikzdaytext};}}
+\restoreTikzDayCode
+
+\pgfkeys{/tikz/day code =
+  {
+    \TikzDayCode
+    \node (upper left) at (-\cellwidth,\cellheight)
+    [below right,align=left,text width=\cellwidth-\pgflinewidth,
+    font=\tiny,black] {\showtext};
+    \node (lower left) at (-\cellwidth,0) {};
+    \node[rounded corners, draw,
+          fit=(lower right) (upper left) (lower left),
+          inner sep=1mm] {};
+  }
+}
+
+\pgfkeys{/tikz/inner sep = 0pt}
+
+\pgfkeys{/tikz/day xshift=\cellwidth+3.5mm}
+
+\pgfkeys{/tikz/day yshift=\cellheight+2mm+2mm}
+
+\newlength{\cellheight}
+\setlength{\cellheight}{20mm}
+\newlength{\cellwidth}
+\setlength{\cellwidth}{26.85mm}
+
+%% Background for selected (emphasized) weeks
+\definecolor{selectedbg}{HTML}{EEEEEE}
+
+\pgfkeys{/tikz/mark-week day/.code =
+  {
+     \filldraw[selectedbg,rounded corners=2mm] (-\cellwidth-3mm,-2mm) rectangle (7*\cellwidth-3.5mm,\cellheight+2mm);
+  }
+}
+
+%% Argument 1: Start date
+%% Argument 2: End data
+\newcommand{\calmonthRaw}[2]{%
+\vspace*{1cm}%
+\centerline{%
+\begin{tikzpicture}[thick]
+  \calendar[dates=#1 to #2,
+            week list,
+            month label above centered,
+            month text={\%mt \%y0},
+            day headings={font=\footnotesize\scshape},
+            day letter headings]
+  if (equals=2014-04-14,
+      equals=2014-01-06,
+      equals=2014-01-13) [mark-week day]
+  if (Monday,
+      equals=01-01,
+      equals=02-01,
+      equals=03-01,
+      equals=04-01,
+      equals=05-01,
+      equals=06-01,
+      equals=07-01,
+      equals=08-01,
+      equals=09-01,
+      equals=10-01,
+      equals=11-01,
+      equals=12-01) [week number]
+  \markRed
+  if (equals=01-01,
+      equals=01-07,
+      equals=02-23,
+      equals=03-08,
+      equals=05-01,
+      equals=06-12,
+      equals=11-04,
+      equals=04-06,
+      equals=04-12,
+      equals=06-22,
+      equals=07-13,
+      equals=07-20,
+      equals=08-17,
+      equals=10-05,
+      equals=09-01,
+      equals=09-28,
+      equals=10-26,
+      equals=12-12
+      ) [flag-flying day]
+  if (equals=10-04) [flag-space day]
+  if (equals=07-27) [flag-navy day]
+  if (equals=12-20) [flag-kgb day]
+  if (equals=08-02) [flag-airborne day]
+  if (equals=09-14) [flag-military day]
+  if (equals=05-09) [flag-victory day]
+  if (equals=01-27,
+      equals=09-08,
+      equals=05-27) [flag-spb day]
+  if (equals=04-20,
+      equals=01-06,
+      equals=01-14,
+      equals=01-18,
+      equals=01-19,
+      equals=03-02,
+      equals=03-03,
+      equals=02-15,
+      equals=02-22,
+      equals=03-15,
+      equals=03-22,
+      equals=03-29,
+      equals=04-13,
+      equals=04-17,
+      equals=04-18,
+      equals=03-09,
+      equals=05-29,
+      equals=06-07,
+      equals=06-08,
+      equals=07-07,
+      equals=08-14,
+      equals=08-19,
+      equals=08-28,
+      equals=08-29,
+      equals=10-14,
+      equals=07-12,
+      equals=04-07,
+      equals=04-29,
+      equals=06-09,
+      equals=09-27,
+      equals=09-11,
+      equals=09-21,
+      equals=11-01,
+      equals=12-04
+  ) [flag-orthodox day]
+  if (equals=01-01) [observance=Новый год]
+  if (equals=01-07) [observance=Рождество\\ Христово]
+  if (equals=02-23) [observance=День защитника Отечества]
+  if (equals=03-08) [observance=Международный женский день]
+  if (equals=04-06) [observance=День геолога]
+  if (equals=05-01) [observance=Праздник Весны и Труда]
+  if (equals=05-09) [observance=День Победы]
+  if (equals=11-04) [observance=День народного единства]
+  if (equals=06-12) [observance=День России]
+  if (equals=04-12) [observance=День\\ космонавтики]
+  if (equals=06-22) [observance=День памяти и скорби]
+  if (equals=07-20) [observance=День\\ металлурга]
+  if (equals=08-02) [observance=День ВДВ\\ Ильин день]
+  if (equals=08-17) [observance=День\\ Воздушного\\ Флота России]
+  if (equals=07-13) [observance=День рыбака]
+  if (equals=07-27) [observance=День ВМФ]
+  if (equals=09-01) [observance=День знаний]
+  if (equals=09-11) [observance=Иван Головосек]
+  if (equals=09-14) [observance=День танкиста]
+  if (equals=09-28) [observance=День машино\-строителя]
+  if (equals=10-04) [observance=День Космических войск]
+  if (equals=10-05) [observance=День учителя]
+  if (equals=10-26) [observance=День\\ автомобилиста]
+  if (equals=12-12) [observance=День\\ Конституции]
+  if (equals=12-20) [observance=День чекиста]
+  %% St. Petersburg (Leningrad) days
+  if (equals=01-27) [observance=Снятие блокады Ленинграда]
+  if (equals=09-08) [observance=Начало блокады Ленинграда]
+  if (equals=05-27) [observance=Основание Санкт-Петербурга]
+  %% Orthodoxy dates
+  if (equals=01-14) [observance=Обрезание\\ Господне]
+  if (equals=02-22,
+  	equals=03-15,
+	equals=03-22,
+	equals=03-29) [observance=Родительская суббота]
+  if (equals=01-19) [observance=Крещение\\ Господне]
+  if (equals=01-06) [observance=Рождественский\\ сочельник]
+  if (equals=01-18) [observance=Крещенский\\ сочельник]
+  if (equals=03-02) [observance=Прощеное\\ воскресенье]
+  if (equals=03-03) [observance=Чистый\\ понедельник]
+  if (equals=02-15) [observance=Сретение\\ Господне]
+  if (equals=04-07) [observance=Благовещение]
+  if (equals=04-13) [observance=Вход Господень в Иерусалим]
+  if (equals=04-17) [observance=Великий\\ Четверток]
+  if (equals=04-18) [observance=Великий\\ Пяток]
+  if (equals=04-20) [observance=Пасха]
+  if (equals=04-29) [observance=Радоница]
+  if (equals=03-09) [observance=Торжество\\ Православия]
+  if (equals=05-29) [observance=Вознесение\\ Господне]
+  if (equals=06-07) [observance=Троицкая\\ родительская суббота]
+  if (equals=06-08) [observance=Троица]
+  if (equals=06-09) [observance=День Святого Духа]
+  if (equals=08-14) [observance=Медовый Спас]
+  if (equals=08-19) [observance=Преображение\\ Господне]
+  if (equals=08-28) [observance=Успение\\ Пресвятой\\ Богородицы]
+  if (equals=08-29) [observance=Третий Спас]
+  if (equals=09-21) [observance=Рождество\\ Пресвятой\\ Богородицы]
+  if (equals=09-27) [observance=Воздвижение Креста\\ Господня]
+  if (equals=10-14) [observance=Покров\\ Пресвятой\\ Богородицы]
+  if (equals=11-01) [observance=Димитриевская родительская суббота]
+  if (equals=07-07) [observance=Рождество Иоанна\\ Предтечи]
+  if (equals=07-12) [observance=День Петра и Павла]
+  if (equals=12-04) [observance=Введение\\ Богородицы во храм]
+;
+\end{tikzpicture}}\bigskip}
+
+%% Argument: month
+\newcommand{\calmonth}[1]{\calmonthRaw{2014-#1-01}{2014-#1-last}}
+
+%% Generates "small" calendar (2 such calendars are in every month's page) 
+\newcommand{\smallmonths}[2]{\noindent\usebox{#1}\hfill\usebox{#2}\newpage}
+

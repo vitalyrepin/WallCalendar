@@ -1,25 +1,29 @@
 # Main input (w/o extension)
-MAIN_FNAME=2014
 # Additional files the main input file depends on
-ADDDEPS=flags.tex flags/fsb.tex flags/orthodox.tex
+ADDDEPS=common/preamble.tex common/flags.tex common/flags/fsb.tex common/flags/orthodox.tex
 
-IMAGES=
+IMAGES=$(addprefix photos/, baikal.png baikalsky.png Carcassonne.png espoo.png finnbay.png hoboi.png irkutsk.png kapchuk.png norilsk.png nuuksio.png peterhof.png piter.png porkkala.png riga.png ruskeala.png savonlinna.png)
+THUMBS=$(addprefix photos/,$(addsuffix .jpg, $(basename $(notdir $(IMAGES)))))
 
-RERUN = "(There were undefined references|Rerun to get (cross-references|the bars) right)"
-
-RERUNBIB = "No file.*\.bbl|Citation.*undefined"
-
-GOALS = $(MAIN_FNAME).pdf
+GOALS = 2014.pdf cover.pdf
 
 COPY = if test -r $*.toc; then cp $*.toc $*.toc.bak; fi
 RM = /bin/rm -f
 
 all:            $(GOALS)
 
-DEPS = 	$(MAIN_FNAME).tex $(ADDDEPS)
 
-$(MAIN_FNAME).pdf: $(DEPS) $(IMAGES)
+DEPS = 	2014.tex $(ADDDEPS)
 
+2014.pdf: $(DEPS) $(IMAGES)
+
+back.pdf: $(ADDDEPS) $(IMAGES) back.tex
+front.pdf: $(ADDDEPS) $(IMAGES) front.tex
+
+cover.pdf: back.pdf front.pdf cover.tex $(IMAGES)
+
+%.jpg:  %.png
+	convert $< $@
 
 %.png:  %.dia
 	dia -e $@ $<
@@ -46,7 +50,7 @@ $(MAIN_FNAME).pdf: $(DEPS) $(IMAGES)
 	convert $< $@
 
 %.pdf:          %.tex
-		latexmk -pdf $<
+		latexmk -pdf -shell-escape $<
 
 clean:
 		latexmk -c
