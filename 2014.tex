@@ -10,6 +10,7 @@
 \pagestyle{empty}
 \usepackage{graphicx}
 \usepackage{tikz}
+\usepackage{wallpaper}
 \usetikzlibrary{calendar,fit}
 \usepackage{expl3,xparse}
 
@@ -32,7 +33,7 @@ pdflang={en}
 \input{common/preamble}
 \input{common/flags}
 
-\newcommand{\pict}[1]{\newgeometry{left=0cm,bottom=0cm,top=0cm,right=0cm,margin=0cm}\noindent\includegraphics[width=\paperwidth,height=.999\paperheight]{photos/#1}\restoregeometry}
+\newcommand{\pict}[1]{\ThisULCornerWallPaper{1}{photos/#1}\vspace*{1cm}\newpage}
 
 % Next year calendar - first page
 \vspace*{1cm}
@@ -68,7 +69,6 @@ pdflang={en}
 \pict{hoboi}
 \calmonth{5}
 \smallmonths{\smallCalApr}{\smallCalJun}
-
 
 %% June
 \pict{kapchuk}
