@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{cmap}
 \usepackage{hyperxmp}
+\usepackage{tikz}
 \usepackage{hyperref}
 \pdfminorversion=5
 \pdfobjcompresslevel=3
@@ -26,6 +27,8 @@ pdflang={en}
 \pagestyle{empty}
 
 \begin{document}
-\vspace*{-.35cm}
-\noindent\includegraphics[keepaspectratio,angle=-90]{back}\includegraphics[keepaspectratio,angle=-90]{back}
+\noindent\begin{tikzpicture}[scale=1]
+\node[anchor=south west,inner sep=0] (back) at (0,0) {\includegraphics[angle=-90]{back}};
+\node[anchor=south west,inner sep=0] (front) at (0.5\paperwidth,0) {\includegraphics[angle=90]{front}};
+\end{tikzpicture}
 \end{document}
