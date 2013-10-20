@@ -10,11 +10,14 @@
 \usepackage{wallpaper}
 \usepackage{color}
 \usepackage{graphicx}
-\usepackage{pst-barcode}
+\usepackage{tikz}
+\usetikzlibrary{calendar}
+\usetikzlibrary{fadings}
+\usepackage{expl3,xparse}
+
 \pdfminorversion=5
 \pdfobjcompresslevel=3
 \pdfcompresslevel=9
-\usepackage{auto-pst-pdf} 
 
 \hypersetup{%
 pdftitle={%
@@ -31,13 +34,32 @@ pdfcontactemail={vitaly.repin@gmail.com},
 pdflang={en}
 }
 
+\input{common/preamble.tex}
+
 \pagestyle{empty}
 
 \begin{document}
-test
+\ThisTileWallPaper{\paperwidth}{\paperheight}{photos/saima}
 
-\begin{pspicture}(1in,1in)
-   \psbarcode{test string}{}{qrcode}
-\end{pspicture}
+\vspace*{.5cm}
+\hfill \colorbox{red}{%
+\begin{tabular}{c}
+\textcolor{white}{\textsf{\textbf{КАЛЕНДАРЬ}}}\\
+\textcolor{white}{\textbf{\itshape\Huge 2014}}\\
+\textcolor{white}{\textsf{\textbf{CALENDAR}}}
+\end{tabular}}\hspace{.65cm}
+
+\vspace*{13.5cm}
+
+\huge
+
+%% Adapted from pgf manual
+\newbox\mybox
+\centerline{\begin{tikzpicture}
+\def\nodeshadowed[#1]#2;{\node[scale=1.2,above,#1]{\global\setbox\mybox=\hbox{#2}\copy\mybox};
+   \node[scale=1.2,above,#1,yscale=-1,scope fading=south,opacity=0.4]{\box\mybox};}
+\nodeshadowed[font=\huge\bfseries, at={(0,0)}] {\textcolor{white}{\caltitleEN}};
+\nodeshadowed[font=\huge\bfseries, at={(0,-1.8)}] {\textcolor{white}{\caltitleRU}};
+\end{tikzpicture}}
 
 \end{document}
