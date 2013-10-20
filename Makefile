@@ -13,7 +13,7 @@ RM = /bin/rm -f
 all:            $(GOALS)
 
 
-DEPS = 	2014.tex $(ADDDEPS)
+DEPS = 	2014.tex customization.tex $(ADDDEPS)
 
 2014.pdf: $(DEPS) $(IMAGES)
 

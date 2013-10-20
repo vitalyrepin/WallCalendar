@@ -33,7 +33,8 @@ pdflang={en}
 \input{common/preamble}
 \input{common/flags}
 
-\newcommand{\pict}[1]{\ThisULCornerWallPaper{1}{photos/#1}\vspace*{1cm}\newpage}
+\newcommand{\pict}[1]{\ThisULCornerWallPaper{1}{photos/\GetMonthImage{#1}}\vspace*{1cm}\newpage}
+\newcommand{\pictCal}[1]{\pict{#1}\calmonth{#1}}
 
 % Next year calendar - first page
 \vspace*{1cm}
@@ -43,69 +44,58 @@ pdflang={en}
 \newpage
 
 %% January
-\pict{espoo}
-\calmonth{1}
+\pictCal{1}
 \smallmonths{\smallCalDecO}{\smallCalFeb}
 
 %% February
-\pict{riga}
-\calmonth{2}
+\pictCal{2}
 \smallmonths{\smallCalJan}{\smallCalMar}
 
 %% March
-\pict{Carcassonne}
+\pict{3}
 \renewcommand{\TikzDayCode}{\node (lower right) at (0,0) [above left,font=\Huge] {\ifthenelse{\equal{\pgfcalendarcurrentday}{24}}{\small 24 (31)}{\tikzdaytext}};}
 \calmonthRaw{2014-03-01}{2014-03-30}
 \restoreTikzDayCode
 \smallmonths{\smallCalFeb}{\smallCalApr}
 
 %% April
-\pict{ruskeala}
-\calmonth{4}
+\pictCal{4}
 \smallmonths{\smallCalMar}{\smallCalMay}
 
 
 %%May
-\pict{hoboi}
-\calmonth{5}
+\pictCal{5}
 \smallmonths{\smallCalApr}{\smallCalJun}
 
 %% June
-\pict{kapchuk}
+\pict{6}
 \renewcommand{\TikzDayCode}{\node (lower right) at (0,0) [above left,font=\Huge] {\ifthenelse{\equal{\pgfcalendarcurrentday}{23}}{\small 23 (30)}{\tikzdaytext}};}
 \calmonthRaw{2014-06-01}{2014-06-29}
 \restoreTikzDayCode
 \smallmonths{\smallCalMay}{\smallCalJul}
 
 %% July
-\pict{peterhof}
-\calmonth{7}
+\pictCal{7}
 \smallmonths{\smallCalJun}{\smallCalAug}
 
 %% August
-\pict{piter}
-\calmonth{8}
+\pictCal{8}
 \smallmonths{\smallCalJul}{\smallCalSep}
 
 %% September
-\pict{porkkala}
-\calmonth{9}
+\pictCal{9}
 \smallmonths{\smallCalAug}{\smallCalOct}
 
-
 %% October
-\pict{irkutsk}
-\calmonth{10}
+\pictCal{10}
 \smallmonths{\smallCalSep}{\smallCalNov}
 
 %% November
-\pict{savonlinna}
-\calmonth{11}
+\pictCal{11}
 \smallmonths{\smallCalOct}{\smallCalDec}
 
 %% December
-\pict{nuuksio}
-\calmonth{12}
+\pictCal{12}
 \smallmonths{\smallCalNov}{\smallCalJanN}
 
 % Next year calendar - last page

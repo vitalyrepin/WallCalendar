@@ -9,9 +9,10 @@
 \usepackage{multirow}
 \usepackage[left=0cm, right=0cm, top=0cm, bottom=0cm,paperwidth=8.75in,paperheight=8.625in]{geometry}
 \pagestyle{empty}
-\usepackage{wallpaper}
-\usepackage{color}
 \usepackage{graphicx}
+\usepackage{wallpaper}
+\usepackage{textcomp}
+\usepackage{color}
 \usepackage{tikz}
 \usetikzlibrary{calendar,fit}
 \usepackage{expl3,xparse}
@@ -39,11 +40,13 @@ pdflang={en}
 \input{common/flags.tex}
 
 \begin{document}
-%% Front cover
-
 %% Back cover
 \ThisTileWallPaper{\paperwidth}{\paperheight}{photos/baikalsky}
-\def\CalExAspectRatio{0.31034}
+
+\vspace*{1cm}
+
+\def\CalExAspectRatio{0.302}
+%\def\CalExAspectRatio{0.31034}
 \def\ThumbAspectRation{0.189655}
 %% Saving calendars in the boxes and sscaling them. Does not work inside minipage environment.
 \newsavebox{\exampleMonthCal}
@@ -54,25 +57,43 @@ pdflang={en}
 \savebox{\examplsmallMonthF}{\resizebox{.13\paperwidth}{!}{\usebox{\smallCalJun}}}
 \savebox{\examplsmallMonthS}{\resizebox{.13\paperwidth}{!}{\usebox{\smallCalAug}}}
 
-\newcommand{\exampleCal}{
-\colorbox{white}{\begin{minipage}{\CalExAspectRatio\paperwidth}
-\noindent\begin{tabular}{lr}
-\multicolumn{2}{l}{\frame{\includegraphics[keepaspectratio,width=\CalExAspectRatio\paperwidth]{photos/peterhof}}}\\
+\newcommand{\exampleCal}{%
+\begingroup%
+\setlength{\fboxsep}{0pt}%
+\frame{\colorbox{white}{\begin{minipage}{\CalExAspectRatio\paperwidth}%
+\setlength{\tabcolsep}{0pt}%
+\noindent\begin{tabular}{lr}%
+\multicolumn{2}{l}{\includegraphics[keepaspectratio,width=\CalExAspectRatio\paperwidth]{photos/\GetMonthImage{7}}}\\
 \multicolumn{2}{l}{\usebox{\exampleMonthCal}}\\[-.15cm]
 \usebox{\examplsmallMonthF}&\usebox{\examplsmallMonthS}\\
-\end{tabular}
-\end{minipage}}
+\end{tabular}%
+\end{minipage}}}%
+\endgroup%
 }
 
-\newcommand{\thumb}[1]{\frame{\includegraphics[keepaspectratio,width=\ThumbAspectRation\paperwidth]{photos/#1}}}
+\newcommand{\thumb}[1]{\frame{\includegraphics[keepaspectratio,width=\ThumbAspectRation\paperwidth]{photos/\GetMonthImage{#1}}}}
 \vspace*{.25cm}
+
+\newsavebox{\isbn}
+\savebox{\isbn}{%
+\begingroup
+\setlength{\tabcolsep}{0pt}
+\tiny%
+\begin{tabular}{l}
+\frame{\colorbox{white}{\includegraphics[keepaspectratio,width=.33\paperwidth]{isbn_barcode}}}\\[.2cm]
+\textsc{\caltitleEN}\\
+\textsc{\caltitleRU}\\[.2cm]
+\textcopyright\ Vitaly Repin, 2013\\
+\end{tabular}
+\endgroup
+}
 
 \centerline{%
 \begin{tabular}{l@{\hspace{2mm}}l@{\hspace{2mm}}l@{\hspace{2mm}}l}
-\thumb{espoo}&\thumb{riga}&\thumb{Carcassonne}&\multirow{3}{*}[3.6cm]{\exampleCal}\\
-\thumb{ruskeala}&\thumb{hoboi}&\thumb{kapchuk}&\\
-\thumb{piter}&\thumb{porkkala}&\thumb{irkutsk}&\\
-\thumb{savonlinna}&\thumb{nuuksio}&\\
+\thumb{1}&\thumb{2}&\thumb{3}&\multirow{3}{*}[3.6cm]{\exampleCal}\\
+\thumb{4}&\thumb{5}&\thumb{6}&\\
+\thumb{8}&\thumb{9}&\thumb{10}&\\
+\thumb{11}&\thumb{12}&\multicolumn{2}{l}{\hspace*{-.4cm}\raisebox{1.6cm}{\usebox{\isbn}}}\\
 \end{tabular}}
 
 \end{document}
