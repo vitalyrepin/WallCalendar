@@ -2,13 +2,15 @@
 # Additional files the main input file depends on
 ADDDEPS=common/preamble.tex common/flags.tex common/flags/fsb.tex common/flags/orthodox.tex
 
-IMAGES=$(addprefix photos/, baikal.png baikalsky.png espoo.png finnbay.png hoboi.png irkutsk.png kapchuk.png norilsk.png nuuksio.png peterhof.png piter.png porkkala.png riga.png ruskeala.png savonlinna.png saima.png)
+IMAGES=$(addprefix photos/, baikalsky.png espoo.png hoboi.png irkutsk.png kapchuk.png nuuksio.png peterhof.png piter.png porkkala.png riga.png ruskeala.png savonlinna.png saima.png zunmurino.png)
 EPS_IMAGES=$(addprefix photos/,$(addsuffix .eps, $(basename $(notdir $(IMAGES)))))
 
 GOALS = 2014.pdf 2014-landscape.pdf cover.pdf
 
 COPY = if test -r $*.toc; then cp $*.toc $*.toc.bak; fi
 RM = /bin/rm -f
+
+.PHONY: clean web
 
 all:            $(GOALS)
 
@@ -60,6 +62,7 @@ cover.pdf: back.pdf front.pdf cover.tex $(IMAGES)
 clean:
 		latexmk -c
 		$(RM) -f *.bbl
+		$(RM) -f $(EPS_IMAGES)
 #		aux *.log *.bbl *.blg *.brf *.cb *.ind *.idx *.ilg  \
 #		*.inx *.ps *.dvi *.pdf *.toc *.out *.lot *.lof *.eps *.fls *.fdb_latexmk
 
