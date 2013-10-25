@@ -1,0 +1,9 @@
+The images (and vector TeX/Tikz) files inside this directory are licensed by the same license as the original works:
+
+orthodox.tex: automatically converted from Wikimedia image: http://commons.wikimedia.org/wiki/File:OrthodoxCross(black,contoured).svg?uselang=en
+fsb.tex: automatically converted from Wikimedia image: http://commons.wikimedia.org/wiki/File:Flag_of_FSB.svg?uselang=en
+SpbFlag.pdf: automatically converted from Wikimedia image: http://en.wikipedia.org/wiki/File:Flag_of_Saint_Petersburg_Russia.svg
+SpaceFlag.png: automatically converted from Wikimedia image: http://commons.wikimedia.org/wiki/File:Russian_military_space_troops_flag.png?uselang=en
+RusDefence.png: automatically converted from Wikimedia image:  http://commons.wikimedia.org/wiki/File:Flag_of_the_Ministry_of_Defence_of_the_Russian_Federation.svg?uselang=en
+RusAirborne.png: automatically converted from Wikimedia image: http://commons.wikimedia.org/wiki/File:Flag_of_the_Russian_Airborne_Troops.svg?uselang=en
+9May.png: automatically converted from Wikimedia image: http://commons.wikimedia.org/wiki/File:Ribbon_of_Saint_George.svg?uselang=en
