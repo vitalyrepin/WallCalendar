@@ -1,0 +1,34 @@
+page_format=txt2tags
+page_template=template
+
+page_title=June 2014
+page_description=June 2014
+page_header1=June Июнь 2014
+page_header2=
+page_keywords=june, июнь, календарь
+
+<<<<< content section 1 >>>>>
+Title
+Author
+%%mtime(%m/%d/%Y)
+
+%!encoding: UTF-8
+%%% Comment: use @@ for a line break
+%!postproc(xhtml): @@  "<br />"
+%%% Comment: insert HTML code with curly brackets: replace < and > by {{ and }}
+%!postproc(xhtml): {{(.*?)}} <\1>
+%%% Comment: replace D_ by the dollar sign.
+%!postproc(xhtml): D_   "$"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+== Wikipedia ==
+- [Putorana Plateau http://en.m.wikipedia.org/wiki/Putorana_Plateau]
+- [Плато Путорана http://ru.m.wikipedia.org/wiki/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE_%D0%9F%D1%83%D1%82%D0%BE%D1%80%D0%B0%D0%BD%D0%B0]
+
+
+== Photo ==
+
+'''
+<a href="http://www.flickr.com/photos/vitalyrepin/10478684096/" title="Putorana plateau, Russia by vitaly.repin, on Flickr"><img src="http://farm3.staticflickr.com/2830/10478684096_3576ab44b1.jpg" width="500" height="500" alt="Putorana plateau, Russia"></a>
+'''
+

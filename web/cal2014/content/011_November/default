@@ -1,0 +1,34 @@
+page_format=txt2tags
+page_template=template
+
+page_title=November 2014
+page_description=November 2014
+page_header1=November Ноябрь 2014
+page_header2=
+page_keywords=november, ноябрь, календарь
+
+<<<<< content section 1 >>>>>
+Title
+Author
+%%mtime(%m/%d/%Y)
+
+%!encoding: UTF-8
+%%% Comment: use @@ for a line break
+%!postproc(xhtml): @@  "<br />"
+%%% Comment: insert HTML code with curly brackets: replace < and > by {{ and }}
+%!postproc(xhtml): {{(.*?)}} <\1>
+%%% Comment: replace D_ by the dollar sign.
+%!postproc(xhtml): D_   "$"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+== Facts ==
+- [Tunkin valley http://www.whitestone.travel/sights/item/50-tunkin-valley.html]
+- [Тункинская долина http://ru.m.wikipedia.org/wiki/%D0%A2%D1%83%D0%BD%D0%BA%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F_%D0%BA%D0%BE%D1%82%D0%BB%D0%BE%D0%B2%D0%B8%D0%BD%D0%B0]
+
+
+== Photo ==
+
+'''
+<a href="http://www.flickr.com/photos/vitalyrepin/10478742384/" title="Tunkin valley, Russia by vitaly.repin, on Flickr"><img src="http://farm8.staticflickr.com/7340/10478742384_e58a767414.jpg" width="500" height="500" alt="Tunkin valley, Russia"></a>
+'''
+

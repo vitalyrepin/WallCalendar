@@ -1,0 +1,34 @@
+page_format=txt2tags
+page_template=template
+
+page_title=October 2014
+page_description=October 2014
+page_header1=October Октябрь 2014
+page_header2=
+page_keywords=october, октябрь, календарь
+
+<<<<< content section 1 >>>>>
+Title
+Author
+%%mtime(%m/%d/%Y)
+
+%!encoding: UTF-8
+%%% Comment: use @@ for a line break
+%!postproc(xhtml): @@  "<br />"
+%%% Comment: insert HTML code with curly brackets: replace < and > by {{ and }}
+%!postproc(xhtml): {{(.*?)}} <\1>
+%%% Comment: replace D_ by the dollar sign.
+%!postproc(xhtml): D_   "$"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+== Wikipedia ==
+- [Irkutsk region http://en.m.wikipedia.org/wiki/Irkutsk_Oblast]
+- [Иркутская область http://ru.m.wikipedia.org/wiki/%D0%98%D1%80%D0%BA%D1%83%D1%82%D1%81%D0%BA%D0%B0%D1%8F_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C]
+
+
+== Photo ==
+
+'''
+<a href="http://www.flickr.com/photos/vitalyrepin/10478842583/" title="Irkutsk region, Russia by vitaly.repin, on Flickr"><img src="http://farm4.staticflickr.com/3679/10478842583_03b3d0632a.jpg" width="500" height="500" alt="Irkutsk region, Russia"></a>
+'''
+

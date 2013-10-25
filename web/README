@@ -1,0 +1,5 @@
+In order to generate the web site:
+- Install http://home.deds.nl/~svg_experimenten/txt2site/
+- Issue the command txt2site -g cal2014/cal2014.conf
+
+Site contents will be generated in cal2014/site/ directory

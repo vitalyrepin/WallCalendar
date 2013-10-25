@@ -1,0 +1,34 @@
+page_format=txt2tags
+page_template=template
+
+page_title=January 2014
+page_description=January 2014
+page_header1=January Январь 2014
+page_header2=
+page_keywords=january, январь, календарь
+
+<<<<< content section 1 >>>>>
+Title
+Author
+%%mtime(%m/%d/%Y)
+
+%!encoding: UTF-8
+%%% Comment: use @@ for a line break
+%!postproc(xhtml): @@  "<br />"
+%%% Comment: insert HTML code with curly brackets: replace < and > by {{ and }}
+%!postproc(xhtml): {{(.*?)}} <\1>
+%%% Comment: replace D_ by the dollar sign.
+%!postproc(xhtml): D_   "$"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+== Wikipedia ==
+- [Nuuksio National Park http://en.m.wikipedia.org/wiki/Nuuksio_National_Park]
+- [Нууксио ''http://ru.m.wikipedia.org/wiki/%D0%9D%D1%83%D1%83%D0%BA%D1%81%D0%B8%D0%BE_(%D0%BD%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B0%D1%80%D0%BA)'']
+
+
+== Photo ==
+
+'''
+<a href="http://www.flickr.com/photos/vitalyrepin/10478672906/" title="Nuuksio National Park, Finland by vitaly.repin, on Flickr"><img src="http://farm8.staticflickr.com/7324/10478672906_4837c093e4.jpg" width="500" height="500" alt="Nuuksio National Park, Finland"></a>
+'''
+

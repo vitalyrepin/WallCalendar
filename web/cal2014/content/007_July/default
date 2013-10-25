@@ -1,0 +1,34 @@
+page_format=txt2tags
+page_template=template
+
+page_title=July 2014
+page_description=July 2014
+page_header1=July Июль 2014
+page_header2=
+page_keywords=july, июль, календарь
+
+<<<<< content section 1 >>>>>
+Title
+Author
+%%mtime(%m/%d/%Y)
+
+%!encoding: UTF-8
+%%% Comment: use @@ for a line break
+%!postproc(xhtml): @@  "<br />"
+%%% Comment: insert HTML code with curly brackets: replace < and > by {{ and }}
+%!postproc(xhtml): {{(.*?)}} <\1>
+%%% Comment: replace D_ by the dollar sign.
+%!postproc(xhtml): D_   "$"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+== Wikipedia ==
+- [Peterhof Palace http://en.m.wikipedia.org/wiki/Peterhof_Palace]
+- [Петергоф ''http://ru.m.wikipedia.org/wiki/%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B3%D0%BE%D1%84_(%D0%B4%D0%B2%D0%BE%D1%80%D1%86%D0%BE%D0%B2%D0%BE-%D0%BF%D0%B0%D1%80%D0%BA%D0%BE%D0%B2%D1%8B%D0%B9_%D0%B0%D0%BD%D1%81%D0%B0%D0%BC%D0%B1%D0%BB%D1%8C)'']
+
+
+== Photo ==
+
+'''
+<a href="http://www.flickr.com/photos/vitalyrepin/10478703306/" title="Peterhof, Russia by vitaly.repin, on Flickr"><img src="http://farm4.staticflickr.com/3710/10478703306_60e0b4a7e2.jpg" width="500" height="500" alt="Peterhof, Russia"></a>
+'''
+
