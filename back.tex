@@ -17,6 +17,7 @@
 \usetikzlibrary{calendar,fit}
 \usepackage{auto-pst-pdf,pst-barcode}
 \usepackage{expl3,xparse}
+\usepackage{ccicons}
 
 \hypersetup{%
 pdftitle={%
@@ -77,21 +78,23 @@ pdflang={en}
 %% QR code
 \newcommand{\QR}{%
 \begin{pspicture}(1in,1in)
-\psbarcode{http://www.flickr.com/photos/vitalyrepin/collections/72157602224858025/}{eclevel=H}{qrcode}
+\psbarcode{\webprefix}{eclevel=H}{qrcode}
 \end{pspicture}
 }
 
 %% ISBN and QR bar codes
+\def\imagetop#1{\vtop{\null\hbox{#1}}}
 \newsavebox{\isbn}
 \savebox{\isbn}{%
 \begingroup
 \setlength{\tabcolsep}{0pt}
 \tiny%
 \begin{tabular}{ll}
-\frame{\colorbox{white}{\includegraphics{isbn_barcode}}}&\raisebox{-.81cm}{\QR}\\[.2cm]
-\textsc{\caltitleEN}&\\
-\textsc{\caltitleRU}&\\[.2cm]
-\textcopyright\ Vitaly Repin, 2013. All rights reserved.&\\
+\imagetop{\frame{\colorbox{white}{\includegraphics{isbn_barcode}}}}&\hspace*{.2cm}\imagetop{\QR}\\
+\raisebox{-.2cm}{\textsc{CALENDAR 2014. \caltitleEN.}}&\\
+\raisebox{-.2cm}{\textsc{КАЛЕНДАРЬ 2014. \caltitleRU.}}&\\
+\multicolumn{2}{l}{\raisebox{-.2cm}{\ccLogo\ Creative Commons Attribution-ShareAlike 3.0 Unported License.}}\\
+\raisebox{-.2cm}{\ccbysa\ Vitaly Repin, 2013.}&\\
 \end{tabular}
 \endgroup
 }
@@ -101,7 +104,7 @@ pdflang={en}
 \thumb{1}&\thumb{2}&\thumb{3}&\multirow{3}{*}[3.5cm]{\exampleCal}\\
 \thumb{4}&\thumb{5}&\thumb{6}&\\
 \thumb{8}&\thumb{9}&\thumb{10}&\\
-\thumb{11}&\thumb{12}&\multicolumn{2}{l}{\hspace*{-.4cm}\raisebox{1.52cm}{\usebox{\isbn}}}\\
+\thumb{11}&\thumb{12}&\multicolumn{2}{l}{\hspace*{-.4cm}\raisebox{1.72cm}{\usebox{\isbn}}}\\
 \end{tabular}}
 
 \end{document}

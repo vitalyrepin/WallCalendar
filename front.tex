@@ -51,11 +51,11 @@ pdflang={en}
 
 %% Adapted from pgf manual
 \newbox\mybox
-\centerline{\begin{tikzpicture}
-\def\nodeshadowed[#1]#2;{\node[scale=1.2,above,#1]{\global\setbox\mybox=\hbox{#2}\copy\mybox};
-   \node[scale=1.2,above,#1,yscale=-1,scope fading=south,opacity=0.4]{\box\mybox};}
-\nodeshadowed[font=\huge\bfseries, at={(0,0)}] {\textcolor{white}{\caltitleEN}};
-\nodeshadowed[font=\huge\bfseries, at={(0,-1.8)}] {\textcolor{white}{\caltitleRU}};
+\centerline{\begin{tikzpicture}[title/.style={font=\huge\bfseries\sffamily}]
+\def\nodeshadowed[#1]#2;{\node[scale=1.4,above,#1]{\global\setbox\mybox=\hbox{#2}\copy\mybox};
+   \node[scale=1.4,above,#1,yscale=-1,scope fading=south,opacity=0.4]{\box\mybox};}
+\node[scale=1.4,title, at={(0,0)}] {\textcolor{white}{\caltitleEN}};
+\nodeshadowed[title, at={(0,-1.8)}] {\textcolor{white}{\caltitleRU}};
 \end{tikzpicture}}
 
 \vspace*{.8cm}

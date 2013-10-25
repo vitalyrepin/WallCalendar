@@ -40,13 +40,6 @@
             \calendar[dates=2015-03-01 to 2015-03-last]; \&
             \calendar[dates=2015-04-01 to 2015-04-last]; \\
 }}
-\newsavebox{\yearCalSecond}
-\savebox{\yearCalSecond}{\genYearCal{
-            \calendar[dates=2015-05-01 to 2015-05-last]; \&
-            \calendar[dates=2015-06-01 to 2015-06-last]; \\
-            \calendar[dates=2015-07-01 to 2015-07-last]; \&
-            \calendar[dates=2015-08-01 to 2015-08-last]; \\
-}}
 
 %% Generates small calendar
 %% Argument 1: Month
@@ -420,29 +413,29 @@
 %% Returns the URL with the description of the image corresponding to the month
 %% Argument: month number: 1..12
 \newcommand{\GetMonthURL}[1]{%
-\ifnum#1=1\JanURL%
+\webprefix\ifnum#1=1january
 \fi%
-\ifnum#1=2\FebURL%
+\ifnum#1=2february%
 \fi%
-\ifnum#1=3\MarURL%
+\ifnum#1=3march%
 \fi%
-\ifnum#1=4\AprURL%
+\ifnum#1=4april%
 \fi%
-\ifnum#1=5\MayURL%
+\ifnum#1=5may%
 \fi%
-\ifnum#1=6\JunURL%
+\ifnum#1=6june%
 \fi%
-\ifnum#1=7\JulURL%
+\ifnum#1=7july%
 \fi%
-\ifnum#1=8\AugURL%
+\ifnum#1=8august%
 \fi%
-\ifnum#1=9\SepURL%
+\ifnum#1=9september%
 \fi%
-\ifnum#1=10\OctURL%
+\ifnum#1=10october%
 \fi%
-\ifnum#1=11\NovURL%
+\ifnum#1=11november%
 \fi%
-\ifnum#1=12\DecURL%
+\ifnum#1=12december%
 \fi%
 }
 
