@@ -1,0 +1,4 @@
+- Redesign configuration mechanism. Ideally for every month there shall be one command like: "\Jan{photo}{url}{desc}..."
+- Redesign GetMonth* functions. Ugly now. Connected with the task of redesigning configuration storage
+- Move descriptions of the images to the customization.tex
+- Redesign \smallmonths. It should take only 1 argument: month name. left and right months shoudl be calculated on the fly

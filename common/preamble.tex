@@ -1,4 +1,7 @@
 %% Preamble. Used by calendar and by cover
+\pdfminorversion=5
+\pdfobjcompresslevel=3
+\pdfcompresslevel=9
 
 %% Customization of the template
 \input{customization.tex}
@@ -414,9 +417,45 @@
 \fi%
 }
 
+%% Returns the URL with the description of the image corresponding to the month
+%% Argument: month number: 1..12
+\newcommand{\GetMonthURL}[1]{%
+\ifnum#1=1\JanURL%
+\fi%
+\ifnum#1=2\FebURL%
+\fi%
+\ifnum#1=3\MarURL%
+\fi%
+\ifnum#1=4\AprURL%
+\fi%
+\ifnum#1=5\MayURL%
+\fi%
+\ifnum#1=6\JunURL%
+\fi%
+\ifnum#1=7\JulURL%
+\fi%
+\ifnum#1=8\AugURL%
+\fi%
+\ifnum#1=9\SepURL%
+\fi%
+\ifnum#1=10\OctURL%
+\fi%
+\ifnum#1=11\NovURL%
+\fi%
+\ifnum#1=12\DecURL%
+\fi%
+}
+
+
 %% Argument: month
 \newcommand{\calmonth}[1]{\calmonthRaw{2014-#1-01}{2014-#1-last}}
 
-%% Generates "small" calendar (2 such calendars are in every month's page) 
-\newcommand{\smallmonths}[2]{\noindent\usebox{#1}\hfill\usebox{#2}\newpage}
+%% Creates Bar Code with the URL
+\newcommand{\descurl}[1]{%
+\begin{pspicture}(1in,.1in)
+\psbarcode{#1}{eclevel=H}{qrcode}
+\end{pspicture}
+}
 
+%% Generates "small" calendar (2 such calendars are in every month's page) 
+\newcommand{\smallmonths}[3]{\usebox{#2}\hfill\raisebox{-2cm}{\descurl{\GetMonthURL{#1}}}\hfill\usebox{#3}\newpage}

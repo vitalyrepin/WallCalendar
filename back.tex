@@ -15,10 +15,8 @@
 \usepackage{color}
 \usepackage{tikz}
 \usetikzlibrary{calendar,fit}
+\usepackage{auto-pst-pdf,pst-barcode}
 \usepackage{expl3,xparse}
-\pdfminorversion=5
-\pdfobjcompresslevel=3
-\pdfcompresslevel=9
 
 \hypersetup{%
 pdftitle={%
@@ -43,27 +41,29 @@ pdflang={en}
 %% Back cover
 \ThisTileWallPaper{\paperwidth}{\paperheight}{photos/baikalsky}
 
+%% Width/Height before trimming
+\newlength{\purePaperWidth}
+\setlength{\purePaperWidth}{\paperwidth}\addtolength{\purePaperWidth}{-.25in}
 \vspace*{1cm}
 
 \def\CalExAspectRatio{0.302}
-%\def\CalExAspectRatio{0.31034}
 \def\ThumbAspectRation{0.189655}
 %% Saving calendars in the boxes and sscaling them. Does not work inside minipage environment.
 \newsavebox{\exampleMonthCal}
-\savebox{\exampleMonthCal}{\resizebox{\CalExAspectRatio\paperwidth}{!}{\calmonth{7}}}
+\savebox{\exampleMonthCal}{\resizebox{\CalExAspectRatio\purePaperWidth}{!}{\calmonth{7}}}
 
 %% Saving "small" calendars
 \newsavebox{\examplsmallMonthF}\newsavebox{\examplsmallMonthS}
-\savebox{\examplsmallMonthF}{\resizebox{.13\paperwidth}{!}{\usebox{\smallCalJun}}}
-\savebox{\examplsmallMonthS}{\resizebox{.13\paperwidth}{!}{\usebox{\smallCalAug}}}
+\savebox{\examplsmallMonthF}{\resizebox{.13\purePaperWidth}{!}{\usebox{\smallCalJun}}}
+\savebox{\examplsmallMonthS}{\resizebox{.13\purePaperWidth}{!}{\usebox{\smallCalAug}}}
 
 \newcommand{\exampleCal}{%
 \begingroup%
 \setlength{\fboxsep}{0pt}%
-\frame{\colorbox{white}{\begin{minipage}{\CalExAspectRatio\paperwidth}%
+\frame{\colorbox{white}{\begin{minipage}{\CalExAspectRatio\purePaperWidth}%
 \setlength{\tabcolsep}{0pt}%
 \noindent\begin{tabular}{lr}%
-\multicolumn{2}{l}{\includegraphics[keepaspectratio,width=\CalExAspectRatio\paperwidth]{photos/\GetMonthImage{7}}}\\
+\multicolumn{2}{l}{\includegraphics[keepaspectratio,width=\CalExAspectRatio\purePaperWidth]{photos/\GetMonthImage{7}}}\\
 \multicolumn{2}{l}{\usebox{\exampleMonthCal}}\\[-.15cm]
 \usebox{\examplsmallMonthF}&\usebox{\examplsmallMonthS}\\
 \end{tabular}%
@@ -71,29 +71,37 @@ pdflang={en}
 \endgroup%
 }
 
-\newcommand{\thumb}[1]{\frame{\includegraphics[keepaspectratio,width=\ThumbAspectRation\paperwidth]{photos/\GetMonthImage{#1}}}}
+\newcommand{\thumb}[1]{\frame{\includegraphics[keepaspectratio,width=\ThumbAspectRation\purePaperWidth]{photos/\GetMonthImage{#1}}}}
 \vspace*{.25cm}
 
+%% QR code
+\newcommand{\QR}{%
+\begin{pspicture}(1in,1in)
+\psbarcode{http://www.flickr.com/photos/vitalyrepin/collections/72157602224858025/}{eclevel=H}{qrcode}
+\end{pspicture}
+}
+
+%% ISBN and QR bar codes
 \newsavebox{\isbn}
 \savebox{\isbn}{%
 \begingroup
 \setlength{\tabcolsep}{0pt}
 \tiny%
-\begin{tabular}{l}
-\frame{\colorbox{white}{\includegraphics{isbn_barcode}}}\\[.2cm]
-\textsc{\caltitleEN}\\
-\textsc{\caltitleRU}\\[.2cm]
-\textcopyright\ Vitaly Repin, 2013\\
+\begin{tabular}{ll}
+\frame{\colorbox{white}{\includegraphics{isbn_barcode}}}&\raisebox{-.81cm}{\QR}\\[.2cm]
+\textsc{\caltitleEN}&\\
+\textsc{\caltitleRU}&\\[.2cm]
+\textcopyright\ Vitaly Repin, 2013. All rights reserved.&\\
 \end{tabular}
 \endgroup
 }
 
 \centerline{%
 \begin{tabular}{l@{\hspace{2mm}}l@{\hspace{2mm}}l@{\hspace{2mm}}l}
-\thumb{1}&\thumb{2}&\thumb{3}&\multirow{3}{*}[3.6cm]{\exampleCal}\\
+\thumb{1}&\thumb{2}&\thumb{3}&\multirow{3}{*}[3.5cm]{\exampleCal}\\
 \thumb{4}&\thumb{5}&\thumb{6}&\\
 \thumb{8}&\thumb{9}&\thumb{10}&\\
-\thumb{11}&\thumb{12}&\multicolumn{2}{l}{\hspace*{-.4cm}\raisebox{1.82cm}{\usebox{\isbn}}}\\
+\thumb{11}&\thumb{12}&\multicolumn{2}{l}{\hspace*{-.4cm}\raisebox{1.52cm}{\usebox{\isbn}}}\\
 \end{tabular}}
 
 \end{document}
