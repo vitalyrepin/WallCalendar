@@ -50,24 +50,27 @@
 \end{tikzpicture}}
 
 %% Orthodoxy christ
-\input{resources/flags/orthodox}
+\input{flags/orthodox}
+
+%% Path to the images with flags. Use only in command but not in boxes! See examples below.
+\def\resources{../../resources/flags}
 
 %% Flag of the Russian Space Troops
-\newcommand{\flagRusSpace}{\includegraphics{resources/flags/SpaceFlag.png}}
+\newcommand{\flagRusSpace}{\includegraphics{\resources/SpaceFlag.png}}
 
 %% Flag of the Russian Arborne Troops
-\newcommand{\flagRusAirborne}{\includegraphics{resources/flags/RusAirborne.png}}
+\newcommand{\flagRusAirborne}{\includegraphics{\resources/RusAirborne.png}}
 
 %% St. Petersburg flag
 \newsavebox{\flagSpb}
-\savebox{\flagSpb}{\includegraphics{resources/flags/SpbFlag.pdf}}
+\savebox{\flagSpb}{\includegraphics{flags/SpbFlag.pdf}}
 
 %% Flag of the Russian Ministry of Defence
 \newsavebox{\flagRusDefence}
-\savebox{\flagRusDefence}{\includegraphics{resources/flags/RusDefence.png}}
+\savebox{\flagRusDefence}{\includegraphics{flags/RusDefence.png}}
 
 %% Saint George ribbon - Vicory Day. 9, May.
-\newcommand{\flagVictory}{\rotatebox{90}{\includegraphics{resources/flags/9May.png}}}
+\newcommand{\flagVictory}{\rotatebox{90}{\includegraphics{\resources/9May.png}}}
 
 %% FSB flag
-\input{resources/flags/fsb}
+\input{flags/fsb}

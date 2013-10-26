@@ -9,6 +9,7 @@
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{tikz}
+\usepackage{import}
 \usepackage{titling}
 \usepackage{wallpaper}
 \usetikzlibrary{calendar,fit}
@@ -490,7 +491,7 @@ pdflang={en}
 %% Generates "small" calendar (2 such calendars are in every month's page) 
 \newcommand{\smallmonths}[3]{\usebox{#2}\hfill\raisebox{-2cm}{\descurl{\GetMonthURL{#1}}}\hfill\usebox{#3}\newpage}
 
-\input{resources/flags}
+\subimport*{../../resources/}{flags}
 
 \fi %% If \PreambleQuick is undefined!!!
 

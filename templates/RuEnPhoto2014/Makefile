@@ -1,8 +1,10 @@
 # Main input (w/o extension)
 # Additional files the main input file depends on
-ADDDEPS=preamble.tex resources/flags.tex resources/flags/fsb.tex resources/flags/orthodox.tex
+RESDIR=../../resources/
+ADDDEPS=preamble.tex $(addprefix $(RESDIR), flags.tex flags/fsb.tex flags/orthodox.tex flags/9May.png flags/RusDefence.png flags/SpaceFlag.png flags/RusAirborne.png flags/SpbFlag.pdf)
 
-IMAGES=$(addprefix photos/, baikalsky.png espoo.png hoboi.png irkutsk.png kapchuk.png nuuksio.png peterhof.png piter.png porkkala.png riga.png ruskeala.png savonlinna.png saima.png zunmurino.png)
+include custom.mk
+
 # Needed to apply license to png files
 XMP_IMAGES=$(addprefix photos/,$(addsuffix .xmp, $(basename $(notdir $(IMAGES)))))
 
