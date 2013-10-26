@@ -47,6 +47,8 @@ sub gen_links($)
 
   while (defined($fname = readdir(DIR))) {
     next if $fname =~ /^\.\.?$/;     # skip . and ..
+    next if ($fname eq "License") or ($fname eq "README"); # Skipping License and Readme
+
     symlink(File::Spec->catfile($dirname, $fname), File::Spec->catfile(".", $fname)) or log_die "can't make symlink $fname : $!";
     _log "Added symlink to $fname";
   }
@@ -61,6 +63,7 @@ sub clean_links()
   opendir(DIR, ".") or log_die "can't opendir .: $!";
   while (defined($fname = readdir(DIR))) {
     next if $fname =~ /^\.\.?$/;     # skip . and ..
+
     if(-l $fname) {
 	_log "Unlinking symlink: '$fname'";
 	 unlink $fname or log_die "Could not unlink $fname: $!";
