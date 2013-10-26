@@ -4,7 +4,7 @@
 
 To have a toolkit to print the high-quality yearly wall calendars in a reasonably fast way.
 
-Original publishing target for this project is lulu.com.
+Original publishing target for this project was lulu.com but it can be used as a general-purpose tool.
 
 Output pdf has:
 
