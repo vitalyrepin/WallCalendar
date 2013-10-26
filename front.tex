@@ -1,38 +1,10 @@
 \documentclass{article}
-\usepackage[english,russian]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage[T2A]{fontenc}
-\usepackage{cmap}
-\usepackage{hyperxmp}
-\usepackage{hyperref}
 \usepackage[left=0cm, right=0cm, top=0cm, bottom=0cm,paperwidth=8.75in,paperheight=8.625in]{geometry}
-\pagestyle{empty}
-\usepackage{wallpaper}
-\usepackage{color}
-\usepackage{graphicx}
-\usepackage{tikz}
-\usetikzlibrary{calendar}
-\usetikzlibrary{fadings}
-\usepackage{expl3,xparse}
+\usepackage{titling}
 
-\hypersetup{%
-pdftitle={%
-Front cover for the Wall calendar 2014.},
-pdfauthor={Vitaly Repin},
-pdfcopyright={This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License},
-pdfsubject={Calendar},
-pdfkeywords={calendar,2014,photos},
-pdflicenseurl={http://creativecommons.org/licenses/by-sa/3.0/},
-pdfcaptionwriter={Vitaly Repin},
-pdfcontactcity={Espoo},
-pdfcontactcountry={Finland},
-pdfcontactemail={vitaly.repin@gmail.com},
-pdflang={en}
-}
-
-\input{common/preamble.tex}
-
-\pagestyle{empty}
+\title{Front cover for the Wall calendar 2014}
+\def\PreambleQuick{}
+\input{preamble.tex}
 
 \begin{document}
 \ThisTileWallPaper{\paperwidth}{\paperheight}{photos/saima}
@@ -49,15 +21,12 @@ pdflang={en}
 
 \huge
 
-%% Adapted from pgf manual
 \newbox\mybox
 \centerline{\begin{tikzpicture}[title/.style={font=\huge\bfseries\sffamily}]
-\def\nodeshadowed[#1]#2;{\node[scale=1.4,above,#1]{\global\setbox\mybox=\hbox{#2}\copy\mybox};
-   \node[scale=1.4,above,#1,yscale=-1,scope fading=south,opacity=0.4]{\box\mybox};}
-\node[scale=1.4,title, at={(0,0)}] {\textcolor{white}{\caltitleEN}};
-\nodeshadowed[title, at={(0,-1.8)}] {\textcolor{white}{\caltitleRU}};
+\node[scale=1.4,title, at={(0,0.15)}] {\textcolor{white}{\caltitleEN}};
+\node[scale=1.4,title, at={(0,-1.3)}] {\textcolor{white}{\caltitleRU}};
 \end{tikzpicture}}
 
 \vspace*{.8cm}
-\textcolor{white}{\it\small\hfill Vitaly Repin\hspace*{.8cm}}
+\textcolor{white}{\it\small\hfill \theauthor\hspace*{.8cm}}
 \end{document}

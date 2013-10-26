@@ -1,10 +1,46 @@
 %% Preamble. Used by calendar and by cover
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{cmap}
+\usepackage{hyperxmp}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{titling}
+\usepackage{wallpaper}
+\usetikzlibrary{calendar,fit}
+\ifdefined\PreambleQuick
+\else %% These packages slow down the compilation
+ \usepackage{auto-pst-pdf}
+ \usepackage{pst-barcode}
+\fi
+\usepackage{ccicons}
+\usepackage{expl3,xparse}
+
 \pdfminorversion=5
 \pdfobjcompresslevel=3
 \pdfcompresslevel=9
 
 %% Customization of the template
+%% MUST be included before \hypersetup!!! Author is taken from customization
 \input{customization.tex}
+
+\hypersetup{%
+pdftitle={\thetitle},
+pdfauthor={\theauthor},
+pdfcopyright={This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License},
+pdfsubject={Calendar},
+pdfkeywords={calendar,2014,photos},
+pdflicenseurl={http://creativecommons.org/licenses/by-sa/3.0/},
+pdfcaptionwriter={\theauthor},
+pdfcontactcity={Espoo},
+pdfcontactcountry={Finland},
+pdfcontactemail={vitaly.repin@gmail.com},
+pdflang={en}
+}
 
 \restoreMarkRed
 
@@ -16,11 +52,6 @@
 }
 
 
-%% Generates Year calendar. Sources are adapted from pgfmanual (Calendar section)
-\colorlet{winter}{blue}
-\colorlet{spring}{green!60!black}
-\colorlet{summer}{orange}
-\colorlet{fall}{red}
 % Adapted from http://www.texample.net/tikz/examples/changing-the-default-calendar-layout/
 \newcommand{\genYearCal}[1]{
 \begin{tikzpicture}[every calendar/.style={
@@ -33,66 +64,72 @@
 	\matrix[column sep=1em, row sep=3em, ampersand replacement=\&] { #1 };
 \end{tikzpicture}}
 
-\newsavebox{\yearCalFirst}
-\savebox{\yearCalFirst}{\genYearCal{
+%% Boxes with small calendars are NOT included if \PreambleQuick is defined (to boost the compile time)
+\ifdefined\PreambleQuick
+  \message{\string\PreambleQuick\ is defined. NOT including calendar-related definitions / box creations}
+\else
+  \message{\string\PreambleQuick\ is NOT defined. Including calendar-related definitions / box creations}
+
+  \newsavebox{\yearCalFirst}
+  \savebox{\yearCalFirst}{\genYearCal{
             \calendar[dates=2015-01-01 to 2015-01-last]; \&
             \calendar[dates=2015-02-01 to 2015-02-last]; \\
             \calendar[dates=2015-03-01 to 2015-03-last]; \&
             \calendar[dates=2015-04-01 to 2015-04-last]; \\
-}}
+  }}
 
-%% Generates small calendar
-%% Argument 1: Month
-%% Argument 2: Year
-%% Argument 3: Month name in russian
-\newcommand{\genSmallCal}[3]{
-\begin{tabular}{c}
-\small #3 #2\\
-\begin{tikzpicture}[every day/.style={font=\small\selectfont}]]
-  \calendar[dates=#2-#1-01 to #2-#1-last,
+  %% Generates small calendar
+  %% Argument 1: Month
+  %% Argument 2: Year
+  %% Argument 3: Month name in russian
+  \newcommand{\genSmallCal}[3]{
+  \begin{tabular}{c}
+  \small #3 #2\\
+  \begin{tikzpicture}[every day/.style={font=\small\selectfont}]]
+   \calendar[dates=#2-#1-01 to #2-#1-last,
             week list,
 	    day xshift=1cm,
 	    day yshift=.65cm]
-  \markRed
- ;
-\end{tikzpicture}
-\end{tabular}
-}
+   \markRed
+  ;
+  \end{tikzpicture}
+  \end{tabular}
+  }
 
-\newsavebox{\smallCalDec}
-\newsavebox{\smallCalFeb}
-\newsavebox{\smallCalDecO}
-\newsavebox{\smallCalJan}
-\newsavebox{\smallCalMar}
-\newsavebox{\smallCalApr}
-\newsavebox{\smallCalMay}
-\newsavebox{\smallCalJun}
-\newsavebox{\smallCalJul}
-\newsavebox{\smallCalAug}
-\newsavebox{\smallCalSep}
-\newsavebox{\smallCalOct}
-\newsavebox{\smallCalNov}
-\newsavebox{\smallCalJanN}
+  \newsavebox{\smallCalDec}
+  \newsavebox{\smallCalFeb}
+  \newsavebox{\smallCalDecO}
+  \newsavebox{\smallCalJan}
+  \newsavebox{\smallCalMar}
+  \newsavebox{\smallCalApr}
+  \newsavebox{\smallCalMay}
+  \newsavebox{\smallCalJun}
+  \newsavebox{\smallCalJul}
+  \newsavebox{\smallCalAug}
+  \newsavebox{\smallCalSep}
+  \newsavebox{\smallCalOct}
+  \newsavebox{\smallCalNov}
+  \newsavebox{\smallCalJanN}
 
 
-%% Small calendars for the months: Dec, 2013 - Jan 2015
-\savebox{\smallCalDecO}{\genSmallCal{12}{2013}{ДЕКАБРЬ}}
-\savebox{\smallCalFeb}{\genSmallCal{02}{2014}{ФЕВРАЛЬ}}
-\savebox{\smallCalJan}{\genSmallCal{01}{2014}{ЯНВАРЬ}}
-\savebox{\smallCalMar}{\genSmallCal{03}{2014}{МАРТ}}
-\savebox{\smallCalApr}{\genSmallCal{04}{2014}{АПРЕЛЬ}}
-\savebox{\smallCalMay}{\genSmallCal{05}{2014}{МАЙ}}
-\savebox{\smallCalJun}{\genSmallCal{06}{2014}{ИЮНЬ}}
-\savebox{\smallCalJul}{\genSmallCal{07}{2014}{ИЮЛЬ}}
-\savebox{\smallCalAug}{\genSmallCal{08}{2014}{АВГУСТ}}
-\savebox{\smallCalSep}{\genSmallCal{09}{2014}{СЕНТЯБРЬ}}
-\savebox{\smallCalOct}{\genSmallCal{10}{2014}{ОКТЯБРЬ}}
-\savebox{\smallCalNov}{\genSmallCal{11}{2014}{НОЯБРЬ}}
-\savebox{\smallCalDec}{\genSmallCal{12}{2014}{ДЕКАБРЬ}}
-%% 2015: We don't know the holidays yet. Marking only weekends with red
-\renewcommand{\markRed}{if (weekend) [red]}
-\savebox{\smallCalJanN}{\genSmallCal{01}{2015}{ЯНВАРЬ}}
-\restoreMarkRed
+  %% Small calendars for the months: Dec, 2013 - Jan 2015
+  \savebox{\smallCalDecO}{\genSmallCal{12}{2013}{ДЕКАБРЬ}}
+  \savebox{\smallCalFeb}{\genSmallCal{02}{2014}{ФЕВРАЛЬ}}
+  \savebox{\smallCalJan}{\genSmallCal{01}{2014}{ЯНВАРЬ}}
+  \savebox{\smallCalMar}{\genSmallCal{03}{2014}{МАРТ}}
+  \savebox{\smallCalApr}{\genSmallCal{04}{2014}{АПРЕЛЬ}}
+  \savebox{\smallCalMay}{\genSmallCal{05}{2014}{МАЙ}}
+  \savebox{\smallCalJun}{\genSmallCal{06}{2014}{ИЮНЬ}}
+  \savebox{\smallCalJul}{\genSmallCal{07}{2014}{ИЮЛЬ}}
+  \savebox{\smallCalAug}{\genSmallCal{08}{2014}{АВГУСТ}}
+  \savebox{\smallCalSep}{\genSmallCal{09}{2014}{СЕНТЯБРЬ}}
+  \savebox{\smallCalOct}{\genSmallCal{10}{2014}{ОКТЯБРЬ}}
+  \savebox{\smallCalNov}{\genSmallCal{11}{2014}{НОЯБРЬ}}
+  \savebox{\smallCalDec}{\genSmallCal{12}{2014}{ДЕКАБРЬ}}
+  %% 2015: We don't know the holidays yet. Marking only weekends with red
+  \renewcommand{\markRed}{if (weekend) [red]}
+  \savebox{\smallCalJanN}{\genSmallCal{01}{2015}{ЯНВАРЬ}}
+  \restoreMarkRed
 
 %% Adapted from http://tex.stackexchange.com/a/10199/4771
 \makeatletter%
@@ -452,3 +489,10 @@
 
 %% Generates "small" calendar (2 such calendars are in every month's page) 
 \newcommand{\smallmonths}[3]{\usebox{#2}\hfill\raisebox{-2cm}{\descurl{\GetMonthURL{#1}}}\hfill\usebox{#3}\newpage}
+
+\input{resources/flags}
+
+\fi %% If \PreambleQuick is undefined!!!
+
+\pagestyle{empty}
+

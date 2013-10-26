@@ -1,6 +1,6 @@
 # Main input (w/o extension)
 # Additional files the main input file depends on
-ADDDEPS=common/preamble.tex common/flags.tex common/flags/fsb.tex common/flags/orthodox.tex
+ADDDEPS=preamble.tex resources/flags.tex resources/flags/fsb.tex resources/flags/orthodox.tex
 
 IMAGES=$(addprefix photos/, baikalsky.png espoo.png hoboi.png irkutsk.png kapchuk.png nuuksio.png peterhof.png piter.png porkkala.png riga.png ruskeala.png savonlinna.png saima.png zunmurino.png)
 # Needed to apply license to png files
@@ -12,6 +12,7 @@ GOALS = 2014.pdf 2014-landscape.pdf cover.pdf
 
 COPY = if test -r $*.toc; then cp $*.toc $*.toc.bak; fi
 RM = /bin/rm -f
+LN = ln -s
 
 .PHONY: clean web license
 
@@ -35,7 +36,7 @@ front.pdf: $(ADDDEPS) $(IMAGES) front.tex
 cover.pdf: back.pdf front.pdf cover.tex $(IMAGES)
 
 %.xmp:  %.png
-	ln -s ccbysa.xmp $@
+	$(LN) ccbysa.xmp $@
 
 %.jpg:  %.png
 	convert $< $@
@@ -71,7 +72,7 @@ cover.pdf: back.pdf front.pdf cover.tex $(IMAGES)
 clean:
 		latexmk -c
 		$(RM) -f *.bbl
-		$(RM) -f $(EPS_IMAGES) $(XMP_IMAGES)
+		$(RM) -f $(EPS_IMAGES) $(XMP_IMAGES) 2014-pics.pdf back-pics.pdf
 #		aux *.log *.bbl *.blg *.brf *.cb *.ind *.idx *.ilg  \
 #		*.inx *.ps *.dvi *.pdf *.toc *.out *.lot *.lof *.eps *.fls *.fdb_latexmk
 

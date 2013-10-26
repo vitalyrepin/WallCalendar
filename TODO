@@ -1,4 +1,9 @@
 - Redesign configuration mechanism. Ideally for every month there shall be one command like: "\Jan{photo}{descru}{descen}..."
 - Redesign GetMonth* functions. Ugly now. Connected with the task of redesigning configuration storage
 - Move descriptions of the images to the customization.tex
+- Replace all bitmap flags to the vector ones (tikz?)
 - Redesign \smallmonths. It should take only 1 argument: month name. left and right months shoudl be calculated on the fly
+
+
+Nice to do:
+- Add mirror to the title in the first page.  Example from pgfmanual does not work in the context of this template. opacity is not respected at all.

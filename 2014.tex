@@ -1,45 +1,18 @@
 \documentclass[fontsize=20pt]{scrartcl}
-\usepackage[T2A]{fontenc}
-\usepackage[english,russian]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage{cmap}
-\usepackage{hyperxmp}
-\usepackage{hyperref}
-\usepackage{ifthen}
 \usepackage[landscape,left=0.1cm, right=.1cm, top=0.1cm, bottom=.1cm,paperwidth=8.75in,paperheight=8.75in]{geometry}
-\pagestyle{empty}
-\usepackage{graphicx}
-\usepackage{tikz}
-\usepackage{textcomp}
-\usepackage{wallpaper}
-\usetikzlibrary{calendar,fit}
-\usepackage{auto-pst-pdf}
-\usepackage{pst-barcode}
-\usepackage{ccicons}
-\usepackage{expl3,xparse}
 
-\hypersetup{%
-pdftitle={%
-Wall calendar 2014},
-pdfauthor={Vitaly Repin},
-pdfcopyright={This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License},
-pdfsubject={Calendar},
-pdfkeywords={calendar,2014,photos},
-pdflicenseurl={http://creativecommons.org/licenses/by-sa/3.0/},
-pdfcaptionwriter={Vitaly Repin},
-pdfcontactcity={Espoo},
-pdfcontactcountry={Finland},
-pdfcontactemail={vitaly.repin@gmail.com},
-pdflang={en}
-}
+\usepackage{titling}
 
-\begin{document}
+%% Title - will go to the PDF meta data
+\title{Wall calendar 2014}
 
-\input{common/preamble}
-\input{common/flags}
+%% Preamble - most of the Calendar declarations
+\input{preamble}
 
 \newcommand{\pict}[1]{\ThisULCornerWallPaper{1}{photos/\GetMonthImage{#1}}\vspace*{1cm}\newpage}
 \newcommand{\pictCal}[1]{\pict{#1}\calmonth{#1}}
+
+\begin{document}
 
 % First page: Title
 \newgeometry{top=.5in,left=1in,right=1in,bottom=.5in}
@@ -73,8 +46,10 @@ pdflang={en}
 \endgroup
 }
 
-\centerline{\tiny\ccbysa\ Vitaly Repin, 2013.}
+\centerline{\tiny\ccbysa\ \theauthor, 2013.}
 \restoregeometry
+
+%% 2 pages per every month: 1 with photo, another with calendar itself
 
 %% January
 \pictCal{1}
