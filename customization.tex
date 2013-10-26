@@ -2,64 +2,75 @@
 %% Defines file names with the photos for each month
 %% (Located in the folder "photos"
 
+%% The parameters which can be used by the template
+
 %% Prefix for the web site where calendar data (photos etc) is located.
 %% This site can be generated from the "web" folder
-\newcommand{\webprefix}{http://vrepin.org/cal2014/}
+\def\webprefix{http://vrepin.org/cal2014/}
 
 % Author
 \author{Vitaly Repin}
 
-\newcommand{\Jan}{espoo}
-\newcommand{\JanDscRU}{Парк Нууксио, Финляндия}
-\newcommand{\JanDscEN}{Nuuksio National Park, Finland}
+%% Contact email
+\def\ContactEmail{vitaly.repin@gmail.com}
+%% Contact city
+\def\ContactCity{Espoo}
+%% Contact country
+\def\ContactCountry{Finland}
+%% Keywords (to be included into pdf)
+\def\Keywords{calendar,2014,photos,landscape,russia,finland,baikal,orthodox}
 
-\newcommand{\Feb}{riga}
-\newcommand{\FebDscRU}{Рига, Латвия}
-\newcommand{\FebDscEN}{Riga, Latvia}
+\def\Jan{espoo}
+\def\JanDscRU{Парк Нууксио, Финляндия}
+\def\JanDscEN{Nuuksio National Park, Finland}
 
-\newcommand{\Mar}{savonlinna}
-\newcommand{\MarDscRU}{Олафсборг, Финляндия}
-\newcommand{\MarDscEN}{Olavinlinna, Finland}
+\def\Feb{riga}
+\def\FebDscRU{Рига, Латвия}
+\def\FebDscEN{Riga, Latvia}
 
-\newcommand{\Apr}{ruskeala}
-\newcommand{\AprDscRU}{Горный парк «Рускеала», Россия}
-\newcommand{\AprDscEN}{Ruskeala park, Russia}
+\def\Mar{savonlinna}
+\def\MarDscRU{Олафсборг, Финляндия}
+\def\MarDscEN{Olavinlinna, Finland}
 
-\newcommand{\May}{hoboi}
-\newcommand{\MayDscRU}{Озеро Байкал, Россия}
-\newcommand{\MayDscEN}{Lake Baikal, Russia}
+\def\Apr{ruskeala}
+\def\AprDscRU{Горный парк «Рускеала», Россия}
+\def\AprDscEN{Ruskeala park, Russia}
 
-\newcommand{\Jun}{kapchuk}
-\newcommand{\JunDscRU}{Плато Путорана, Россия}
-\newcommand{\JunDscEN}{Putorana plateau, Russia}
+\def\May{hoboi}
+\def\MayDscRU{Озеро Байкал, Россия}
+\def\MayDscEN{Lake Baikal, Russia}
 
-\newcommand{\Jul}{peterhof}
-\newcommand{\JulDscRU}{Петергоф, Россия}
-\newcommand{\JulDscEN}{Peterhof, Russia}
+\def\Jun{kapchuk}
+\def\JunDscRU{Плато Путорана, Россия}
+\def\JunDscEN{Putorana plateau, Russia}
 
-\newcommand{\Aug}{piter}
-\newcommand{\AugDscRU}{Летний сад, Россия}
-\newcommand{\AugDscEN}{Summer Garden, Russia}
+\def\Jul{peterhof}
+\def\JulDscRU{Петергоф, Россия}
+\def\JulDscEN{Peterhof, Russia}
 
-\newcommand{\Sep}{porkkala}
-\newcommand{\SepDscRU}{Порккала, Финляндия}
-\newcommand{\SepDscEN}{Porkkala, Finland}
+\def\Aug{piter}
+\def\AugDscRU{Летний сад, Россия}
+\def\AugDscEN{Summer Garden, Russia}
 
-\newcommand{\Oct}{irkutsk}
-\newcommand{\OctDscRU}{Иркутская область, Россия}
-\newcommand{\OctDscEN}{Irkutsk region, Russia}
+\def\Sep{porkkala}
+\def\SepDscRU{Порккала, Финляндия}
+\def\SepDscEN{Porkkala, Finland}
 
-\newcommand{\Nov}{zunmurino}
-\newcommand{\NovDscRU}{Тункинская долина, Россия}
-\newcommand{\NovDscEN}{Tunkin valley, Russia}
+\def\Oct{irkutsk}
+\def\OctDscRU{Иркутская область, Россия}
+\def\OctDscEN{Irkutsk region, Russia}
 
-\newcommand{\Dec}{nuuksio}
-\newcommand{\DecDscRU}{Эспоо, Финляндия}
-\newcommand{\DecDscEN}{Espoo, Finland}
+\def\Nov{zunmurino}
+\def\NovDscRU{Тункинская долина, Россия}
+\def\NovDscEN{Tunkin valley, Russia}
+
+\def\Dec{nuuksio}
+\def\DecDscRU{Эспоо, Финляндия}
+\def\DecDscEN{Espoo, Finland}
 
 %% Names on the title and back covers in russian and english
-\newcommand{\caltitleRU}{Времена года}
-\newcommand{\caltitleEN}{The Four Seasons}
+\def\caltitleRU{Времена года}
+\def\caltitleEN{The Four Seasons}
 
 %% Holidays which shall be marked in red
 \newcommand{\markRed}{}
