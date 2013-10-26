@@ -49,6 +49,12 @@ Utility scripts. Currently only one script is there - get\_templ.pl
 
 ### Understanding how it all works
 
+The sources contain two examples of the calendar: real-life example _FourSeasons2014_ and trivial example _Trivial2014_.
+Both examples use the same calendar template: _RuEnPhoto2014_.
+
+Trivial example could be useful if you modify the template and want to increase the compilation speed. The resulting files are also quite compact and it could make sense
+to send the pdf output of the trivial example to the customers or other team members when the work is focused on calendar grid design itself.
+
 Start from looking into an example calendar: calendars/FourSeasons2014/
 
 Build the calendar there by following the steps below:
