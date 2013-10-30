@@ -1,0 +1,1 @@
+../../templates/RuEnPhoto2014/Makefile
