@@ -24,6 +24,7 @@ license: $(XMP_IMAGES)
 	find ./photos -name "*.png" -exec exiv2 -S .xmp in {} \;
 
 web:
+	mkdir -p web/cal2014/site/target
 	txt2site -g web/cal2014/cal2014.conf
 
 DEPS = 	2014.tex customization.tex $(ADDDEPS)

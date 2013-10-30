@@ -33,9 +33,12 @@
      <br />
      <p class="header1" > ${page_header1} </p>
      <p class="header2" > ${page_header2} </p>
+<p>
+<a href="http://www.lulu.com/shop/vitaly-repin/calendar-2014-the-four-seasons/paperback/product-21271953.html">Buy this calendar!</a>
+</p>
 </div> 
 
-<div id="div_hoofdvak" > 
+<div id="div_hoofdvak" >
     $(html_content_div 1) 
 </div>  <!-- end hoofdvak -->
 
