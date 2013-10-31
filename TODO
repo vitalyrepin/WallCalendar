@@ -1,3 +1,4 @@
+- Made an option to degrade DPI of the images automatically (based on the settings in Makefile). using ImageMagick
 - Redesign configuration mechanism. Ideally for every month there shall be one command like: "\Jan{photo}{descru}{descen}..."
 - Redesign GetMonth* functions. Ugly now. Connected with the task of redesigning configuration storage
 - Make page size configurable without need to creae new template (shoudl be pretty easy)
