@@ -29,36 +29,68 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<a name="what-is-it-project-goal" class="anchor" href="#what-is-it-project-goal"><span class="octicon octicon-link"></span></a>What is it? Project goal</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>The goal of this project is to establish a free repository of high-quality and wall calendars templates for a variety of countries. Having this repository in place will allow to prepare high-quality calendars for everybody who is not an expert in DTP.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<h2>
+<a name="motivation-for-the-project" class="anchor" href="#motivation-for-the-project"><span class="octicon octicon-link"></span></a>Motivation for the project</h2>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>What are the major steps to produce a wall calendar?</p>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<ol>
+<li>Decide on the paper size and number of pages</li>
+<li>Prepare the Interior and Covers.</li>
+<li>Publish it (using the <a href="http://en.wikipedia.org/wiki/Print_on_demand">POD</a> services</li>
+</ol><p>Format of the Interior and Covers should meet publisher's requirements. It is time-consuming and boring task to prepare Interior and Covers which satisfy them for those who are not DTP experts.</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>That's the reason most of the people who want to create their own calendar (e.g., based on their photos) go to the photo publishing services which makes it easy to produce custom calendars. But the downside of this are very limited possibilities of customization. Usually you only can modify the photos and add your dates to the calendar grid.</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<p>That's why this project is started. The aim is to free you from the boring parts of the calendar preparation process and let be focused on the creative tasks. But without limiting the creativity in the way photo services are doing!</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<h2>
+<a name="project-structure" class="anchor" href="#project-structure"><span class="octicon octicon-link"></span></a>Project structure</h2>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>This project contains set of resources and tools which make it extremely easy to prepare your own calendar which is ready for publishing.</p>
 
 <h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a name="templates" class="anchor" href="#templates"><span class="octicon octicon-link"></span></a>Templates</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>Wall calendar templates. Template is a set of TeX files and Makefile to build pdfs out of them.
+It contains two customization files - <em>customization.tex</em> and <em>custom.mk</em>.</p>
+
+<p>These files shall be changed by the user of template in order to produce calendar.
+They contain names of the images, celebrations, holidays and other parameters of the template.</p>
+
+<p>The fact that template is a set of TeX file makes it easy to make your own template based on existing one.
+You don't need to make the template from scratch - you can re-use existing template and modify it to suit your needs!</p>
+
+<h3>
+<a name="resources" class="anchor" href="#resources"><span class="octicon octicon-link"></span></a>Resources</h3>
+
+<p>This directory contains the free (CC BY SA) graphical resources which could be used by ANY calendar template. In particular, it contains the
+vector flags which could be used by a calendar template in order to mark certain days with a special icon.</p>
+
+<h3>
+<a name="management-script" class="anchor" href="#management-script"><span class="octicon octicon-link"></span></a>Management script</h3>
+
+<p>Script <em>CalManage.pl</em> is located in the root directory of the project.  It simplifies the template/calendar management process.
+It allows to create a project directory for  new calendar based on specific template, list existing templates and calendars.</p>
+
+<h3>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h3>
+
+<p>An example of  the calendar created with the help of this project is <a href="http://www.lulu.com/shop/vitaly-repin/calendar-2014-the-four-seasons/paperback/product-21271953.html">"The Four Seasons 2014" calendar, published at lulu.com</a>.</p>
+
+<p>It has the following features:</p>
+
+<ul>
+<li>Photo pages</li>
+<li>Calendar grid with holidays of different kind emphasized with different icons and titles</li>
+<li>Integration with <a href="http://vrepin.org/cal2014/index.html">the calendar web site</a> through QR codes</li>
+<li>Overview page which contains all the images</li>
+<li>Cover page which contains all the images and mini-version of the calendar grid</li>
+</ul><p>It is based on the template <em>RuEnPhoto2014</em> included into the project. Sources of thsi example are also included into the project.</p>
         </section>
 
         <aside id="sidebar">
