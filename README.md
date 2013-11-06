@@ -29,10 +29,6 @@ template.
 
 Contains resources which can be commonly used by different templates (e.g., flags and other graphical resources).
 
-### Folder "utils"
-
-Utility scripts. Currently only one script is there - get\_templ.pl
-
 ### Tools used
 
 - Primary tool is LaTeX (_pdflatex_).
@@ -43,7 +39,7 @@ Utility scripts. Currently only one script is there - get\_templ.pl
 - _exiv2_ utility is used to embed licensing metadata into the images (optional, useful if you are going to distribute images separately from the calendar itself)
 - _GNU make_ is used to build pdf files from LaTeX sources
 - _txt2site_ utility to build static web sites (optional)
-
+- _perl_ to manage templates
 
 ## How to Start
 
@@ -59,7 +55,7 @@ Start from looking into an example calendar: calendars/FourSeasons2014/
 
 Build the calendar there by following the steps below:
 
-1. Create symlinks to the template which is used by this example: `get_templ.pl --link` (you can check all the supported options of this script by launching it without arguments).
+1. Synchronize calendar with the template: `./CalManage.pl --sync-cal FourSeasons2014 RuEnPhoto2014` (you can check all the supported options of this script by launching it without arguments).
 1. Make sure you have all the non-optional tools installed (see the section "Tools used")
 1. Build the project: `make all`. It should generate the following files:
   - _2014.pdf_ Calendar suitable for viewing (horizontal orientation)
@@ -70,15 +66,15 @@ Build the calendar there by following the steps below:
 1. Go the "web" sub-folder of the example. You will see how the web site is created using txt2site utility.
 1. In order to generate web site launch `make web` from the folder calendars/FourSeasons2014/
 
-### Creating new Calendar on existing template
+### Creating new Calendar based on existing template
 
-1. Create new sub-folder in the directory _calendars_
-1. Copy to the created subfolder the utility get\_templ.pl from _utils_ folder
-1. Create symlinks to the template `get_templ.pl --link` (you can check all the supported options of this script by launching it without arguments).
-1. Create your own files _customization.tex_ and _custom.mk_ Put the required images into the subfolder required by the template (typically, _photos_)
+We will use RuEnPhoto2014 as an example of the template below.
+
+1. Launch `./CalManage.pl --new-cal NewCal RuEnPhoto2014` (_NewCal_ will be the name of your new calendar)
+1. Edit customization files _customization.tex_ and _custom.mk_ in the clendar directory. Put the required images into the subfolder required by the template (typically, _photos_)
 1. Build your project using `make all`
 
 ### Creating new template
 
-1. Create new sub-folder in the directory _templates_. Name of this subfolder will be the name of the template (used by get\_templ.pl script)
+1. Create new sub-folder in the directory _templates_. Name of this subfolder will be the name of the template (used by CalManage.pl script)
 2. Create Makefile and TeX files needed for your template. It is strongly advised to use the template RuEnPhoto2014 as an example.
