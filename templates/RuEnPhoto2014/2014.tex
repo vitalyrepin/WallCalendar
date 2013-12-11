@@ -16,8 +16,8 @@
 
 % First page: Title
 \newgeometry{top=.5in,left=1in,right=1in,bottom=.5in}
-\centerline{\small\bf\caltitleEN.}
-\centerline{\small\bf\caltitleRU.}
+\centerline{\small\bf\caltitleEN}
+\centerline{\small\bf\caltitleRU}
 
 \newcommand{\thumb}[1]{\frame{\includegraphics[keepaspectratio,width=.11\paperwidth]{photos/\GetMonthImage{#1}}}}
 %% Argument 1: English description
@@ -46,6 +46,7 @@
 \endgroup
 }
 
+\vspace*{-.3cm}
 \centerline{\tiny\ccbysa\ \theauthor, 2013.}
 \restoregeometry
 
@@ -111,5 +112,12 @@
 \centerline{\bf\Large 2015}
 \vspace*{1.5cm}
 \centerline{\usebox{\yearCalFirst}}
+
+\newpage
+\vspace*{1cm}
+\centerline{\bf\Large 2015}
+\vspace*{1.5cm}
+\centerline{\usebox{\yearCalSecond}}
+
 
 \end{document}

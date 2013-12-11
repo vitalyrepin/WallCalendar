@@ -80,7 +80,13 @@ pdflang={en}
             \calendar[dates=2015-03-01 to 2015-03-last]; \&
             \calendar[dates=2015-04-01 to 2015-04-last]; \\
   }}
-
+  \newsavebox{\yearCalSecond}
+  \savebox{\yearCalSecond}{\genYearCal{
+            \calendar[dates=2015-05-01 to 2015-05-last]; \&
+            \calendar[dates=2015-06-01 to 2015-06-last]; \\
+            \calendar[dates=2015-07-01 to 2015-07-last]; \&
+            \calendar[dates=2015-08-01 to 2015-08-last]; \\
+  }}
   %% Generates small calendar
   %% Argument 1: Month
   %% Argument 2: Year
@@ -491,7 +497,7 @@ pdflang={en}
 }
 
 %% Generates "small" calendar (2 such calendars are in every month's page) 
-\newcommand{\smallmonths}[3]{\usebox{#2}\hfill\raisebox{-2cm}{\descurl{\GetMonthURL{#1}}}\hfill\usebox{#3}\newpage}
+\newcommand{\smallmonths}[3]{\usebox{#2}\hfill\raisebox{-1cm}{\descurl{\GetMonthURL{#1}}}\hfill\usebox{#3}\newpage}
 
 \subimport*{../../resources/}{flags}
 
