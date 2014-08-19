@@ -1,0 +1,79 @@
+\documentclass[fontsize=20pt]{scrartcl}
+\usepackage[left=0cm, right=0cm, top=0cm, bottom=0cm,paperwidth=8.75in,paperheight=8.625in]{geometry}
+\usepackage{titling}
+\usepackage{multirow}
+
+\title{Back cover for the Wall calendar 2015}
+\input{preamble.tex}
+
+
+\begin{document}
+%% Back cover
+\ThisTileWallPaper{\paperwidth}{\paperheight}{photos/\backCover}
+
+%% Width/Height before trimming
+\newlength{\purePaperWidth}
+\setlength{\purePaperWidth}{\paperwidth}\addtolength{\purePaperWidth}{-.25in}
+\vspace*{1cm}
+
+\def\CalExAspectRatio{0.302}
+\def\ThumbAspectRation{0.189655}
+%% Saving calendars in the boxes and sscaling them. Does not work inside minipage environment.
+\newsavebox{\exampleMonthCal}
+\savebox{\exampleMonthCal}{\resizebox{\CalExAspectRatio\purePaperWidth}{!}{\calmonth{7}}}
+
+%% Saving "small" calendars
+\newsavebox{\examplsmallMonthF}\newsavebox{\examplsmallMonthS}
+\savebox{\examplsmallMonthF}{\resizebox{.13\purePaperWidth}{!}{\usebox{\smallCalJun}}}
+\savebox{\examplsmallMonthS}{\resizebox{.13\purePaperWidth}{!}{\usebox{\smallCalAug}}}
+
+\newcommand{\exampleCal}{%
+\begingroup%
+\setlength{\fboxsep}{0pt}%
+\frame{\colorbox{white}{\begin{minipage}{\CalExAspectRatio\purePaperWidth}%
+\setlength{\tabcolsep}{0pt}%
+\noindent\begin{tabular}{lr}%
+\multicolumn{2}{l}{\includegraphics[keepaspectratio,width=\CalExAspectRatio\purePaperWidth]{photos/\GetMonthImage{7}}}\\
+\multicolumn{2}{l}{\usebox{\exampleMonthCal}}\\[-.15cm]
+\usebox{\examplsmallMonthF}&\usebox{\examplsmallMonthS}\\
+\end{tabular}%
+\end{minipage}}}%
+\endgroup%
+}
+
+\newcommand{\thumb}[1]{\frame{\includegraphics[keepaspectratio,width=\ThumbAspectRation\purePaperWidth]{photos/\GetMonthImage{#1}}}}
+\vspace*{.25cm}
+
+%% QR code
+\newcommand{\QR}{%
+\begin{pspicture}(1in,1in)
+\psbarcode{\webprefix}{eclevel=H}{qrcode}
+\end{pspicture}
+}
+
+%% ISBN and QR bar codes
+\def\imagetop#1{\vtop{\null\hbox{#1}}}
+\newsavebox{\isbn}
+\savebox{\isbn}{%
+\begingroup
+\setlength{\tabcolsep}{0pt}
+\tiny%
+\begin{tabular}{ll}
+\imagetop{\frame{\colorbox{white}{\includegraphics{isbn_barcode}}}}&\hspace*{.2cm}\imagetop{\QR}\\
+\raisebox{-.2cm}{\textsc{CALENDAR 2015. \caltitleEN.}}&\\
+\raisebox{-.2cm}{\textsc{КАЛЕНДАРЬ 2015. \caltitleRU.}}&\\
+\multicolumn{2}{l}{\raisebox{-.2cm}{\ccLogo\ Creative Commons Attribution-ShareAlike 3.0 Unported License.}}\\
+\raisebox{-.2cm}{\ccbysa\ \theauthor, 2014.}&\\
+\end{tabular}
+\endgroup
+}
+
+\centerline{%
+\begin{tabular}{l@{\hspace{2mm}}l@{\hspace{2mm}}l@{\hspace{2mm}}l}
+\thumb{1}&\thumb{2}&\thumb{3}&\multirow{3}{*}[3.5cm]{\exampleCal}\\
+\thumb{4}&\thumb{5}&\thumb{6}&\\
+\thumb{8}&\thumb{9}&\thumb{10}&\\
+\thumb{11}&\thumb{12}&\multicolumn{2}{l}{\hspace*{-.4cm}\raisebox{1.72cm}{\usebox{\isbn}}}\\
+\end{tabular}}
+
+\end{document}

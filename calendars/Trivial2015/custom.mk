@@ -1,0 +1,4 @@
+# Makefile customization
+
+IMAGES=
+

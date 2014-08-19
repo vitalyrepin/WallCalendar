@@ -1,0 +1,126 @@
+\documentclass[fontsize=20pt]{scrartcl}
+\usepackage[landscape,left=0.1cm, right=.1cm, top=0.1cm, bottom=.1cm,paperwidth=8.75in,paperheight=8.75in]{geometry}
+
+\usepackage{titling}
+
+%% Title - will go to the PDF meta data
+\title{Wall calendar 2015}
+
+%% Preamble - most of the Calendar declarations
+\input{preamble}
+
+\newcommand{\pict}[1]{\ThisULCornerWallPaper{1}{photos/\GetMonthImage{#1}}\vspace*{1cm}\newpage}
+\newcommand{\pictCal}[1]{\pict{#1}\calmonth{#1}}
+
+\begin{document}
+
+% First page: Title
+\newgeometry{top=.5in,left=1in,right=1in,bottom=.5in}
+\centerline{\small\bf\caltitleEN}
+\centerline{\small\bf\caltitleRU}
+
+\newcommand{\thumb}[1]{\frame{\includegraphics[keepaspectratio,width=.11\paperwidth]{photos/\GetMonthImage{#1}}}}
+%% Argument 1: English description
+%% Argument 2: Russian description
+\newcommand{\desc}[2]{%
+\raisebox{1.85cm}{\it\begin{tabular}{p{7cm}}
+#1.\\
+#2.
+\end{tabular}}
+}
+
+\vspace*{.3cm}
+\hspace*{-1.5cm}
+{
+\tiny%
+\begingroup%
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{l@{\hspace{-.6mm}}p{7cm}l@{\hspace{-.6mm}}p{7cm}}
+\thumb{1}&\desc{\JanDscEN}{\JanDscRU}&\thumb{7}&\desc{\JulDscEN}{\JulDscRU}\\
+\thumb{2}&\desc{\FebDscEN}{\FebDscRU}&\thumb{8}&\desc{\AugDscEN}{\AugDscRU}\\
+\thumb{3}&\desc{\MarDscEN}{\MarDscRU}&\thumb{9}&\desc{\SepDscEN}{\SepDscRU}\\
+\thumb{4}&\desc{\AprDscEN}{\AprDscRU}&\thumb{10}&\desc{\OctDscEN}{\OctDscRU}\\
+\thumb{5}&\desc{\MayDscEN}{\MayDscRU}&\thumb{11}&\desc{\NovDscEN}{\NovDscRU}\\
+\thumb{6}&\desc{\JunDscEN}{\JunDscRU}&\thumb{12}&\desc{\DecDscEN}{\DecDscRU}\\
+\end{tabular}
+\endgroup
+}
+
+\vspace*{-.3cm}
+\centerline{\tiny\ccbysa\ \theauthor, 2014.}
+\restoregeometry
+
+%% 2 pages per every month: 1 with photo, another with calendar itself
+
+%% January
+\pictCal{1}
+\smallmonths{1}{\smallCalDecO}{\smallCalFeb}
+
+%% February
+\pictCal{2}
+\smallmonths{2}{\smallCalJan}{\smallCalMar}
+
+%% March
+\pict{3}
+\renewcommand{\TikzDayCode}{\node (lower right) at (0,0) [above left,font=\Huge] {\ifthenelse{\equal{\pgfcalendarcurrentday}{23}}{\small 23 (30)}{\ifthenelse{\equal{\pgfcalendarcurrentday}{24}}{\small 24 (31)}{\tikzdaytext}}};}
+\calmonthRaw{2015-03-01}{2015-03-29}
+\restoreTikzDayCode
+\smallmonths{3}{\smallCalFeb}{\smallCalApr}
+
+%% April
+\pictCal{4}
+\smallmonths{4}{\smallCalMar}{\smallCalMay}
+
+
+%%May
+\pictCal{5}
+\smallmonths{5}{\smallCalApr}{\smallCalJun}
+
+%% June
+\pictCal{6}
+\smallmonths{6}{\smallCalMay}{\smallCalJul}
+
+%% July
+\pictCal{7}
+\smallmonths{7}{\smallCalJun}{\smallCalAug}
+
+%% August
+\pict{8}
+\renewcommand{\TikzDayCode}{\node (lower right) at (0,0) [above left,font=\Huge] {\ifthenelse{\equal{\pgfcalendarcurrentday}{24}}{\small 24 (31)}{\tikzdaytext}};}
+\calmonthRaw{2015-08-01}{2015-08-30}
+\restoreTikzDayCode
+\smallmonths{8}{\smallCalJul}{\smallCalSep}
+
+%% September
+\pictCal{9}
+\smallmonths{9}{\smallCalAug}{\smallCalOct}
+
+%% October
+\pictCal{10}
+\smallmonths{10}{\smallCalSep}{\smallCalNov}
+
+%% November
+\pict{11}
+\renewcommand{\TikzDayCode}{\node (lower right) at (0,0) [above left,font=\Huge] {\ifthenelse{\equal{\pgfcalendarcurrentday}{23}}{\small 23 (30)}{\tikzdaytext}};}
+\calmonthRaw{2015-11-01}{2015-11-29}
+\restoreTikzDayCode
+\smallmonths{11}{\smallCalOct}{\smallCalDec}
+
+%% December
+\pictCal{12}
+\smallmonths{12}{\smallCalNov}{\smallCalJanN}
+
+% Next year calendar - last page
+\vspace*{1cm}
+\centerline{\bf\Large 2016}
+\vspace*{1.5cm}
+\centerline{\usebox{\yearCalFirst}}
+
+\newpage
+\vspace*{1cm}
+\centerline{\bf\Large 2016}
+\vspace*{1.5cm}
+\centerline{\usebox{\yearCalSecond}}
+
+
+\end{document}

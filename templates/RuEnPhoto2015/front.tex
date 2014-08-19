@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage[left=0cm, right=0cm, top=0cm, bottom=0cm,paperwidth=8.75in,paperheight=8.625in]{geometry}
+\usepackage{titling}
+
+\title{Front cover for the Wall calendar 2015}
+\def\PreambleQuick{}
+\input{preamble.tex}
+
+\begin{document}
+\ThisTileWallPaper{\paperwidth}{\paperheight}{photos/\frontCover}
+
+\vspace*{.5cm}
+\hfill \colorbox{red}{%
+\begin{tabular}{c}
+\textcolor{white}{\textsf{\textbf{КАЛЕНДАРЬ}}}\\
+\textcolor{white}{\textbf{\itshape\Huge 2015}}\\
+\textcolor{white}{\textsf{\textbf{CALENDAR}}}
+\end{tabular}}\hspace{.8cm}
+
+\vspace*{13.5cm}
+
+\huge
+
+\newbox\mybox
+\centerline{\begin{tikzpicture}[title/.style={font=\huge\bfseries\sffamily}]
+\node[scale=1.4,title, at={(0,0.15)}] {\textcolor{white}{\caltitleEN}};
+\node[scale=1.4,title, at={(0,-1.3)}] {\textcolor{white}{\caltitleRU}};
+\end{tikzpicture}}
+
+\vspace*{.8cm}
+\textcolor{white}{\it\small\hfill \theauthor\hspace*{.8cm}}
+\end{document}

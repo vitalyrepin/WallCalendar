@@ -1,0 +1,506 @@
+%% Preamble. Used by calendar and by cover
+\pdfminorversion=3 %% This is required by lulu.com: http://connect.lulu.com/t5/Interior-Formatting/PDF-Creation-Settings-How-can-I-be-sure-my-PDF-will-print/ta-p/33681
+%\RequirePackage{pdf13}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{cmap}
+\usepackage{hyperxmp}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage{titling}
+\usepackage{wallpaper}
+\usetikzlibrary{calendar,fit}
+\ifdefined\PreambleQuick
+\else %% These packages slow down the compilation
+ \usepackage{auto-pst-pdf}
+ \usepackage{pst-barcode}
+\fi
+\usepackage{ccicons}
+\usepackage{expl3,xparse}
+
+%\pdfminorversion=3 %% This is required by lulu.com: http://connect.lulu.com/t5/Interior-Formatting/PDF-Creation-Settings-How-can-I-be-sure-my-PDF-will-print/ta-p/33681
+\pdfobjcompresslevel=3
+\pdfcompresslevel=9
+
+%% Customization of the template
+%% MUST be included before \hypersetup!!! Author is taken from customization
+\input{customization.tex}
+
+\hypersetup{%
+pdftitle={\thetitle},
+pdfauthor={\theauthor},
+pdfcopyright={This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License},
+pdfsubject={Calendar},
+pdfkeywords={\Keywords},
+pdflicenseurl={http://creativecommons.org/licenses/by-sa/3.0/},
+pdfcaptionwriter={\theauthor},
+pdfcontactcity={\ContactCity},
+pdfcontactcountry={\ContactCountry},
+pdfcontactemail={\ContactEmail},
+pdflang={en}
+}
+
+\restoreMarkRed
+
+%% Adapted from pgf source
+\def\pgfcalendarmonthname#1{%
+  \translate{\ifcase#1\or {Январь January}\or Февраль February\or Март March\or Апрель April\or
+    Май\or Июнь\or Июль\or Август\or Сентябрь\or Октябрь\or
+    Ноябрь\or Декабрь\fi}%
+}
+
+
+% Adapted from http://www.texample.net/tikz/examples/changing-the-default-calendar-layout/
+\newcommand{\genYearCal}[1]{
+\begin{tikzpicture}[every calendar/.style={
+            month label above centered,
+            month text={\textsc{\small\%mt}},
+            every day/.append style={font=\tiny\itshape},
+            if={(weekend) [red]},
+            week list,
+        }]
+	\matrix[column sep=1em, row sep=3em, ampersand replacement=\&] { #1 };
+\end{tikzpicture}}
+
+%% Boxes with small calendars are NOT included if \PreambleQuick is defined (to boost the compile time)
+\ifdefined\PreambleQuick
+  \message{\string\PreambleQuick\ is defined. NOT including calendar-related definitions / box creations}
+\else
+  \message{\string\PreambleQuick\ is NOT defined. Including calendar-related definitions / box creations}
+
+  \newsavebox{\yearCalFirst}
+  \savebox{\yearCalFirst}{\genYearCal{
+            \calendar[dates=2016-01-01 to 2016-01-last]; \&
+            \calendar[dates=2016-02-01 to 2016-02-last]; \\
+            \calendar[dates=2016-03-01 to 2016-03-last]; \&
+            \calendar[dates=2016-04-01 to 2016-04-last]; \\
+  }}
+  \newsavebox{\yearCalSecond}
+  \savebox{\yearCalSecond}{\genYearCal{
+            \calendar[dates=2016-05-01 to 2016-05-last]; \&
+            \calendar[dates=2016-06-01 to 2016-06-last]; \\
+            \calendar[dates=2016-07-01 to 2016-07-last]; \&
+            \calendar[dates=2016-08-01 to 2016-08-last]; \\
+  }}
+  %% Generates small calendar
+  %% Argument 1: Month
+  %% Argument 2: Year
+  %% Argument 3: Month name in russian
+  \newcommand{\genSmallCal}[3]{
+  \begin{tabular}{c}
+  \small #3 #2\\
+  \begin{tikzpicture}[every day/.style={font=\small\selectfont}]]
+   \calendar[dates=#2-#1-01 to #2-#1-last,
+            week list,
+	    day xshift=1cm,
+	    day yshift=.65cm]
+   \markRed
+  ;
+  \end{tikzpicture}
+  \end{tabular}
+  }
+
+  \newsavebox{\smallCalDec}
+  \newsavebox{\smallCalFeb}
+  \newsavebox{\smallCalDecO}
+  \newsavebox{\smallCalJan}
+  \newsavebox{\smallCalMar}
+  \newsavebox{\smallCalApr}
+  \newsavebox{\smallCalMay}
+  \newsavebox{\smallCalJun}
+  \newsavebox{\smallCalJul}
+  \newsavebox{\smallCalAug}
+  \newsavebox{\smallCalSep}
+  \newsavebox{\smallCalOct}
+  \newsavebox{\smallCalNov}
+  \newsavebox{\smallCalJanN}
+
+
+  %% Small calendars for the months: Dec, 2014 - Jan 2016
+  \savebox{\smallCalDecO}{\genSmallCal{12}{2014}{ДЕКАБРЬ}}
+  \savebox{\smallCalFeb}{\genSmallCal{02}{2015}{ФЕВРАЛЬ}}
+  \savebox{\smallCalJan}{\genSmallCal{01}{2015}{ЯНВАРЬ}}
+  \savebox{\smallCalMar}{\genSmallCal{03}{2015}{МАРТ}}
+  \savebox{\smallCalApr}{\genSmallCal{04}{2015}{АПРЕЛЬ}}
+  \savebox{\smallCalMay}{\genSmallCal{05}{2015}{МАЙ}}
+  \savebox{\smallCalJun}{\genSmallCal{06}{2015}{ИЮНЬ}}
+  \savebox{\smallCalJul}{\genSmallCal{07}{2015}{ИЮЛЬ}}
+  \savebox{\smallCalAug}{\genSmallCal{08}{2015}{АВГУСТ}}
+  \savebox{\smallCalSep}{\genSmallCal{09}{2015}{СЕНТЯБРЬ}}
+  \savebox{\smallCalOct}{\genSmallCal{10}{2015}{ОКТЯБРЬ}}
+  \savebox{\smallCalNov}{\genSmallCal{11}{2015}{НОЯБРЬ}}
+  \savebox{\smallCalDec}{\genSmallCal{12}{2015}{ДЕКАБРЬ}}
+  %% 2016: We don't know the holidays yet. Marking only weekends with red
+  \renewcommand{\markRed}{if (weekend) [red]}
+  \savebox{\smallCalJanN}{\genSmallCal{01}{2016}{ЯНВАРЬ}}
+  \restoreMarkRed
+
+%% Adapted from http://tex.stackexchange.com/a/10199/4771
+\makeatletter%
+\tikzoption{day headings}{\tikzstyle{day heading}=[#1]}
+\tikzstyle{day heading}=[]
+\tikzstyle{day letter headings}=[
+    execute before day scope={ \ifdate{day of month=1}{%
+      \pgfmathsetlength{\pgf@ya}{\tikz@lib@cal@yshift}%
+      \pgfmathsetlength\pgf@xa{\tikz@lib@cal@xshift}%
+      \pgftransformyshift{-\pgf@ya}
+      \pgftransformyshift{-.45cm}
+      \foreach \d/\l in {0/ПОНЕДЕЛЬНИК MONDAY,1/ВТОРНИК TUESDAY,2/СРЕДА WEDNESDAY,3/ЧЕТВЕРГ THURSDAY,%
+                         4/ПЯТНИЦА FRIDAY,5/СУББОТА SATURDAY,6/ВОСКРЕСЕНЬЕ SUNDAY} {
+        \pgf@xa=\d\pgf@xa%
+        \pgftransformxshift{\pgf@xa-\cellwidth/2}%
+        \pgftransformyshift{\pgf@ya}%
+	\ifnum\ifnum\d=5 1\else\ifnum\d=6 1\else0\fi\fi
+   	=1 %
+	\node[above=-0.5ex,day heading,align=center,text width=3cm,color=red,font=\tiny]{\l};
+	\else
+	\node[above=-0.5ex,day heading,align=center,text width=3cm,font=\tiny]{\l};
+ 	\fi
+      }
+    }{}%
+  }%
+]
+\makeatother%
+%% End
+
+%% Adapted from pgf source
+\def\pgfcalendarmonthname#1{%
+  \translate{\ifcase#1\or ЯНВАРЬ JANUARY\or ФЕВРАЛЬ FEBRUARY\or МАРТ MARCH\or АПРЕЛЬ APRIL\or
+    МАЙ MAY\or ИЮНЬ JUNE\or ИЮЛЬ JULY\or АВГУСТ AUGUST\or СЕНТЯБРЬ SEPTEMBER\or ОКТЯБРЬ OCTOBER\or
+    НОЯБРЬ NOVEMBER\or ДЕКАБРЬ DECEMBER\fi}%
+}
+
+
+\makeatletter
+\tikzstyle{month label above centered}=[%
+  execute before day scope={%
+    \ifdate{day of month=1}{%
+      {
+        \pgfmathsetlength{\pgf@xa}{\tikz@lib@cal@xshift}%
+        \pgf@xb=\tikz@lib@cal@width\pgf@xa%
+        \advance\pgf@xb by-\pgf@xa%
+        \pgf@xb=.5\pgf@xb%
+        \pgftransformxshift{\pgf@xb}%
+        \pgftransformxshift{-\cellwidth/2}%
+        \pgfmathsetlength{\pgf@y}{\tikz@lib@cal@yshift}%
+        \pgftransformyshift{0.333\pgf@y}
+        \tikzmonthcode%
+      }
+    }{}},
+  every month/.append style={anchor=base}
+]
+\makeatother
+%% End
+
+\ExplSyntaxOn
+
+%% Adapted from http://tex.stackexchange.com/a/56214/4771
+%%
+% first of all we define the user level commands
+\NewDocumentCommand{\addtext}{ m }{ \bdaycal_input_add:n { #1 } }
+\NewDocumentCommand{\addtextyear}{ mm }{ \bdaycal_input_add_y:nn { #1 } { #2 } }
+\NewDocumentCommand{\showtext}{ }{ \bdaycal_output_direct: }
+
+% allocate variable:
+% a sequence for global storage of the inputs;
+\seq_new:N \g_bdaycal_input_seq
+
+% store globally an input in the sequence
+\cs_new:Npn \bdaycal_input_add:n #1
+ {
+  \seq_gput_right:Nn \g_bdaycal_input_seq { #1 }
+ }
+
+\cs_new:Npn \bdaycal_input_add_y:nn #1 #2
+ {
+  \seq_gput_right:Nn \g_bdaycal_input_seq { #1 ~ ( \int_to_arabic:n
+    { \pgfcalendarifdateyear - #2 } ) }
+ }
+
+% how to output in direct order; we simply do a mapping function calling
+% \bdaycal_print:n after incrementing the counter
+\cs_new_protected:Npn \bdaycal_output_direct:
+ {
+  \seq_map_inline:Nn \g_bdaycal_input_seq
+   {
+    \bdaycal_print:n { ##1 }
+   }
+  \seq_gclear:N \g_bdaycal_input_seq
+ }
+
+% the printing macro; change here for adapting to your wishes
+\cs_new:Npn \bdaycal_print:n #1
+ {
+  #1 \par
+ }
+%% End
+
+%% http://www.tondering.dk/claus/cal/week.php#calcweekno
+\int_new:N \l_week_number_year_int
+\int_new:N \l_week_number_month_int
+\int_new:N \l_week_number_day_int
+\int_new:N \l_week_number_a_int
+\int_new:N \l_week_number_b_int
+\int_new:N \l_week_number_c_int
+\int_new:N \l_week_number_s_int
+\int_new:N \l_week_number_e_int
+\int_new:N \l_week_number_f_int
+\int_new:N \l_week_number_g_int
+\int_new:N \l_week_number_d_int
+\int_new:N \l_week_number_n_int
+\int_new:N \l_week_number_W_int
+
+\cs_new:Nn \week_number:nnn {
+
+  \int_set:Nn \l_week_number_year_int { #1 }
+  \int_set:Nn \l_week_number_month_int { #2 }
+  \int_set:Nn \l_week_number_day_int { #3 }
+
+  \int_compare:nNnTF { \l_week_number_month_int } < { 3 } % jan or feb
+  { % true
+
+    \int_set:Nn \l_week_number_a_int { \l_week_number_year_int - 1 }
+
+    \int_set:Nn \l_week_number_b_int {
+      \int_div_truncate:nn { \l_week_number_a_int } { 4 }
+      - \int_div_truncate:nn { \l_week_number_a_int } { 100 }
+      + \int_div_truncate:nn { \l_week_number_a_int } { 400 }
+    }
+
+    \int_set:Nn \l_week_number_c_int {
+      \int_div_truncate:nn { \l_week_number_a_int - 1 } { 4 }
+      - \int_div_truncate:nn { \l_week_number_a_int - 1 } { 100 }
+      + \int_div_truncate:nn { \l_week_number_a_int - 1 } { 400 }
+    }
+
+    \int_set:Nn \l_week_number_s_int {
+      \l_week_number_b_int - \l_week_number_c_int }
+
+    \int_zero:N \l_week_number_e_int
+
+    \int_set:Nn \l_week_number_f_int { \l_week_number_day_int - 1
+      + 31 * ( \l_week_number_month_int - 1 ) }
+
+  } % end true
+  { % false
+
+    \int_set_eq:NN \l_week_number_a_int \l_week_number_year_int
+
+    \int_set:Nn \l_week_number_b_int {
+      \int_div_truncate:nn { \l_week_number_a_int } { 4 }
+      - \int_div_truncate:nn { \l_week_number_a_int } { 100 }
+      + \int_div_truncate:nn { \l_week_number_a_int } { 400 }
+    }
+
+    \int_set:Nn \l_week_number_c_int {
+      \int_div_truncate:nn { \l_week_number_a_int - 1 } { 4 }
+      - \int_div_truncate:nn { \l_week_number_a_int - 1 } { 100 }
+      + \int_div_truncate:nn { \l_week_number_a_int - 1 } { 400 }
+    }
+
+    \int_set:Nn \l_week_number_s_int {
+      \l_week_number_b_int - \l_week_number_c_int }
+
+    \int_set:Nn \l_week_number_e_int { \l_week_number_s_int + 1 }
+
+    \int_set:Nn \l_week_number_f_int { \l_week_number_day_int
+      + \int_div_truncate:nn {
+        153 * ( \l_week_number_month_int - 3 ) + 2 } { 5 }
+      + 58 + \l_week_number_s_int }
+
+  } % end false
+
+  \int_set:Nn \l_week_number_g_int {
+    \int_mod:nn { \l_week_number_a_int + \l_week_number_b_int } { 7 }  }
+
+  \int_set:Nn \l_week_number_d_int {
+    \int_mod:nn { \l_week_number_f_int + \l_week_number_g_int
+      - \l_week_number_e_int } { 7 }  }
+
+  \int_set:Nn \l_week_number_n_int {
+    \l_week_number_f_int + 3 - \l_week_number_d_int }
+
+  \int_compare:nNnTF { \l_week_number_n_int } < { 0 }
+  { %true
+
+    \int_set:Nn \l_week_number_W_int { 53
+      - \int_div_truncate:nn { \l_week_number_g_int
+        - \l_week_number_s_int } { 5 } }
+
+  } % end true
+  { % false
+
+    \int_compare:nNnTF { \l_week_number_n_int } > { 364
+      + \l_week_number_s_int }
+    { % true
+
+      \int_set:Nn \l_week_number_W_int { 1 }
+
+    } % end true
+    { % false
+
+      \int_set:Nn \l_week_number_W_int { \int_div_truncate:nn {
+          \l_week_number_n_int } { 7 } + 1 }
+
+    } % end false
+
+  } % end false
+
+}
+
+\pgfkeys{/tikz/week~number/.code =
+  {
+    \week_number:nnn { 
+      \pgfcalendarifdateyear } { 
+      \pgfcalendarifdatemonth } { 
+      \pgfcalendarifdateday }
+    \addtext{\textit{\int_to_arabic:n { \l_week_number_W_int }} }
+  }
+}
+
+\ExplSyntaxOff
+
+
+\pgfkeys{/tikz/observance/.code =
+  {
+    \addtext{#1}
+  }
+}
+
+\newcommand{\TikzDayCode}{}
+\newcommand{\restoreTikzDayCode}{\renewcommand{\TikzDayCode}{\node (lower right) at (0,0) [above left,font=\Huge] {\tikzdaytext};}}
+\restoreTikzDayCode
+
+\pgfkeys{/tikz/day code =
+  {
+    \TikzDayCode
+    \node (upper left) at (-\cellwidth,\cellheight)
+    [below right,align=left,text width=\cellwidth-\pgflinewidth,
+    font=\tiny,black] {\showtext};
+    \node (lower left) at (-\cellwidth,0) {};
+    \node[rounded corners, draw,
+          fit=(lower right) (upper left) (lower left),
+          inner sep=1mm] {};
+  }
+}
+
+\pgfkeys{/tikz/inner sep = 0pt}
+
+\pgfkeys{/tikz/day xshift=\cellwidth+3.5mm}
+
+\pgfkeys{/tikz/day yshift=\cellheight+2mm+2mm}
+
+\newlength{\cellheight}
+\setlength{\cellheight}{20mm}
+\newlength{\cellwidth}
+\setlength{\cellwidth}{26.85mm}
+
+%% Background for selected (emphasized) weeks
+\definecolor{selectedbg}{HTML}{EEEEEE}
+
+\pgfkeys{/tikz/mark-week day/.code =
+  {
+     \filldraw[selectedbg,rounded corners=2mm] (-\cellwidth-3mm,-2mm) rectangle (7*\cellwidth-3.5mm,\cellheight+2mm);
+  }
+}
+
+%% Argument 1: Start date
+%% Argument 2: End data
+\newcommand{\calmonthRaw}[2]{%
+\vspace*{1cm}%
+\centerline{%
+\begin{tikzpicture}[thick]
+  \calendar[dates=#1 to #2,
+            week list,
+            month label above centered,
+            month text={\%mt \%y0},
+            day headings={font=\footnotesize\scshape},
+            day letter headings]
+  %% Defined in customization.tex. The core of the calendar
+  \markRed
+  \markDays
+  ;
+\end{tikzpicture}}\bigskip}
+
+%% Returns the file name of the photo for the month
+%% Argument: month number: 1..12
+\newcommand{\GetMonthImage}[1]{%
+\ifnum#1=1\Jan%
+\fi%
+\ifnum#1=2\Feb%
+\fi%
+\ifnum#1=3\Mar%
+\fi%
+\ifnum#1=4\Apr%
+\fi%
+\ifnum#1=5\May%
+\fi%
+\ifnum#1=6\Jun%
+\fi%
+\ifnum#1=7\Jul%
+\fi%
+\ifnum#1=8\Aug%
+\fi%
+\ifnum#1=9\Sep%
+\fi%
+\ifnum#1=10\Oct%
+\fi%
+\ifnum#1=11\Nov%
+\fi%
+\ifnum#1=12\Dec%
+\fi%
+}
+
+%% Returns the URL with the description of the image corresponding to the month
+%% Argument: month number: 1..12
+\newcommand{\GetMonthURL}[1]{%
+\webprefix\ifnum#1=1january
+\fi%
+\ifnum#1=2february%
+\fi%
+\ifnum#1=3march%
+\fi%
+\ifnum#1=4april%
+\fi%
+\ifnum#1=5may%
+\fi%
+\ifnum#1=6june%
+\fi%
+\ifnum#1=7july%
+\fi%
+\ifnum#1=8august%
+\fi%
+\ifnum#1=9september%
+\fi%
+\ifnum#1=10october%
+\fi%
+\ifnum#1=11november%
+\fi%
+\ifnum#1=12december%
+\fi%
+}
+
+
+%% Argument: month
+\newcommand{\calmonth}[1]{\calmonthRaw{2015-#1-01}{2015-#1-last}}
+
+%% Creates Bar Code with the URL
+\newcommand{\descurl}[1]{%
+\begin{pspicture}(1in,.1in)
+\psbarcode{#1}{eclevel=H}{qrcode}
+\end{pspicture}
+}
+
+%% Generates "small" calendar (2 such calendars are in every month's page) 
+\newcommand{\smallmonths}[3]{\usebox{#2}\hfill\raisebox{-.7cm}{\descurl{\GetMonthURL{#1}}}\hfill\usebox{#3}\newpage}
+
+\subimport*{../../resources/}{flags}
+
+\fi %% If \PreambleQuick is undefined!!!
+
+\pagestyle{empty}
