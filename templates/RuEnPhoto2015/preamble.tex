@@ -61,7 +61,7 @@ pdflang={en}
             month label above centered,
             month text={\textsc{\small\%mt}},
             every day/.append style={font=\tiny\itshape},
-            if={(weekend) [red]},
+            if={(weekend, equals=01-01) [red]},
             week list,
         }]
 	\matrix[column sep=1em, row sep=3em, ampersand replacement=\&] { #1 };
@@ -135,8 +135,8 @@ pdflang={en}
   \savebox{\smallCalOct}{\genSmallCal{10}{2015}{ОКТЯБРЬ}}
   \savebox{\smallCalNov}{\genSmallCal{11}{2015}{НОЯБРЬ}}
   \savebox{\smallCalDec}{\genSmallCal{12}{2015}{ДЕКАБРЬ}}
-  %% 2016: We don't know the holidays yet. Marking only weekends with red
-  \renewcommand{\markRed}{if (weekend) [red]}
+  %% 2016: We don't know the holidays yet. Marking only weekends and 1st of January with red
+  \renewcommand{\markRed}{if (weekend, equals=01-01) [red]}
   \savebox{\smallCalJanN}{\genSmallCal{01}{2016}{ЯНВАРЬ}}
   \restoreMarkRed
 

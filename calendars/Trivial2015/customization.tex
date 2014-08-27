@@ -34,7 +34,7 @@
 \def\FebDscRU{Описание февральской фотографии на русском языке}
 \def\FebDscEN{Description of the February photo}
 
-\def\Mar{mosaic}
+\def\Mar{helix}
 \def\MarDscRU{Описание мартовской фотографии на русском языке}
 \def\MarDscEN{Description of the March photo}
 
@@ -46,11 +46,11 @@
 \def\MayDscRU{Описание майской фотографии на русском языке}
 \def\MayDscEN{Description of the May photo}
 
-\def\Jun{mosaic}
+\def\Jun{helix}
 \def\JunDscRU{Описание июньской фотографии на русском языке}
 \def\JunDscEN{Description of the June photo}
 
-\def\Jul{mosaic}
+\def\Jul{helix}
 \def\JulDscRU{Описание июльской фотографии на русском языке}
 \def\JulDscEN{Description of the July photo}
 
@@ -70,7 +70,7 @@
 \def\NovDscRU{Описание ноябрьской фотографии на русском языке}
 \def\NovDscEN{Description of the November photo}
 
-\def\Dec{mosaic}
+\def\Dec{helix}
 \def\DecDscRU{Описание декабрьской фотографии на русском языке}
 \def\DecDscEN{Description of the December photo}
 
@@ -85,18 +85,12 @@
       Saturday,
       equals=01-01,
       equals=01-02,
-      equals=01-03,
-      equals=01-04,
-      equals=01-06,
-      equals=01-07,
-      equals=01-08,
-      equals=03-10,
+      between=01-05 and 01-09,
+      equals=03-09,
       equals=05-01,
-      equals=05-02,
-      equals=05-09,
+      equals=05-04,
+      equals=05-11,
       equals=06-12,
-      equals=06-13,
-      equals=11-03,
       equals=11-04,
       equals=02-23) [red]
 }}
@@ -104,7 +98,7 @@
 
 %% All the days which shall be marked by any sings, notes etc
 \newcommand{\markDays}{
-if (equals=2015-04-13,
+if (equals=2015-04-06,
       equals=2015-01-05,
       equals=2015-01-12) [mark-week day]
   if (Monday,
@@ -122,90 +116,94 @@ if (equals=2015-04-13,
       equals=12-01) [week number]
   \markRed
   if (equals=01-01,
-      equals=01-07,
       equals=02-23,
       equals=03-08,
       equals=05-01,
       equals=06-12,
       equals=11-04,
-      equals=04-06,
-      equals=04-12,
       equals=06-22,
-      equals=07-13,
-      equals=07-20,
-      equals=08-17,
+      equals=07-19,
+      equals=08-16,
       equals=10-05,
       equals=09-01,
-      equals=09-28,
-      equals=10-26,
+      equals=10-25,
       equals=12-12
       ) [flag-flying day]
+  if (equals=07-12,
+      equals=01-07,
+      equals=04-12,
+      equals=04-05
+     ) [flag-rus-orthodox day]
   if (equals=10-04) [flag-space day]
-  if (equals=07-27) [flag-navy day]
+  if (equals=07-26) [flag-navy day]
   if (equals=12-20) [flag-kgb day]
   if (equals=08-02) [flag-airborne day]
-  if (equals=09-14) [flag-military day]
+  if (equals=09-13) [flag-military day]
   if (equals=05-09) [flag-victory day]
   if (equals=01-27,
       equals=09-08,
       equals=05-27) [flag-spb day]
-  if (equals=04-20,
-      equals=01-06,
+  if (equals=01-06,
+      equals=01-08,
       equals=01-14,
       equals=01-18,
       equals=01-19,
-      equals=03-02,
-      equals=03-03,
-      equals=02-15,
       equals=02-22,
-      equals=03-15,
-      equals=03-22,
-      equals=03-29,
-      equals=04-13,
-      equals=03-09,
-      equals=05-29,
-      equals=06-07,
-      equals=06-08,
+      equals=02-15,
+      equals=02-14,
+      equals=03-07,
+      equals=03-14,
+      equals=03-21,
+      equals=03-01,
+      equals=05-21,
+      equals=05-30,
+      equals=05-31,
       equals=07-07,
       equals=08-14,
       equals=08-19,
       equals=08-28,
       equals=08-29,
       equals=10-14,
-      equals=07-12,
-      equals=04-07,
-      equals=04-29,
-      equals=06-09,
+      equals=04-21,
+      equals=06-01,
       equals=09-27,
       equals=09-11,
       equals=09-21,
-      equals=11-01,
+      equals=11-07,
       equals=12-04,
-      between=04-14 and 04-20 %% Страстная неделя
+      between=04-06 and 04-11 %% Страстная неделя
   ) [flag-orthodox day]
   if (equals=01-01) [observance=Новый год]
   if (equals=01-07) [observance=Рождество\\ Христово]
+  if (equals=01-08) [observance=Собор\\ Пресвятой\\ Богородицы]
   if (equals=02-23) [observance=День защитника Отечества]
   if (equals=03-08) [observance=Международный женский день]
-  if (equals=04-06) [observance=День геолога]
-  if (equals=05-01) [observance=Праздник Весны и Труда]
+%% Вербное ВС first, день геолога second :-)
+  if (equals=04-05) [observance=Вербное\\ воскресенье.]
+  if (equals=04-05) [observance=День геолога]
+  if (equals=05-01) [observance=Праздник\\ Весны и Труда]
   if (equals=05-09) [observance=День Победы]
   if (equals=11-04) [observance=День народного единства]
   if (equals=06-12) [observance=День России]
+%% "Пасха" - выше "дня космонавтики"
+  if (equals=04-12) [observance=Пасха.]
   if (equals=04-12) [observance=День\\ космонавтики]
   if (equals=06-22) [observance=День памяти и скорби]
-  if (equals=07-20) [observance=День\\ металлурга]
+  if (equals=07-19) [observance=День\\ металлурга]
   if (equals=08-02) [observance=День ВДВ\\ Ильин день]
-  if (equals=08-17) [observance=День\\ Воздушного\\ Флота России]
-  if (equals=07-13) [observance=День рыбака]
-  if (equals=07-27) [observance=День ВМФ]
+  if (equals=08-16) [observance=День\\ Воздушного\\ Флота России]
+%% День Петра и Павла выше дня рыбака :-)
+  if (equals=07-12) [observance=День Петра и Павла.]
+  if (equals=07-12) [observance=День рыбака]
+  if (equals=07-26) [observance=День ВМФ]
   if (equals=09-01) [observance=День знаний]
   if (equals=09-11) [observance=Иван Головосек]
-  if (equals=09-14) [observance=День танкиста]
-  if (equals=09-28) [observance=День машино\-строителя]
+  if (equals=09-13) [observance=День танкиста]
+%% 2015: День машиностроителя и Праздник Воздвижение Креста Господня совпадают. Не помешаются в одной клетке календаря
+%%  if (equals=09-27) [observance=День машино\-строителя]
   if (equals=10-04) [observance=День Космических войск]
   if (equals=10-05) [observance=День учителя]
-  if (equals=10-26) [observance=День\\ автомобилиста]
+  if (equals=10-25) [observance=День\\ автомобилиста]
   if (equals=12-12) [observance=День\\ Конституции]
   if (equals=12-20) [observance=День чекиста]
   %% St. Petersburg (Leningrad) days
@@ -214,41 +212,43 @@ if (equals=2015-04-13,
   if (equals=05-27) [observance=Основание Санкт-Петербурга]
   %% Orthodoxy dates
   if (equals=01-14) [observance=Обрезание\\ Господне]
-  if (equals=02-22,
-  	equals=03-15,
-	equals=03-22,
-	equals=03-29) [observance=Родительская суббота]
+  if (equals=02-14,
+  	equals=03-07,
+	equals=03-14,
+	equals=03-21) [observance=Родительская суббота]
   if (equals=01-19) [observance=Крещение\\ Господне]
   if (equals=01-06) [observance=Рождественский\\ сочельник]
   if (equals=01-18) [observance=Крещенский\\ сочельник]
-  if (equals=03-02) [observance=Прощеное\\ воскресенье]
-  if (equals=03-03) [observance=Чистый\\ понедельник]
+  if (equals=02-22) [observance=Прощеное\\ воскресенье]
+%% 2015: Чистый ПН и День Защитника Отечества совпадают. Не помещаются на одной клетке календаря
+%% if (equals=02-23) [observance=Чистый\\ понедельник]
   if (equals=02-15) [observance=Сретение\\ Господне]
-  if (equals=02-24) [observance=Встреча\\ Масленицы]
-  if (equals=04-07) [observance=Благовещение]
-  if (equals=04-13) [observance=Вербное\\ воскресенье]
-  if (equals=04-17) [observance=Великий\\ Четверток]
-  if (equals=04-18) [observance=Великий\\ Пяток]
-  if (equals=04-16) [observance=Великая\\ Среда]
-  if (equals=04-15) [observance=Великий\\ Вторник]
-  if (equals=04-19) [observance=Великая\\ Суббота]
-  if (equals=04-14) [observance=Великий\\ Понедельник]
-  if (equals=04-20) [observance=Пасха]
-  if (equals=04-29) [observance=Радоница]
-  if (equals=03-09) [observance=Торжество\\ Православия]
-  if (equals=05-29) [observance=Вознесение\\ Господне]
-  if (equals=06-07) [observance=Троицкая\\ родительская суббота]
-  if (equals=06-08) [observance=Троица]
-  if (equals=06-09) [observance=День Святого Духа]
+  if (equals=02-16) [observance=Встреча\\ Масленицы]
+  if (equals=04-09) [observance=Великий\\ Четверток]
+  if (equals=04-10) [observance=Великий\\ Пяток]
+  if (equals=04-08) [observance=Великая\\ Среда]
+  if (equals=04-07) [observance=Великий\\ Вторник.\\ Благовещение]
+  if (equals=04-11) [observance=Великая\\ Суббота]
+  if (equals=04-06) [observance=Великий\\ Понедельник]
+  if (equals=04-21) [observance=Радоница]
+  if (equals=03-01) [observance=Торжество\\ Православия]
+  if (equals=05-21) [observance=Вознесение\\ Господне]
+  if (equals=05-30) [observance=Троицкая\\ родительская суббота]
+  if (equals=05-31) [observance=Троица]
+  if (equals=06-01) [observance=День Святого Духа]
   if (equals=08-14) [observance=Медовый Спас]
   if (equals=08-19) [observance=Преображение\\ Господне]
   if (equals=08-28) [observance=Успение\\ Пресвятой\\ Богородицы]
   if (equals=08-29) [observance=Третий Спас]
-  if (equals=09-21) [observance=Рождество\\ Пресвятой\\ Богородицы]
+  if (equals=09-21) [observance=Рождество\\ Пр. Богородицы]
   if (equals=09-27) [observance=Воздвижение Креста\\ Господня]
   if (equals=10-14) [observance=Покров\\ Пресвятой\\ Богородицы]
-  if (equals=11-01) [observance=Димитриевская родительская суббота]
+  if (equals=11-07) [observance=Димитриевская родительская суббота]
   if (equals=07-07) [observance=Рождество Иоанна\\ Предтечи]
-  if (equals=07-12) [observance=День Петра и Павла]
-  if (equals=12-04) [observance=Введение\\ Богородицы во храм]
+  if (equals=12-04) [observance=Введение\\ во храм\\ Пр. Богородицы]
+%% Астрономические даты
+  if (equals=03-21) [observance=Вес. равноденствие]
+  if (equals=09-23) [observance=Осеннее\\ равноденствие]
+  if (equals=06-21) [observance=Летнее\\ солнцестояние]
+  if (equals=12-22) [observance=Зимнее\\ солнцестояние]
 }
