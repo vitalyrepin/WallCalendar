@@ -6,9 +6,9 @@ ADDDEPS=preamble.tex $(addprefix $(RESDIR), flags.tex flags/fsb.tex flags/orthod
 include custom.mk
 
 # Needed to apply license to png files
-XMP_IMAGES=$(addprefix photos/,$(addsuffix .xmp, $(basename $(notdir $(IMAGES)))))
+XMP_IMAGES=$(addprefix $(RESDIR)/photos2014/,$(addsuffix .xmp, $(basename $(notdir $(IMAGES)))))
 
-EPS_IMAGES=$(addprefix photos/,$(addsuffix .eps, $(basename $(notdir $(IMAGES)))))
+EPS_IMAGES=$(addprefix $(RESDIR)/photos2014/,$(addsuffix .eps, $(basename $(notdir $(IMAGES)))))
 
 GOALS = 2015.pdf 2015-landscape.pdf cover.pdf
 

@@ -9,7 +9,7 @@
 %% Preamble - most of the Calendar declarations
 \input{preamble}
 
-\newcommand{\pict}[1]{\ThisULCornerWallPaper{1}{photos/\GetMonthImage{#1}}\vspace*{1cm}\newpage}
+\newcommand{\pict}[1]{\ThisULCornerWallPaper{1}{\PhotoPath\GetMonthImage{#1}}\vspace*{1cm}\newpage}
 \newcommand{\pictCal}[1]{\pict{#1}\calmonth{#1}}
 
 \begin{document}
@@ -19,7 +19,7 @@
 \centerline{\small\bf\caltitleEN}
 \centerline{\small\bf\caltitleRU}
 
-\newcommand{\thumb}[1]{\frame{\includegraphics[keepaspectratio,width=.11\paperwidth]{photos/\GetMonthImage{#1}}}}
+\newcommand{\thumb}[1]{\frame{\includegraphics[keepaspectratio,width=.11\paperwidth]{\PhotoPath\GetMonthImage{#1}}}}
 %% Argument 1: English description
 %% Argument 2: Russian description
 \newcommand{\desc}[2]{%
