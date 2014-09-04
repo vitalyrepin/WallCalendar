@@ -18,7 +18,7 @@
 
 \def\CalExAspectRatio{0.302}
 \def\ThumbAspectRation{0.189655}
-%% Saving calendars in the boxes and sscaling them. Does not work inside minipage environment.
+%% Saving calendars in the boxes and scaling them. Does not work inside minipage environment.
 \newsavebox{\exampleMonthCal}
 \savebox{\exampleMonthCal}{\resizebox{\CalExAspectRatio\purePaperWidth}{!}{\calmonth{7}}}
 
@@ -27,15 +27,21 @@
 \savebox{\examplsmallMonthF}{\resizebox{.13\purePaperWidth}{!}{\usebox{\smallCalJun}}}
 \savebox{\examplsmallMonthS}{\resizebox{.13\purePaperWidth}{!}{\usebox{\smallCalAug}}}
 
+%% Saving QR code
+\newsavebox{\smallQR}
+\savebox{\smallQR}{\resizebox{.05\purePaperWidth}{!}{\descurl{\GetMonthURL{7}}}}
+
+%\newcommand{\smallmonths}[3]{\usebox{#2}\hfill\raisebox{-.7cm}{\descurl{\GetMonthURL{#1}}}\hfill\usebox{#3}\newpage}
+
 \newcommand{\exampleCal}{%
 \begingroup%
 \setlength{\fboxsep}{0pt}%
 \frame{\colorbox{white}{\begin{minipage}{\CalExAspectRatio\purePaperWidth}%
 \setlength{\tabcolsep}{0pt}%
-\noindent\begin{tabular}{lr}%
-\multicolumn{2}{l}{\includegraphics[keepaspectratio,width=\CalExAspectRatio\purePaperWidth]{\PhotoPath\GetMonthImage{7}}}\\
-\multicolumn{2}{l}{\usebox{\exampleMonthCal}}\\[-.15cm]
-\usebox{\examplsmallMonthF}&\usebox{\examplsmallMonthS}\\
+\noindent\begin{tabular}{lcr}%
+\multicolumn{3}{l}{\includegraphics[keepaspectratio,width=\CalExAspectRatio\purePaperWidth]{\PhotoPath\GetMonthImage{7}}}\\
+\multicolumn{3}{l}{\usebox{\exampleMonthCal}}\\[-.15cm]
+\usebox{\examplsmallMonthF}&\raisebox{-.5cm}{\usebox{\smallQR}}&\usebox{\examplsmallMonthS}\\
 \end{tabular}%
 \end{minipage}}}%
 \endgroup%
