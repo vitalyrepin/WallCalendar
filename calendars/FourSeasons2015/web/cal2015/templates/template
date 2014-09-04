@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="nl" lang="nl" >
+<head  profile="http://www.w3.org/2005/10/profile" >
+  <title> ${page_title} </title>
+  <meta name="robots" content="index, follow" />    
+  <meta name="lang" content="NL" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta name="generator" content="http://txt2tags.org" />
+  <meta name="description" content="${page_description}" />
+  <meta name="keywords" content="${page_keywords}" />
+  <meta name="date" content="${page_source_mtime}" />
+  <link rel="icon" type="image/png" href="${path_to_root}include/images/favicon.png" />
+  <link href="${path_to_root}include/css/style.css" rel="stylesheet" type="text/css" />
+  <link href="${path_to_root}include/css/print.css" rel="stylesheet" type="text/css" media="print" />
+</head>
+
+<!-- =========================================================================== -->
+
+<body >
+
+<div id="div_body" >
+
+<a name="anchor_at_top" id="anchor_at_top" >  </a>
+
+<div id="div_top" > 
+  <div id="div_hormenu" >
+     $(html_mainmenu_div)
+  </div> 
+</div> 
+
+<div id="div_koptekst" >
+     <br />
+     <p class="header1" > ${page_header1} </p>
+     <p class="header2" > ${page_header2} </p>
+<p>
+<a href="http://www.lulu.com/shop/vitaly-repin/calendar-2014-the-four-seasons/paperback/product-21271953.html">Buy this calendar!</a>
+</p>
+</div> 
+
+<div id="div_hoofdvak" >
+    $(html_content_div 1) 
+</div>  <!-- end hoofdvak -->
+
+<div id="div_voet" >
+   <span>  Powered by <a href="http://home.deds.nl/~svg_experimenten/txt2site/">Txt2Site</a> </span>
+   <span><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Calendar 2014: Four Seasons</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.flickr.com/photos/vitalyrepin/" property="cc:attributionName" rel="cc:attributionURL">Vitaly Repin</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a></span>
+   <span>  Last changed: ${page_source_mtime} </span>
+</div>     
+
+</div>  <!-- end div_body -->
+
+</body>
+</html>
+

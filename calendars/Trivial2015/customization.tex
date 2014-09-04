@@ -101,9 +101,6 @@
 
 %% All the days which shall be marked by any sings, notes etc
 \newcommand{\markDays}{
-if (equals=2015-04-06,
-      equals=2015-01-05,
-      equals=2015-01-12) [mark-week day]
   if (Monday,
       equals=01-01,
       equals=02-01,
@@ -130,7 +127,10 @@ if (equals=2015-04-06,
       equals=10-05,
       equals=09-01,
       equals=10-25,
-      equals=12-12
+      equals=10-19,
+      equals=06-06,
+      equals=12-12,
+      equals=05-24
       ) [flag-flying day]
   if (equals=07-12,
       equals=01-07,
@@ -145,7 +145,15 @@ if (equals=2015-04-06,
   if (equals=05-09) [flag-victory day]
   if (equals=01-27,
       equals=09-08,
+      equals=06-09,
+      equals=08-15,
+      equals=02-10,
+      equals=07-25,
+      equals=09-20,
+      equals=09-05,
+      equals=07-01,
       equals=05-27) [flag-spb day]
+  if (equals=09-12) [flag-spb-orthodox day]
   if (equals=01-06,
       equals=01-08,
       equals=01-14,
@@ -188,6 +196,7 @@ if (equals=2015-04-06,
   if (equals=05-09) [observance=День Победы]
   if (equals=11-04) [observance=День народного единства]
   if (equals=06-12) [observance=День России]
+  if (equals=06-06) [observance=Пушкинский день]
 %% "Пасха" - выше "дня космонавтики"
   if (equals=04-12) [observance=Пасха.]
   if (equals=04-12) [observance=День\\ космонавтики]
@@ -200,19 +209,28 @@ if (equals=2015-04-06,
   if (equals=07-12) [observance=День рыбака]
   if (equals=07-26) [observance=День ВМФ]
   if (equals=09-01) [observance=День знаний]
-  if (equals=09-11) [observance=Иван Головосек]
+  if (equals=09-11) [observance=Усекновение\\ главы\\ Предтечи]
   if (equals=09-13) [observance=День танкиста]
 %% 2015: День машиностроителя и Праздник Воздвижение Креста Господня совпадают. Не помешаются в одной клетке календаря
 %%  if (equals=09-27) [observance=День машино\-строителя]
-  if (equals=10-04) [observance=День Космических войск]
+  if (equals=10-04) [observance=День\\ космических\\ войск]
   if (equals=10-05) [observance=День учителя]
   if (equals=10-25) [observance=День\\ автомобилиста]
   if (equals=12-12) [observance=День\\ Конституции]
   if (equals=12-20) [observance=День чекиста]
+  if (equals=10-19) [observance=День лицеиста]
   %% St. Petersburg (Leningrad) days
   if (equals=01-27) [observance=Снятие блокады Ленинграда]
   if (equals=09-08) [observance=Начало блокады Ленинграда]
   if (equals=05-27) [observance=Основание Санкт-Петербурга]
+  if (equals=09-12) [observance=Перенесение мощей Александра Невского]
+  if (equals=02-10) [observance=День памяти\\ А.С. Пушкина]
+  if (equals=06-09) [observance=День рождения Петра I]
+  if (equals=08-15) [observance=День Ладоги]
+  if (equals=09-05) [observance=День Колпино]
+  if (equals=07-01) [observance=День\\ реставратора]
+  if (equals=07-25) [observance=День\\ Зеленогорска\\ (Терийоки)]
+  if (equals=09-20) [observance=День основания Сестрорецка]
   %% Orthodoxy dates
   if (equals=01-14) [observance=Обрезание\\ Господне]
   if (equals=02-14,
@@ -223,6 +241,9 @@ if (equals=2015-04-06,
   if (equals=01-06) [observance=Рождественский\\ сочельник]
   if (equals=01-18) [observance=Крещенский\\ сочельник]
   if (equals=02-22) [observance=Прощеное\\ воскресенье]
+  %% International dates
+  if (equals=05-18) [observance=Международный день музеев]
+  if (equals=05-24) [observance=День\\ славянской письменности~и\\культуры]
 %% 2015: Чистый ПН и День Защитника Отечества совпадают. Не помещаются на одной клетке календаря
 %% if (equals=02-23) [observance=Чистый\\ понедельник]
   if (equals=02-15) [observance=Сретение\\ Господне]
@@ -242,7 +263,7 @@ if (equals=2015-04-06,
   if (equals=08-14) [observance=Медовый Спас]
   if (equals=08-19) [observance=Преображение\\ Господне]
   if (equals=08-28) [observance=Успение\\ Пресвятой\\ Богородицы]
-  if (equals=08-29) [observance=Третий Спас]
+  if (equals=08-29) [observance=Третий Спас\\ (Спас на\\ полотне)]
   if (equals=09-21) [observance=Рождество\\ Пр. Богородицы]
   if (equals=09-27) [observance=Воздвижение Креста\\ Господня]
   if (equals=10-14) [observance=Покров\\ Пресвятой\\ Богородицы]

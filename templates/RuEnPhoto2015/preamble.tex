@@ -403,7 +403,13 @@ pdflang={en}
 %% Background for selected (emphasized) weeks
 \definecolor{selectedbg}{HTML}{EEEEEE}
 
-\pgfkeys{/tikz/mark-week day/.code =
+\pgfkeys{/tikz/mark-week53 day/.code =
+  {
+     \filldraw[selectedbg,rounded corners=2mm] (\cellwidth+5mm,-2mm) rectangle (7*\cellwidth-3.5mm,\cellheight+2mm);
+  }
+}
+
+\pgfkeys{/tikz/mark-full-week day/.code =
   {
      \filldraw[selectedbg,rounded corners=2mm] (-\cellwidth-3mm,-2mm) rectangle (7*\cellwidth-3.5mm,\cellheight+2mm);
   }

@@ -1,0 +1,28 @@
+page_format=txt2tags
+page_template=template
+
+page_title=Calendar 2015. The Four Seasons.
+page_description=Calendar 2015. The Four Seasons.
+page_header1=Calendar 2015. Календарь 2015.
+page_header2=The Four Seasons. Времена года.
+page_keywords=calendar,календарь,2015,времена года, four seasons, wallpaper, wall calendar, настенный календарь
+
+<<<<< content section 1 >>>>>
+Title
+Author
+%%mtime(%m/%d/%Y)
+
+%!encoding: UTF-8
+%%% Comment: use @@ for a line break
+%!postproc(xhtml): @@  "<br />"
+%%% Comment: insert HTML code with curly brackets: replace < and > by {{ and }}
+%!postproc(xhtml): {{(.*?)}} <\1>
+%%% Comment: replace D_ by the dollar sign.
+%!postproc(xhtml): D_   "$"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== 2015. The Four Seasons. Времена года. ==
+
+'''
+<object width="500" height="375"> <param name="flashvars" value="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fvitalyrepin%2Fsets%2F72157636941750064%2Fshow%2F&page_show_back_url=%2Fphotos%2Fvitalyrepin%2Fsets%2F72157636941750064%2F&set_id=72157636941750064&jump_to="></param> <param name="movie" value="http://www.flickr.com/apps/slideshow/show.swf?v=124984"></param> <param name="allowFullScreen" value="true"></param><embed type="application/x-shockwave-flash" src="http://www.flickr.com/apps/slideshow/show.swf?v=124984" allowFullScreen="true" flashvars="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fvitalyrepin%2Fsets%2F72157636941750064%2Fshow%2F&page_show_back_url=%2Fphotos%2Fvitalyrepin%2Fsets%2F72157636941750064%2F&set_id=72157636941750064&jump_to=" width="500" height="375"></embed></object>
+'''
+

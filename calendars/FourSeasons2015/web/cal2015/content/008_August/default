@@ -1,0 +1,34 @@
+page_format=txt2tags
+page_template=template
+
+page_title=August 2015
+page_description=August 2015
+page_header1=August Август 2015
+page_header2=
+page_keywords=august, август, календарь
+
+<<<<< content section 1 >>>>>
+Title
+Author
+%%mtime(%m/%d/%Y)
+
+%!encoding: UTF-8
+%%% Comment: use @@ for a line break
+%!postproc(xhtml): @@  "<br />"
+%%% Comment: insert HTML code with curly brackets: replace < and > by {{ and }}
+%!postproc(xhtml): {{(.*?)}} <\1>
+%%% Comment: replace D_ by the dollar sign.
+%!postproc(xhtml): D_   "$"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+== Wikipedia ==
+- [Summer Garden http://en.m.wikipedia.org/wiki/Summer_Garden]
+- [Летний сад http://ru.m.wikipedia.org/wiki/%D0%9B%D0%B5%D1%82%D0%BD%D0%B8%D0%B9_%D1%81%D0%B0%D0%B4]
+
+
+== Photo ==
+
+'''
+<a href="http://www.flickr.com/photos/vitalyrepin/10478718824/" title="Summer Garden, Russia by vitaly.repin, on Flickr"><img src="http://farm8.staticflickr.com/7394/10478718824_9d84016138.jpg" width="500" height="500" alt="Summer Garden, Russia"></a>
+'''
+
