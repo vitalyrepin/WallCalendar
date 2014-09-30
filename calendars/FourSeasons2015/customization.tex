@@ -98,6 +98,42 @@
       equals=02-23) [red]
 }}
 
+
+%% Taken from: http://tex.stackexchange.com/questions/180297/does-a-symbol-for-married-exist-in-some-package-or-font
+\colorlet{mring color}{orange!50!yellow!80!black}
+\definecolor{Front}{rgb}{0.85,0.8627,0.839}
+\colorlet{mborder color}{Front!70!white}
+
+\newcommand{\mycm}{,}
+\newcommand{\married}{%
+\begin{tikzpicture}[x=1ex, y=1ex, scale=0.35, baseline=-.6ex]
+\begin{scope}
+\clip (-2,-.2) rectangle ++(5.5,2.2);
+\path[draw=mborder color,line width=.08ex,
+     fill=mring color,even odd rule]
+     (0, 0) circle (2ex)
+     (0, 0) ellipse (1.5ex and 1.3ex);
+\path[draw=mborder color,line width=.08ex,
+     fill=mring color,even odd rule]
+     (1.5, 0) circle (2ex)
+     (1.5, 0) ellipse (1.5ex and 1.3ex);
+\end{scope}
+\begin{scope}
+\clip (-2,-2) rectangle ++(5.5,2.2);
+\path[draw=mborder color,line width=.08ex,
+     fill=mring color,even odd rule]
+     (1.5, 0) circle (2ex)
+     (1.5, 0) ellipse (1.5ex and 1.3ex);
+\path[draw=mborder color,line width=.08ex,
+     fill=mring color,even odd rule]
+     (0, 0) circle (2ex)
+     (0, 0) ellipse (1.5ex and 1.3ex);
+\end{scope}
+\end{tikzpicture}%
+}
+
+\newcommand{\birthday}[2]{if (equals=#1) [observance=\textborn\ #2]}
+
 %% All the days which shall be marked by any sings, notes etc
 \newcommand{\markDays}{
   if (Monday,
@@ -274,4 +310,17 @@
   if (equals=09-23) [observance=Осеннее\\ равноденствие]
   if (equals=06-21) [observance=Летнее\\ солнцестояние]
   if (equals=12-22) [observance=Зимнее\\ солнцестояние]
+%% Personal dates
+  \birthday{10-17}{Максим}
+  \birthday{12-04}{Дима Бигуняк}
+  \birthday{01-04}{Бабушка}
+  \birthday{02-09}{Маркел}
+  \birthday{04-14}{Сергей Кузьмин}
+  \birthday{04-25}{Олег Гавриков}
+  \birthday{05-12}{Петя}
+  \birthday{05-13}{Олег Иванович}
+  \birthday{06-09}{Тарас}
+  \birthday{10-25}{Полина}
+  if (equals=09-07) [observance=\married\ \mycm Денис Полина]
+  if (equals=08-05) [observance=\married\ Кирилл Настя\\ \married\ Тарас]
 }
