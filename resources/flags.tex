@@ -13,10 +13,16 @@
 }
 
 \defineDayKey{flag-flying}{\hspace*{-.2cm}\resizebox{!}{0.8ex}{\usebox{\flagRU}}}
+\defineDayKey{flag-finland}{\hspace*{-.2cm}\usebox{\flagFIN}}
+\defineDayKey{flag-aland}{\usebox{\flagAland}}
+\defineDayKey{flag-spb-aland}{\hspace*{-.2cm}\usebox{\flagAland}\resizebox{!}{0.8ex}{\usebox{\flagSpb}}}
+\defineDayKey{flag-sv-finland}{\hspace*{-.2cm}\usebox{\flagSvFIN}}
 \defineDayKey{flag-victory}{\resizebox{!}{1.75ex}{\flagVictory}}
 \defineDayKey{flag-navy}{\resizebox{!}{0.8ex}{\flagRusNavy}}
 \defineDayKey{flag-airborne}{\resizebox{!}{0.8ex}{\flagRusAirborne} \resizebox{!}{0.8ex}{\usebox{\OrthodoxChrist}}}
 \defineDayKey{flag-rus-orthodox}{\resizebox{!}{0.8ex}{\usebox{\flagRU}} \resizebox{!}{0.8ex}{\usebox{\OrthodoxChrist}}}
+\defineDayKey{flag-fin-orthodox}{\resizebox{!}{0.8ex}{\usebox{\flagFIN}} \resizebox{!}{0.8ex}{\usebox{\OrthodoxChrist}}}
+\defineDayKey{flag-rus-fin}{\hspace*{-.2cm}\usebox{\flagFIN}\resizebox{!}{0.8ex}{\usebox{\flagRU}}}
 \defineDayKey{flag-spb-orthodox}{\resizebox{!}{0.8ex}{\usebox{\flagSpb}} \resizebox{!}{0.8ex}{\usebox{\OrthodoxChrist}}}
 \defineDayKey{flag-space}{\resizebox{!}{0.8ex}{\flagRusSpace}}
 \defineDayKey{flag-kgb}{\resizebox{!}{0.8ex}{\flagKGB}}
@@ -53,6 +59,63 @@
 
 %% Orthodoxy christ
 \input{flags/orthodox}
+
+%% Flags of Finland and Swedish Speaking Finns
+\newcommand{\flagFinSv}[2]{
+\resizebox{!}{.45cm}{%
+\begin{tikzpicture}[y=0.80pt,x=0.80pt,yscale=-1, inner sep=0pt, outer sep=0pt]
+% rect4
+\path[fill=#1,rounded corners=0.0000cm] (0.0000,0.0000) rectangle
+  (1800.0000,1100.0000);
+% rect6
+\path[fill=#2,rounded corners=0.0000cm] (0.0000,400.0000) rectangle
+  (1800.0000,700.0000);
+% rect8
+\path[fill=#2,rounded corners=0.0000cm] (500.0000,0.0000) rectangle
+  (800.0000,1100.0000);
+\end{tikzpicture}}}
+
+%% Flag of Finland
+\definecolor{cfff}{RGB}{255,255,255}
+\definecolor{c003580}{RGB}{0,53,128}
+\newsavebox{\flagFIN}
+\savebox{\flagFIN}{\flagFinSv{cfff}{c003580}}
+
+%% Flag of Swedish Speaking finns
+\definecolor{scfff}{HTML}{FF0000}
+\definecolor{sc003580}{HTML}{FFFF00}
+\newsavebox{\flagSvFIN}
+\savebox{\flagSvFIN}{\flagFinSv{scfff}{sc003580}}
+
+%% Flag of Åland
+\definecolor{c0053a5}{RGB}{0,83,165}
+\definecolor{cffce00}{RGB}{255,206,0}
+\definecolor{cd21034}{RGB}{210,16,52}
+
+\newsavebox{\flagAland}
+\savebox{\flagAland}{%
+\resizebox{!}{.45cm}{\begin{tikzpicture}[y=0.80pt,x=0.80pt,yscale=-1, inner sep=0pt, outer sep=0pt]
+% rect3
+\path[fill=c0053a5,rounded corners=0.0000cm] (0.0000,0.0000) rectangle
+  (1300.0000,850.0000);
+
+\begin{scope}[fill=cffce00]% g5
+  % rect7
+  \path[fill,rounded corners=0.0000cm] (400.0000,0.0000) rectangle
+    (650.0000,850.0000);
+  % rect9
+  \path[fill,rounded corners=0.0000cm] (0.0000,300.0000) rectangle
+    (1300.0000,550.0000);
+\end{scope}
+\begin{scope}[fill=cd21034]% g11
+  % rect13
+  \path[fill,rounded corners=0.0000cm] (475.0000,0.0000) rectangle
+    (575.0000,850.0000);
+  % rect15
+  \path[fill,rounded corners=0.0000cm] (0.0000,375.0000) rectangle
+    (1300.0000,475.0000);
+\end{scope}
+\end{tikzpicture}}}
 
 %% Path to the images with flags. Use only in command but not in boxes! See examples below.
 \def\resources{../../resources/flags}
